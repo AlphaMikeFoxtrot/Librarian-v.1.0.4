@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="12dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/issue_book_custom_list_view_subscriber_name"
+        style="@style/TextAppearance.AppCompat.Headline"
+        android:fontFamily="sans-serif-smallcaps"
+        android:layout_margin="8dp"
+        android:ellipsize="end"
+        tools:text="Fardeen Sohil Panjwani"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:text="SB/Lib/009"
+        android:id="@+id/issue_book_custom_list_view_subscriber_id"
+        android:fontFamily="sans-serif-smallcaps"
+        android:layout_margin="8dp"/>
+
+</LinearLayout>
