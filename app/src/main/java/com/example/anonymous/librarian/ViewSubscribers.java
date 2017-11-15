@@ -1,6 +1,7 @@
 package com.example.anonymous.librarian;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -59,6 +60,8 @@ public class ViewSubscribers extends AppCompatActivity {
                 Subscribers subscriberClicked = subscribers.get(i);
 
                 // TODO : pass the name and id to the following intent
+                Intent toSubscriberDetails = new Intent(ViewSubscribers.this, SubscriberDetails.class);
+                startActivity(toSubscriberDetails);
 
             }
         });
