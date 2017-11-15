@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.anonymous.librarian.SubscriberDetails">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
+            android:id="@+id/subscriber_detail_toolbar">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Subscriber details"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:gravity="center_vertical"
+                android:fontFamily="sans-serif-smallcaps"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"/>
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_margin="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="12dp"
+                android:id="@+id/subscriber_detail_image_view"
+                tools:src="@drawable/subscribers"
+                android:scaleType="fitCenter"/>
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Fardeen Sohil Panjwani"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:id="@+id/subscriber_detail_name"
+                android:fontFamily="sans-serif-smallcaps"/>
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="SB/Lib/093"
+                android:id="@+id/subscriber_detail_id"
+                android:fontFamily="sans-serif-smallcaps"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginTop="12dp"/>
+
+            <TextView
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Personal Details"
+                android:fontFamily="sans-serif-smallcaps"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_horizontal"
+                android:textSize="16sp"
+                style="@style/TextAppearance.AppCompat.Headline" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginBottom="6dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

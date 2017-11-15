@@ -23,7 +23,8 @@
         <activity android:name=".IssueBookFinalPhase" />
         <activity android:name=".ReturnBook" />
         <activity android:name=".ReturnBookFinalPhase" />
-        <activity android:name=".ViewSubscribers"></activity>
+        <activity android:name=".ViewSubscribers" />
+        <activity android:name=".SubscriberDetails"></activity>
     </application>
 
 </manifest>
