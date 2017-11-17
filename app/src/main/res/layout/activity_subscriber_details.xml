@@ -505,140 +505,83 @@
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@android:color/darker_gray"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@android:color/darker_gray"
-            android:layout_marginTop="12dp"/>
-
-        <TextView
-            android:textStyle="bold"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Monthly Analysis"
-            android:textAllCaps="true"
-            android:fontFamily="sans-serif-smallcaps"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_horizontal"
-            android:textSize="16sp"
-            style="@style/TextAppearance.AppCompat.Headline" />
+            android:id="@+id/empty_list_linear_layout"
+            android:visibility="invisible"
+            android:orientation="vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@android:color/darker_gray"
-            android:layout_marginBottom="6dp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/empty_list_message"
+                android:textStyle="bold"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:fontFamily="sans-serif-smallcaps"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="6dp">
+            android:id="@+id/subscriber_detail_analysis_layout"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_marginTop="12dp"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/darker_gray"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginTop="12dp"/>
+
+            <TextView
+                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:text="Monthly Analysis"
+                android:textAllCaps="true"
+                android:fontFamily="sans-serif-smallcaps"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_horizontal"
+                android:textSize="16sp"
+                style="@style/TextAppearance.AppCompat.Headline" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Month"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:textStyle="bold"
-                    android:layout_marginRight="6dp"
-                    android:gravity="center_vertical|end" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginBottom="6dp"/>
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.1"
-                    android:background="@android:color/transparent"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:id="@+id/subscriber_detail_month_of_analysis"
-                    tools:text="January"
-                    android:layout_marginLeft="6dp"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:gravity="center_vertical|left" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="12dp"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Number Of Books"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:textStyle="bold"
-                    android:layout_marginRight="6dp"
-                    android:gravity="center_vertical|end" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.1"
-                    android:background="@android:color/transparent"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:id="@+id/subscriber_detail_books_activity"
-                    tools:text="45"
-                    android:layout_marginLeft="6dp"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:gravity="center_vertical|left" />
-
-            </LinearLayout>
+                android:text="Select Month for analysis"
+                android:fontFamily="sans-serif-smallcaps"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:layout_margin="6dp"
+                android:textSize="16sp" />
 
             <LinearLayout
-                android:layout_marginTop="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:layout_margin="6dp">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Number Of Toys"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:textStyle="bold"
-                    android:layout_marginRight="6dp"
-                    android:gravity="center_vertical|end" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.1"
-                    android:background="@android:color/transparent"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:id="@+id/subscriber_detail_toys_activity"
-                    tools:text="12"
-                    android:layout_marginLeft="6dp"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:gravity="center_vertical|left" />
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dip"
+                    android:id="@+id/subscriber_detail_list_view"/>
 
             </LinearLayout>
 

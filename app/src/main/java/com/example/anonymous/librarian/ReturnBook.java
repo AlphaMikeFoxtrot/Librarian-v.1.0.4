@@ -44,6 +44,10 @@ public class ReturnBook extends AppCompatActivity {
         Toolbar mToolbar = findViewById(R.id.return_book_toolbar);
         setSupportActionBar(mToolbar);
 
+        if(books.size() > 0){
+            books.clear();
+        }
+
         GetBooksAsyncTask getBooksAsyncTask = new GetBooksAsyncTask();
         getBooksAsyncTask.execute();
 

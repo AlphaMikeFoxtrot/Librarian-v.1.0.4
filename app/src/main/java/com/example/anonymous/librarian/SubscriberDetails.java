@@ -1,10 +1,17 @@
 package com.example.anonymous.librarian;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +25,7 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,11 +41,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.Buffer;
 import java.util.ArrayList;
 
 public class SubscriberDetails extends AppCompatActivity {
 
-    ProgressDialog progressDialog;
+    ProgressDialog progressDialog, progressDialogGetAnalysis;
     TextView mSubscriberName,
             mSubscriberId,
             mSubscriberJkCenter,
@@ -57,6 +66,16 @@ public class SubscriberDetails extends AppCompatActivity {
 
     ImageView mSubscriberPhoto;
 
+    SubscriberAnalysisAdapter adapter;
+
+    ListView mListView;
+
+    LinearLayout mLinearLayout;
+
+    public ArrayList<SubscriberAnalysis> analysis;
+
+    JSONArray root;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,16 +92,40 @@ public class SubscriberDetails extends AppCompatActivity {
         mSubscriberPhone = findViewById(R.id.subscriber_detail_phone);
         mSubscriberGender = findViewById(R.id.subscriber_detail_gender);
         mSubscriberDOB = findViewById(R.id.subscriber_detail_dob);
-        mSubscriberMonth = findViewById(R.id.subscriber_detail_month_of_analysis);
-        mSubscriberBooksActivity = findViewById(R.id.subscriber_detail_books_activity);
-        mSubscriberToysActivity = findViewById(R.id.subscriber_detail_toys_activity);
         mSubscriberDailyBookActivity = findViewById(R.id.subscriber_detail_daily_book_activity);
         mSubscriberDailyToysActivity = findViewById(R.id.subscriber_detail_daily_toys_activity);
 
         mSubscriberPhoto = findViewById(R.id.subscriber_detail_image_view);
 
+        mListView = findViewById(R.id.subscriber_detail_list_view);
+
+        mLinearLayout = findViewById(R.id.subscriber_detail_analysis_layout);
+
+        mListView.setOnTouchListener(new View.OnTouchListener() {
+            // Setting on Touch Listener for handling the touch inside ScrollView
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Disallow the touch request for parent scroll on touch of child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+
         GetSubscriberDetailsAsyncTask getSubscriberDetailsAsyncTask = new GetSubscriberDetailsAsyncTask();
         getSubscriberDetailsAsyncTask.execute(getIntent().getStringExtra("subscriberId"));
+
+        GetAnalysisAsyncTask getAnalysisAsyncTask = new GetAnalysisAsyncTask();
+        getAnalysisAsyncTask.execute(getIntent().getStringExtra("subscriberId"));
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                SubscriberAnalysis subscriberAnalysis = analysis.get(i);
+
+                Toast.makeText(SubscriberDetails.this, "Month : " + subscriberAnalysis.getmMonthOfAnalysis() + "\nToy Activity : " + subscriberAnalysis.getmNumberOfToys() + "\nBookActivity : " + subscriberAnalysis.getmNumberOfBooks(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
     }
 
@@ -201,6 +244,121 @@ public class SubscriberDetails extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(SubscriberDetails.this, "Sorry! The server seems to be down at the moment\nPlease try again after some time.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    public class GetAnalysisAsyncTask extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected void onPreExecute() {
+            progressDialogGetAnalysis = new ProgressDialog(SubscriberDetails.this);
+            progressDialogGetAnalysis.setMessage("Getting Analysis..");
+            progressDialogGetAnalysis.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String subscriberId = strings[0];
+
+            final String GET_ANALYSIS_URL = "https://suppliant-fives.000webhostapp.com/librarian/get_subscriber_analysis.php";
+
+            HttpURLConnection httpURLConnection = null;
+            BufferedReader bufferedReader = null;
+            BufferedWriter bufferedWriter = null;
+
+            try {
+
+                URL url = new URL(GET_ANALYSIS_URL);
+
+                httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.connect();
+
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(outputStream, "UTF-8");
+
+                bufferedWriter = new BufferedWriter(outputStreamWriter);
+
+                String dataToWrite = URLEncoder.encode("subscriberId", "UTF-8") +"="+ URLEncoder.encode(subscriberId, "UTF-8");
+
+                bufferedWriter.write(dataToWrite);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+
+                bufferedReader = new BufferedReader(inputStreamReader);
+
+                String line;
+                StringBuilder response = new StringBuilder();
+
+                while((line = bufferedReader.readLine()) != null){
+                    response.append(line);
+                }
+
+                return response.toString();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return null;
+            } catch (IOException e) {
+                e.printStackTrace();
+                mLinearLayout.setVisibility(View.GONE);
+                return null;
+            } finally {
+                if(httpURLConnection != null){
+                    httpURLConnection.disconnect();
+                }
+                if(bufferedReader != null){
+                    try {
+                        bufferedReader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            if(s.isEmpty() || s == null || s.contains("empty")){
+                progressDialogGetAnalysis.dismiss();
+                mLinearLayout.setVisibility(View.GONE);
+                LinearLayout linearLayout = findViewById(R.id.empty_list_linear_layout);
+                TextView textView = findViewById(R.id.empty_list_message);
+                textView.setText("Sorry! Monthly Analysis is not available at the moment");
+                linearLayout.setVisibility(View.VISIBLE);
+            } else {
+
+                progressDialogGetAnalysis.dismiss();
+                analysis = new ArrayList<>();
+
+                try {
+
+                    root = new JSONArray(s);
+                    for(int i = 0; i < root.length(); i++) {
+                        JSONObject nthObject = root.getJSONObject(i);
+                        String month = nthObject.getString("month");
+                        String book_activity = nthObject.getString("book_activity");
+                        String toy_activity = nthObject.getString("toy_activity");
+
+                        SubscriberAnalysis subscriberAnalysis = new SubscriberAnalysis();
+                        subscriberAnalysis.setmMonthOfAnalysis(month);
+                        subscriberAnalysis.setmNumberOfBooks(book_activity);
+                        subscriberAnalysis.setmNumberOfToys(toy_activity);
+
+                        analysis.add(subscriberAnalysis);
+                    }
+
+                    adapter = new SubscriberAnalysisAdapter(SubscriberDetails.this, analysis);
+                    mListView.setAdapter(adapter);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
         }

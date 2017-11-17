@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         isLastDay = checkLastDay(splitDate[2]);
 
-        if(isLastDay){
+        if(true){
             lastDayProtocol();
         }
 
