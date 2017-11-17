@@ -39,11 +39,13 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="12dp"
+                android:alpha="0.5"
                 android:id="@+id/subscriber_detail_image_view"
+                android:background="@drawable/image_view_border"
                 tools:src="@drawable/subscribers"
                 android:scaleType="fitCenter"/>
 
@@ -90,7 +92,7 @@
                 android:layout_marginBottom="6dp"/>
 
             <LinearLayout
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -103,7 +105,7 @@
                     android:fontFamily="sans-serif-smallcaps"
                     android:textStyle="bold"
                     android:layout_marginRight="6dp"
-                    android:gravity="end" />
+                    android:gravity="center_vertical|end" />
 
                 <View
                     android:layout_width="0dp"
@@ -119,12 +121,12 @@
                     tools:text="10th December 1384"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
-                    android:gravity="left" />
+                    android:gravity="center_vertical|left" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -137,7 +139,7 @@
                     android:fontFamily="sans-serif-smallcaps"
                     android:textStyle="bold"
                     android:layout_marginRight="6dp"
-                    android:gravity="end" />
+                    android:gravity="center_vertical|end" />
 
                 <View
                     android:layout_width="0dp"
@@ -153,13 +155,13 @@
                     tools:text="RFC"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
-                    android:gravity="left" />
+                    android:gravity="center_vertical|left" />
 
             </LinearLayout>
 
 
             <LinearLayout
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -172,7 +174,7 @@
                     android:fontFamily="sans-serif-smallcaps"
                     android:textStyle="bold"
                     android:layout_marginRight="6dp"
-                    android:gravity="end" />
+                    android:gravity="center_vertical|end" />
 
                 <View
                     android:layout_width="0dp"
@@ -188,12 +190,12 @@
                     tools:text="Old Enrollment"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
-                    android:gravity="left" />
+                    android:gravity="center_vertical|left" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -206,7 +208,7 @@
                     android:fontFamily="sans-serif-smallcaps"
                     android:textStyle="bold"
                     android:layout_marginRight="6dp"
-                    android:gravity="end" />
+                    android:gravity="center_vertical|end" />
 
                 <View
                     android:layout_width="0dp"
@@ -222,12 +224,12 @@
                     tools:text="Secunderabad"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
-                    android:gravity="left" />
+                    android:gravity="center_vertical|left" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -240,7 +242,7 @@
                     android:fontFamily="sans-serif-smallcaps"
                     android:textStyle="bold"
                     android:layout_marginRight="6dp"
-                    android:gravity="end" />
+                    android:gravity="center_vertical|end" />
 
                 <View
                     android:layout_width="0dp"
@@ -256,12 +258,12 @@
                     tools:text="Secunderabad"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
-                    android:gravity="left" />
+                    android:gravity="center_vertical|left" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -274,7 +276,7 @@
                     android:fontFamily="sans-serif-smallcaps"
                     android:textStyle="bold"
                     android:layout_marginRight="6dp"
-                    android:gravity="end" />
+                    android:gravity="center_vertical|end" />
 
                 <View
                     android:layout_width="0dp"
@@ -290,7 +292,109 @@
                     tools:text="Secunderabad"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
-                    android:gravity="left" />
+                    android:gravity="center_vertical|left" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Phone Number"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textStyle="bold"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical|end" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="@android:color/transparent"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/subscriber_detail_phone"
+                    tools:text="8008771837"
+                    android:layout_marginLeft="6dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center_vertical|left" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Date Of Birth"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textStyle="bold"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical|end" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="@android:color/transparent"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/subscriber_detail_dob"
+                    tools:text="10-12-1998"
+                    android:layout_marginLeft="6dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center_vertical|left" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Gender"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textStyle="bold"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical|end" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="@android:color/transparent"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/subscriber_detail_gender"
+                    tools:text="Male"
+                    android:layout_marginLeft="6dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center_vertical|left" />
 
             </LinearLayout>
 
@@ -311,7 +415,7 @@
             android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Analysis"
+            android:text="Daily Analysis"
             android:textAllCaps="true"
             android:fontFamily="sans-serif-smallcaps"
             android:layout_gravity="center_vertical"
@@ -325,10 +429,220 @@
             android:background="@android:color/darker_gray"
             android:layout_marginBottom="6dp"/>
 
-        <com.github.mikephil.charting.charts.BarChart
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:id="@+id/subscriber_detail_barchart"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="6dp">
+
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Total number of books taken"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textStyle="bold"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical|end" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="@android:color/transparent"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/subscriber_detail_daily_book_activity"
+                    tools:text="45"
+                    android:layout_marginLeft="6dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center_vertical|left" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Total number of toys taken"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textStyle="bold"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical|end" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="@android:color/transparent"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/subscriber_detail_daily_toys_activity"
+                    tools:text="75"
+                    android:layout_marginLeft="6dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center_vertical|left" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/darker_gray"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="12dp"/>
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Monthly Analysis"
+            android:textAllCaps="true"
+            android:fontFamily="sans-serif-smallcaps"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_horizontal"
+            android:textSize="16sp"
+            style="@style/TextAppearance.AppCompat.Headline" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginBottom="6dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="6dp">
+
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Month"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textStyle="bold"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical|end" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="@android:color/transparent"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/subscriber_detail_month_of_analysis"
+                    tools:text="January"
+                    android:layout_marginLeft="6dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center_vertical|left" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Number Of Books"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textStyle="bold"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical|end" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="@android:color/transparent"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/subscriber_detail_books_activity"
+                    tools:text="45"
+                    android:layout_marginLeft="6dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center_vertical|left" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Number Of Toys"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textStyle="bold"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical|end" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="@android:color/transparent"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/subscriber_detail_toys_activity"
+                    tools:text="12"
+                    android:layout_marginLeft="6dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center_vertical|left" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 

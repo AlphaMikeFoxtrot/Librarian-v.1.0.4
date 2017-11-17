@@ -61,6 +61,8 @@ public class ViewSubscribers extends AppCompatActivity {
 
                 // TODO : pass the name and id to the following intent
                 Intent toSubscriberDetails = new Intent(ViewSubscribers.this, SubscriberDetails.class);
+                String subscriberId = subscriberClicked.getmSubscriberId();
+                toSubscriberDetails.putExtra("subscriberId", subscriberId);
                 startActivity(toSubscriberDetails);
 
             }
