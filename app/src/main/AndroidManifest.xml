@@ -24,7 +24,8 @@
         <activity android:name=".ReturnBook" />
         <activity android:name=".ReturnBookFinalPhase" />
         <activity android:name=".ViewSubscribers" />
-        <activity android:name=".SubscriberDetails"></activity>
+        <activity android:name=".SubscriberDetails" />
+        <activity android:name=".Analysis"></activity>
     </application>
 
 </manifest>

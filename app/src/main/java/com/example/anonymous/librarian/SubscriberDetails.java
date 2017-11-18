@@ -3,6 +3,7 @@ package com.example.anonymous.librarian;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -72,7 +73,7 @@ public class SubscriberDetails extends AppCompatActivity {
 
     LinearLayout mLinearLayout;
 
-    public ArrayList<SubscriberAnalysis> analysis;
+    public ArrayList<SubscriberAnalysis> analysis = new ArrayList<>();
 
     JSONArray root;
 
@@ -120,9 +121,9 @@ public class SubscriberDetails extends AppCompatActivity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                SubscriberAnalysis subscriberAnalysis = analysis.get(i);
 
-                Toast.makeText(SubscriberDetails.this, "Month : " + subscriberAnalysis.getmMonthOfAnalysis() + "\nToy Activity : " + subscriberAnalysis.getmNumberOfToys() + "\nBookActivity : " + subscriberAnalysis.getmNumberOfBooks(), Toast.LENGTH_SHORT).show();
+                Intent toAnalysis = new Intent(SubscriberDetails.this, Analysis.class);
+                startActivity(toAnalysis);
 
             }
         });
@@ -335,7 +336,6 @@ public class SubscriberDetails extends AppCompatActivity {
             } else {
 
                 progressDialogGetAnalysis.dismiss();
-                analysis = new ArrayList<>();
 
                 try {
 
