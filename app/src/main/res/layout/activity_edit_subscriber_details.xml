@@ -19,7 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
             android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
-            android:id="@+id/subscriber_detail_toolbar">
+            android:id="@+id/edit_subscriber_detail_toolbar">
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -71,10 +71,11 @@
                     android:background="@android:color/transparent"/>
 
                 <EditText
+                    style="@style/Base.V12.Widget.AppCompat.EditText"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:id="@+id/subscriber_detail_enrolled_on"
+                    android:id="@+id/edit_subscriber_detail_enrolled_on"
                     android:hint="10th December 1384"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
@@ -105,10 +106,11 @@
                     android:background="@android:color/transparent"/>
 
                 <EditText
+                    style="@style/Base.V12.Widget.AppCompat.EditText"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:id="@+id/subscriber_detail_enrolled_for"
+                    android:id="@+id/edit_subscriber_detail_enrolled_for"
                     android:hint="RFC"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
@@ -140,113 +142,12 @@
                     android:background="@android:color/transparent"/>
 
                 <EditText
+                    style="@style/Base.V12.Widget.AppCompat.EditText"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:id="@+id/subscriber_detail_enrollment_type"
+                    android:id="@+id/edit_subscriber_detail_enrollment_type"
                     android:hint="Old Enrollment"
-                    android:layout_marginLeft="6dp"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:gravity="center_vertical|left" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="R.E.B"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:textStyle="bold"
-                    android:layout_marginRight="6dp"
-                    android:gravity="center_vertical|end" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.1"
-                    android:background="@android:color/transparent"/>
-
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:id="@+id/subscriber_detail_reb"
-                    android:hint="Secunderabad"
-                    android:layout_marginLeft="6dp"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:gravity="center_vertical|left" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="L.E.B"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:textStyle="bold"
-                    android:layout_marginRight="6dp"
-                    android:gravity="center_vertical|end" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.1"
-                    android:background="@android:color/transparent"/>
-
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:id="@+id/subscriber_detail_leb"
-                    android:hint="Secunderabad"
-                    android:layout_marginLeft="6dp"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:gravity="center_vertical|left" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Respective Center"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:textStyle="bold"
-                    android:layout_marginRight="6dp"
-                    android:gravity="center_vertical|end" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.1"
-                    android:background="@android:color/transparent"/>
-
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:id="@+id/subscriber_detail_center"
-                    android:hint="Secunderabad"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center_vertical|left" />
@@ -276,10 +177,11 @@
                     android:background="@android:color/transparent"/>
 
                 <EditText
+                    style="@style/Base.V12.Widget.AppCompat.EditText"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:id="@+id/subscriber_detail_phone"
+                    android:id="@+id/edit_subscriber_detail_phone"
                     android:hint="8008771837"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
@@ -310,45 +212,12 @@
                     android:background="@android:color/transparent"/>
 
                 <EditText
+                    style="@style/Base.V12.Widget.AppCompat.EditText"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:id="@+id/subscriber_detail_dob"
+                    android:id="@+id/edit_subscriber_detail_dob"
                     android:hint="10-12-1998"
-                    android:layout_marginLeft="6dp"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:gravity="center_vertical|left" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Gender"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:textStyle="bold"
-                    android:layout_marginRight="6dp"
-                    android:gravity="center_vertical|end" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.1"
-                    android:background="@android:color/transparent"/>
-
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:id="@+id/subscriber_detail_gender"
-                    android:hint="Male"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center_vertical|left" />

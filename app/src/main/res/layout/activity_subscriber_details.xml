@@ -598,7 +598,7 @@
 
                 <ListView
                     android:layout_width="match_parent"
-                    android:layout_height="150dip"
+                    android:layout_height="100dip"
                     android:id="@+id/subscriber_detail_list_view"/>
 
             </LinearLayout>
