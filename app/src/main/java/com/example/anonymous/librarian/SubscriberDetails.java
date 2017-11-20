@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -67,6 +68,8 @@ public class SubscriberDetails extends AppCompatActivity {
 
     ImageView mSubscriberPhoto;
 
+    Button mEditButton;
+
     SubscriberAnalysisAdapter adapter;
 
     ListView mListView;
@@ -98,6 +101,8 @@ public class SubscriberDetails extends AppCompatActivity {
 
         mSubscriberPhoto = findViewById(R.id.subscriber_detail_image_view);
 
+        mEditButton = findViewById(R.id.edit_button);
+
         mListView = findViewById(R.id.subscriber_detail_list_view);
 
         mLinearLayout = findViewById(R.id.subscriber_detail_analysis_layout);
@@ -122,8 +127,16 @@ public class SubscriberDetails extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Intent toAnalysis = new Intent(SubscriberDetails.this, Analysis.class);
-                startActivity(toAnalysis);
+                // TODO
+
+            }
+        });
+
+        mEditButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
 
             }
         });

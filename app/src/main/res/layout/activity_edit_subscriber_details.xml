@@ -38,14 +38,6 @@
                     android:textColor="@android:color/white"
                     android:textStyle="bold"/>
 
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_weight="0.1"
-                    android:layout_height="32dp"
-                    android:layout_margin="6dp"
-                    android:id="@+id/edit_button"
-                    android:background="@drawable/ic_action_edit" />
-
             </LinearLayout>
 
         </android.support.v7.widget.Toolbar>
@@ -55,59 +47,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="12dp"
-                android:alpha="0.5"
-                android:id="@+id/subscriber_detail_image_view"
-                android:background="@drawable/image_view_border"
-                tools:src="@drawable/subscribers"
-                android:scaleType="fitCenter"/>
-
-            <TextView
-                android:gravity="center_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="Fardeen Sohil Panjwani"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:id="@+id/subscriber_detail_name"
-                android:fontFamily="sans-serif-smallcaps"/>
-
-            <TextView
-                android:gravity="center_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="SB/Lib/093"
-                android:id="@+id/subscriber_detail_id"
-                android:fontFamily="sans-serif-smallcaps"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@android:color/darker_gray"
-                android:layout_marginTop="12dp"/>
-
-            <TextView
-                android:textStyle="bold"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Details"
-                android:textAllCaps="true"
-                android:fontFamily="sans-serif-smallcaps"
-                android:layout_gravity="center_vertical"
-                android:gravity="center_horizontal"
-                android:textSize="16sp"
-                style="@style/TextAppearance.AppCompat.Headline" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@android:color/darker_gray"
-                android:layout_marginBottom="6dp"/>
 
             <LinearLayout
                 android:layout_marginTop="12dp"
@@ -131,12 +70,12 @@
                     android:layout_weight="0.1"
                     android:background="@android:color/transparent"/>
 
-                <TextView
+                <EditText
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/subscriber_detail_enrolled_on"
-                    tools:text="10th December 1384"
+                    android:hint="10th December 1384"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center_vertical|left" />
@@ -165,12 +104,12 @@
                     android:layout_weight="0.1"
                     android:background="@android:color/transparent"/>
 
-                <TextView
+                <EditText
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/subscriber_detail_enrolled_for"
-                    tools:text="RFC"
+                    android:hint="RFC"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center_vertical|left" />
@@ -200,12 +139,12 @@
                     android:layout_weight="0.1"
                     android:background="@android:color/transparent"/>
 
-                <TextView
+                <EditText
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/subscriber_detail_enrollment_type"
-                    tools:text="Old Enrollment"
+                    android:hint="Old Enrollment"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center_vertical|left" />
@@ -234,12 +173,12 @@
                     android:layout_weight="0.1"
                     android:background="@android:color/transparent"/>
 
-                <TextView
+                <EditText
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/subscriber_detail_reb"
-                    tools:text="Secunderabad"
+                    android:hint="Secunderabad"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center_vertical|left" />
@@ -268,12 +207,12 @@
                     android:layout_weight="0.1"
                     android:background="@android:color/transparent"/>
 
-                <TextView
+                <EditText
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/subscriber_detail_leb"
-                    tools:text="Secunderabad"
+                    android:hint="Secunderabad"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center_vertical|left" />
@@ -302,12 +241,12 @@
                     android:layout_weight="0.1"
                     android:background="@android:color/transparent"/>
 
-                <TextView
+                <EditText
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/subscriber_detail_center"
-                    tools:text="Secunderabad"
+                    android:hint="Secunderabad"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center_vertical|left" />
@@ -336,12 +275,12 @@
                     android:layout_weight="0.1"
                     android:background="@android:color/transparent"/>
 
-                <TextView
+                <EditText
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/subscriber_detail_phone"
-                    tools:text="8008771837"
+                    android:hint="8008771837"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center_vertical|left" />
@@ -370,12 +309,12 @@
                     android:layout_weight="0.1"
                     android:background="@android:color/transparent"/>
 
-                <TextView
+                <EditText
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/subscriber_detail_dob"
-                    tools:text="10-12-1998"
+                    android:hint="10-12-1998"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center_vertical|left" />
@@ -404,117 +343,12 @@
                     android:layout_weight="0.1"
                     android:background="@android:color/transparent"/>
 
-                <TextView
+                <EditText
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/subscriber_detail_gender"
-                    tools:text="Male"
-                    android:layout_marginLeft="6dp"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:gravity="center_vertical|left" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@android:color/darker_gray"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@android:color/darker_gray"
-            android:layout_marginTop="12dp"/>
-
-        <TextView
-            android:textStyle="bold"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Daily Analysis"
-            android:textAllCaps="true"
-            android:fontFamily="sans-serif-smallcaps"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_horizontal"
-            android:textSize="16sp"
-            style="@style/TextAppearance.AppCompat.Headline" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@android:color/darker_gray"
-            android:layout_marginBottom="6dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="6dp">
-
-            <LinearLayout
-                android:layout_marginTop="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Total number of books taken"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:textStyle="bold"
-                    android:layout_marginRight="6dp"
-                    android:gravity="center_vertical|end" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.1"
-                    android:background="@android:color/transparent"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:id="@+id/subscriber_detail_daily_book_activity"
-                    tools:text="45"
-                    android:layout_marginLeft="6dp"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:gravity="center_vertical|left" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginTop="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Total number of toys taken"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:textStyle="bold"
-                    android:layout_marginRight="6dp"
-                    android:gravity="center_vertical|end" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.1"
-                    android:background="@android:color/transparent"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:id="@+id/subscriber_detail_daily_toys_activity"
-                    tools:text="75"
+                    android:hint="Male"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center_vertical|left" />
@@ -526,82 +360,34 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/empty_list_linear_layout"
-            android:visibility="invisible"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@android:color/darker_gray"/>
-
-            <TextView
-                android:layout_width="match_parent"
+            <Button
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/empty_list_message"
-                android:textStyle="bold"
-                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_weight="1"
+                android:text="submit"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:id="@+id/edit_subscriber_detail_submit"
                 android:fontFamily="sans-serif-smallcaps"/>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/subscriber_detail_analysis_layout"
-            android:orientation="vertical">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@android:color/darker_gray"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@android:color/darker_gray"
-                android:layout_marginTop="12dp"/>
-
-            <TextView
-                android:textStyle="bold"
-                android:layout_width="match_parent"
+            <Button
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Monthly Analysis"
-                android:textAllCaps="true"
-                android:fontFamily="sans-serif-smallcaps"
-                android:layout_gravity="center_vertical"
-                android:gravity="center_horizontal"
-                android:textSize="16sp"
-                style="@style/TextAppearance.AppCompat.Headline" />
+                android:layout_weight="1"
+                android:text="Reset"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:id="@+id/edit_subscriber_detail_reset"
+                android:fontFamily="sans-serif-smallcaps"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@android:color/darker_gray"
-                android:layout_marginBottom="6dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
+            <Button
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Select Month for analysis"
-                android:fontFamily="sans-serif-smallcaps"
-                android:gravity="center_vertical"
-                android:textStyle="bold"
-                android:layout_margin="6dp"
-                android:textSize="16sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="6dp">
-
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="150dip"
-                    android:id="@+id/subscriber_detail_list_view"/>
-
-            </LinearLayout>
+                android:layout_weight="1"
+                android:text="Cancel"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:id="@+id/edit_subscriber_detail_cancel"
+                android:fontFamily="sans-serif-smallcaps"/>
 
         </LinearLayout>
 

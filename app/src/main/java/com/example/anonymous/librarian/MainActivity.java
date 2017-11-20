@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         listItems.add(new MainActivityListViewItems("Issue a Book", R.drawable.issue_book));
         listItems.add(new MainActivityListViewItems("Register Returned Book", R.drawable.return_book));
         listItems.add(new MainActivityListViewItems("View subscribers Details", R.drawable.subscribers));
+        listItems.add(new MainActivityListViewItems("View Currently Issued Books", R.drawable.books));
 
         adapter = new MainActivityAdapter(getApplicationContext(), listItems);
 
@@ -84,10 +85,21 @@ public class MainActivity extends AppCompatActivity {
                         viewSubscribers();
                         break;
 
+                    case 3:
+                        // view issued books clicked
+                        viewIssuedBooks();
+
                 }
 
             }
         });
+
+    }
+
+    private void viewIssuedBooks() {
+
+        Intent toViewIssuedBooks = new Intent(MainActivity.this, ViewCurrentlyIssuedBooks.class);
+        startActivity(toViewIssuedBooks);
 
     }
 

@@ -6,7 +6,7 @@ package com.example.anonymous.librarian;
 
 public class Books {
 
-    private String mBookId, mBookName, mBookAuthor, mBookIsIssued, mBookQuantity, mBookIssuedOn, mBookAddedOn;
+    private String mBookId, mBookName, mBookAuthor, mBookIsIssued, mBookQuantity, mBookIssuedOn, mBookAddedOn, mBookIssuedTo;
 
     public String getmBookId() {
         return mBookId;
@@ -62,5 +62,13 @@ public class Books {
 
     public void setmBookAddedOn(String mBookAddedOn) {
         this.mBookAddedOn = mBookAddedOn;
+    }
+
+    public String getmBookIssuedTo() {
+        return mBookIssuedTo;
+    }
+
+    public void setmBookIssuedTo(String mBookIssuedTo) {
+        this.mBookIssuedTo = mBookIssuedTo;
     }
 }
