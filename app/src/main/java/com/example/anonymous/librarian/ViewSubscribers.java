@@ -63,6 +63,7 @@ public class ViewSubscribers extends AppCompatActivity {
                 Intent toSubscriberDetails = new Intent(ViewSubscribers.this, SubscriberDetails.class);
                 String subscriberId = subscriberClicked.getmSubscriberId();
                 toSubscriberDetails.putExtra("subscriberId", subscriberId);
+                toSubscriberDetails.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toSubscriberDetails);
 
             }
@@ -82,6 +83,7 @@ public class ViewSubscribers extends AppCompatActivity {
         if(itemId == R.id.action_add){
             // TODO:
             Intent toAddSubscriber = new Intent(ViewSubscribers.this, AddSubscriber.class);
+            toAddSubscriber.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(toAddSubscriber);
         }
         return true;

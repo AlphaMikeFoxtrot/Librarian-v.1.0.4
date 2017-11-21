@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="150dip"
+    android:layout_height="155dip"
+    app:cardCornerRadius="12dp"
+    android:layout_gravity="center_horizontal"
+    app:contentPadding="6dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="75dip"
+            android:layout_height="75dip"
+            android:id="@+id/button_image_view"
+            android:scaleType="centerCrop"
+            tool:src="@drawable/books"
+            android:layout_margin="6dp"/>
+
+        <TextView
+            android:layout_alignParentBottom="true"
+            android:id="@+id/button_name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tool:text="Add subscriber"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="sans-serif-smallcaps"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

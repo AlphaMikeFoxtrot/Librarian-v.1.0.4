@@ -80,6 +80,7 @@ public class IssuedBookPhaseTwoAdapter extends RecyclerView.Adapter<IssuedBookPh
             Intent toFinalPhase = new Intent(context, IssueBookFinalPhase.class);
             toFinalPhase.putExtra("subscriberName", subscriberName);
             toFinalPhase.putExtra("subscriberId", subscriberId);
+            toFinalPhase.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             this.context.startActivity(toFinalPhase);
 
         }

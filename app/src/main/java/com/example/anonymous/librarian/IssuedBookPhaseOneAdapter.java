@@ -93,6 +93,7 @@ public class IssuedBookPhaseOneAdapter extends RecyclerView.Adapter<IssuedBookPh
             insertTempDataAsyncTask.execute(mBooks.get(position).getmBookName(), mBooks.get(position).getmBookId());
 
             Intent toIssueBookPhaseTwo = new Intent(context, IssuedBookPhaseTwo.class);
+            toIssueBookPhaseTwo.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             this.context.startActivity(toIssueBookPhaseTwo);
         }
     }

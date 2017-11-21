@@ -243,6 +243,7 @@ public class IssueBookFinalPhase extends AppCompatActivity {
                 issueBookProgressDialog.dismiss();
                 Toast.makeText(IssueBookFinalPhase.this, "Book Successfully issued!", Toast.LENGTH_SHORT).show();
                 Intent toMainActivity = new Intent(IssueBookFinalPhase.this, MainActivity.class);
+                toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toMainActivity);
             } else {
                 issueBookProgressDialog.dismiss();

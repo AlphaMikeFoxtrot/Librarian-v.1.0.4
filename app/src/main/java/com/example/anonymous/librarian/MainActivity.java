@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,7 +32,7 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     private ListView mListView;
-    private MainActivityAdapter adapter;
+    // private MainActivityAdapter adapter;
     public boolean isLastDay;
     ProgressDialog lastDayProgressBar;
 
@@ -48,66 +49,75 @@ public class MainActivity extends AppCompatActivity {
 
         isLastDay = checkLastDay(splitDate[2]);
 
-        if(isLastDay){
+        if (isLastDay) {
             lastDayProtocol();
         }
 
-        mListView = findViewById(R.id.main_activity_list_view);
+        // mListView = findViewById(R.id.main_activity_list_view);
         ArrayList<MainActivityListViewItems> listItems = new ArrayList<>();
 
         listItems.add(new MainActivityListViewItems("Issue a Book", R.drawable.issue_book));
+        listItems.add(new MainActivityListViewItems("Issue a Toy", R.drawable.toys));
+        listItems.add(new MainActivityListViewItems("Register Returned Toy", R.drawable.toys));
         listItems.add(new MainActivityListViewItems("Register Returned Book", R.drawable.return_book));
         listItems.add(new MainActivityListViewItems("View subscribers Details", R.drawable.subscribers));
         listItems.add(new MainActivityListViewItems("View Currently Issued Books", R.drawable.books));
+        listItems.add(new MainActivityListViewItems("View all Books", R.drawable.books));
+        listItems.add(new MainActivityListViewItems("View Source Code", R.drawable.view_source_code));
 
-        adapter = new MainActivityAdapter(getApplicationContext(), listItems);
-
-        mListView.setAdapter(adapter);
-
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                switch (i){
-
-                    case 0:
-                        // issue a book clicked
-                        issueBook();
-                        break;
-
-                    case 1:
-                        // return book clicked
-                        returnBook();
-                        break;
-
-                    case 2:
-                        // view subscribers clicked
-                        viewSubscribers();
-                        break;
-
-                    case 3:
-                        // view issued books clicked
-                        viewIssuedBooks();
-
-                }
-
-            }
-        });
-
+        MainActivityBaseAdapter adapter = new MainActivityBaseAdapter(getApplicationContext(), listItems);
+        GridView gridView = findViewById(R.id.main_activity_grid_view);
+        gridView.setAdapter(adapter);
     }
 
-    private void viewIssuedBooks() {
+        // adapter = new MainActivityAdapter(getApplicationContext(), listItems);
 
-        Intent toViewIssuedBooks = new Intent(MainActivity.this, ViewCurrentlyIssuedBooks.class);
-        startActivity(toViewIssuedBooks);
-
-    }
-
-    private void viewSubscribers() {
-        // TODO : initiate intent
-        Intent toViewSubscribers = new Intent(MainActivity.this, ViewSubscribers.class);
-        startActivity(toViewSubscribers);
-    }
+//        mListView.setAdapter(adapter);
+//
+//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//                switch (i){
+//
+//                    case 0:
+//                        // issue a book clicked
+//                        issueBook();
+//                        break;
+//
+//                    case 1:
+//                        // return book clicked
+//                        returnBook();
+//                        break;
+//
+//                    case 2:
+//                        // view subscribers clicked
+//                        viewSubscribers();
+//                        break;
+//
+//                    case 3:
+//                        // view issued books clicked
+//                        viewIssuedBooks();
+//
+//                }
+//
+//            }
+//        });
+//
+//    }
+//
+//    private void viewIssuedBooks() {
+//
+//        Intent toViewIssuedBooks = new Intent(MainActivity.this, ViewCurrentlyIssuedBooks.class);
+//        startActivity(toViewIssuedBooks);
+//
+//    }
+//
+//    private void viewSubscribers() {
+//        // TODO : initiate intent
+//        Intent toViewSubscribers = new Intent(MainActivity.this, ViewSubscribers.class);
+//        startActivity(toViewSubscribers);
+//    }
 
     private void lastDayProtocol() {
 
@@ -120,17 +130,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void returnBook() {
-        // TODO : create and execute intent
-        Intent toReturnBook = new Intent(MainActivity.this, ReturnBook.class);
-        startActivity(toReturnBook);
-    }
-
-    private void issueBook() {
-        // TODO : create and execute intent
-        Intent toIssueBookPhaseOne = new Intent(MainActivity.this, IssueBookPhaseOne.class);
-        startActivity(toIssueBookPhaseOne);
-    }
+//    private void returnBook() {
+//        // TODO : create and execute intent
+//        Intent toReturnBook = new Intent(MainActivity.this, ReturnBook.class);
+//        startActivity(toReturnBook);
+//    }
+//
+//    private void issueBook() {
+//        // TODO : create and execute intent
+//        Intent toIssueBookPhaseOne = new Intent(MainActivity.this, IssueBookPhaseOne.class);
+//        startActivity(toIssueBookPhaseOne);
+//    }
 
     public boolean checkLastDay(String date){
 

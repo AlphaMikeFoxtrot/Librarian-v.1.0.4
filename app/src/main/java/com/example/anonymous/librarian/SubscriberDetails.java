@@ -143,6 +143,7 @@ public class SubscriberDetails extends AppCompatActivity {
             toEdit.putExtra("enrollmentType", mSubscriberEnrollmentType.getText().toString());
             toEdit.putExtra("dob", mSubscriberDOB.getText().toString());
             toEdit.putExtra("phone", mSubscriberPhone.getText().toString());
+            toEdit.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(toEdit);
 
 

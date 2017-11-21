@@ -59,6 +59,7 @@ public class AddSubscriber extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent toSubscriberList = new Intent(AddSubscriber.this, ViewSubscribers.class);
+                toSubscriberList.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toSubscriberList);
 
             }
@@ -181,6 +182,7 @@ public class AddSubscriber extends AppCompatActivity {
                 progressDialog.dismiss();
                 Toast.makeText(AddSubscriber.this, "new Subscriber successfully added", Toast.LENGTH_SHORT).show();
                 Intent toSubscriberList = new Intent(AddSubscriber.this, ViewSubscribers.class);
+                toSubscriberList.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toSubscriberList);
             } else {
                 progressDialog.dismiss();

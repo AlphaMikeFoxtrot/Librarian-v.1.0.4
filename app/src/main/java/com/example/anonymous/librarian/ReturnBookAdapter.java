@@ -77,6 +77,7 @@ public class ReturnBookAdapter extends RecyclerView.Adapter<ReturnBookAdapter.Re
             Intent toReturnBookFinalPhase = new Intent(context, ReturnBookFinalPhase.class);
             toReturnBookFinalPhase.putExtra("book_id", bookPressed.getmBookId());
             toReturnBookFinalPhase.putExtra("book_name", bookPressed.getmBookName());
+            toReturnBookFinalPhase.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             this.context.startActivity(toReturnBookFinalPhase);
         }
     }

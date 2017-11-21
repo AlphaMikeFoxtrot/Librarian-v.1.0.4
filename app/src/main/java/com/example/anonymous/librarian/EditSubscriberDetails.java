@@ -76,6 +76,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent back = new Intent(EditSubscriberDetails.this, ViewSubscribers.class);
+                back.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(back);
 
             }
@@ -226,6 +227,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
                 progressDialog.dismiss();
                 Toast.makeText(EditSubscriberDetails.this, "Subscriber Detail successfully updated", Toast.LENGTH_SHORT).show();
                 Intent toMainActivity = new Intent(EditSubscriberDetails.this, MainActivity.class);
+                toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toMainActivity);
 
             } else {
@@ -233,6 +235,8 @@ public class EditSubscriberDetails extends AppCompatActivity {
                 progressDialog.dismiss();
                 Toast.makeText(EditSubscriberDetails.this, "Sorry! There seems to be a problem with the server!\n" + s, Toast.LENGTH_SHORT).show();
                 Intent toMainActivity = new Intent(EditSubscriberDetails.this, MainActivity.class);
+                toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(toMainActivity);
 
             }
         }
@@ -314,6 +318,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
                 deleteProgressDialog.dismiss();
                 Toast.makeText(EditSubscriberDetails.this, "Subscriber successfully delted", Toast.LENGTH_SHORT).show();
                 Intent toMainActivity = new Intent(EditSubscriberDetails.this, MainActivity.class);
+                toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toMainActivity);
             } else {
                 deleteProgressDialog.dismiss();

@@ -248,6 +248,7 @@ public class ReturnBookFinalPhase extends AppCompatActivity {
                 returnBookProgressDialog.dismiss();
                 Toast.makeText(ReturnBookFinalPhase.this, "Entry registered successfully", Toast.LENGTH_SHORT).show();
                 Intent toMainActivity = new Intent(ReturnBookFinalPhase.this, MainActivity.class);
+                toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toMainActivity);
             } else {
                 returnBookProgressDialog.dismiss();
