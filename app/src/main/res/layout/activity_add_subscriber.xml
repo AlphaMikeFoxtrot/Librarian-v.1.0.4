@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.anonymous.librarian.AddSubscriber">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:id="@+id/add_subscriber_toolbar"
+            android:background="@color/colorPrimary"
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="New Subscriber"
+                android:textStyle="bold"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:gravity="center_vertical"/>
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="6dp">
+
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Name"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textStyle="bold"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical|end" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="@android:color/transparent"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/add_subscriber_name"
+                    style="@style/Base.V12.Widget.AppCompat.EditText"
+                    android:layout_marginLeft="6dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center_vertical|left" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="New Id"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textStyle="bold"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical|end" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="@android:color/transparent"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/add_subscriber_id"
+                    android:hint="SB/Lib/94.."
+                    style="@style/Base.V12.Widget.AppCompat.EditText"
+                    android:layout_marginLeft="6dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center_vertical|left" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Date Of Birth"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textStyle="bold"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical|end" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="@android:color/transparent"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/add_subscriber_dob"
+                    android:hint="12-10-1998"
+                    style="@style/Base.V12.Widget.AppCompat.EditText"
+                    android:layout_marginLeft="6dp"
+                    android:inputType="date"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center_vertical|left" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Gender"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textStyle="bold"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical|end" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="@android:color/transparent"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/add_subscriber_gender"
+                    android:hint="male, female"
+                    style="@style/Base.V12.Widget.AppCompat.EditText"
+                    android:layout_marginLeft="6dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center_vertical|left" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Phone Number"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textStyle="bold"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical|end" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="@android:color/transparent"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/add_subscriber_phone"
+                    style="@style/Base.V12.Widget.AppCompat.EditText"
+                    android:layout_marginLeft="6dp"
+                    android:inputType="phone"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center_vertical|left" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Regional Education Board"
+                    android:ellipsize="end"
+                    android:lines="2"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textStyle="bold"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical|end" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="@android:color/transparent"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/add_subscriber_reb"
+                    android:hint="Secunderabad, Hyderabad"
+                    style="@style/Base.V12.Widget.AppCompat.EditText"
+                    android:layout_marginLeft="6dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center_vertical|left" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Local Education Board"
+                    android:ellipsize="end"
+                    android:lines="2"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textStyle="bold"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical|end" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="@android:color/transparent"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/add_subscriber_leb"
+                    android:hint="Secunderabad, Hyderabad"
+                    style="@style/Base.V12.Widget.AppCompat.EditText"
+                    android:layout_marginLeft="6dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center_vertical|left" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Jamatkhana Center"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textStyle="bold"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical|end" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="@android:color/transparent"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/add_subscriber_center"
+                    android:hint="Secunderabad, Hyderabad"
+                    style="@style/Base.V12.Widget.AppCompat.EditText"
+                    android:layout_marginLeft="6dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center_vertical|left" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Enrolled For"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textStyle="bold"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical|end" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="@android:color/transparent"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/add_subscriber_enrolled_for"
+                    android:hint="RFC, ToyLib.."
+                    style="@style/Base.V12.Widget.AppCompat.EditText"
+                    android:layout_marginLeft="6dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center_vertical|left" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Enrollment Type"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textStyle="bold"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical|end" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="@android:color/transparent"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/add_subscriber_enrollment_type"
+                    android:hint="New, Old..."
+                    style="@style/Base.V12.Widget.AppCompat.EditText"
+                    android:layout_marginLeft="6dp"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center_vertical|left" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="submit"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:id="@+id/add_subscriber_submit"
+                    android:fontFamily="sans-serif-smallcaps"/>
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Reset"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:id="@+id/add_subscriber_reset"
+                    android:fontFamily="sans-serif-smallcaps"/>
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cancel"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:id="@+id/add_subscriber_cancel"
+                    android:fontFamily="sans-serif-smallcaps"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

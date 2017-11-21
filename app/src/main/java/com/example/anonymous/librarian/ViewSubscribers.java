@@ -69,6 +69,24 @@ public class ViewSubscribers extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.add_subscriber, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+
+        if(itemId == R.id.action_add){
+            // TODO:
+            Intent toAddSubscriber = new Intent(ViewSubscribers.this, AddSubscriber.class);
+            startActivity(toAddSubscriber);
+        }
+        return true;
+    }
+
     public class GetSubscribersAsyncTask extends AsyncTask<String, Void, String>{
 
         @Override

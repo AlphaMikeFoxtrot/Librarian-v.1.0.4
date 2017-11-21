@@ -76,7 +76,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/edit_subscriber_detail_enrolled_on"
-                    android:hint="10th December 1384"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center_vertical|left" />
@@ -111,7 +110,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/edit_subscriber_detail_enrolled_for"
-                    android:hint="RFC"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center_vertical|left" />
@@ -147,7 +145,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/edit_subscriber_detail_enrollment_type"
-                    android:hint="Old Enrollment"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center_vertical|left" />
@@ -182,7 +179,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/edit_subscriber_detail_phone"
-                    android:hint="8008771837"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center_vertical|left" />
@@ -217,7 +213,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/edit_subscriber_detail_dob"
-                    android:hint="10-12-1998"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center_vertical|left" />

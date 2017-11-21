@@ -109,6 +109,8 @@ public class ViewCurrentlyIssuedBooks extends AppCompatActivity {
 
                 try {
 
+                    progressDialog.dismiss();
+
                     JSONArray root = new JSONArray(s);
                     for(int i = 0; i < root.length(); i++){
 
@@ -119,11 +121,13 @@ public class ViewCurrentlyIssuedBooks extends AppCompatActivity {
                         String issuedTo = nthObject.getString("issued_book_to_name");
                         String issuedOn = nthObject.getString("issued_on");
 
+                        String[] issuedOnDates = issuedOn.split(" ");
+
                         Books book = new Books();
                         book.setmBookName(issuedBookName);
                         book.setmBookId(issuedBookId);
                         book.setmBookIssuedTo(issuedTo);
-                        book.setmBookIssuedOn(issuedOn);
+                        book.setmBookIssuedOn(issuedOnDates[0]);
 
                         mIssuedBooks.add(book);
 

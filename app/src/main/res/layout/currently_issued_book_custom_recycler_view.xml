@@ -84,6 +84,8 @@
                 tools:text="01-12-8549"
                 android:fontFamily="sans-serif-smallcaps"
                 android:id="@+id/currently_issued_book_on"
+                android:lines="2"
+                android:ellipsize="end"
                 android:gravity="start"/>
 
         </LinearLayout>

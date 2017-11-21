@@ -26,7 +26,8 @@
         <activity android:name=".ViewSubscribers" />
         <activity android:name=".SubscriberDetails" />
         <activity android:name=".ViewCurrentlyIssuedBooks" />
-        <activity android:name=".EditSubscriberDetails"></activity>
+        <activity android:name=".EditSubscriberDetails" />
+        <activity android:name=".AddSubscriber"></activity>
     </application>
 
 </manifest>

@@ -137,6 +137,7 @@ public class SubscriberDetails extends AppCompatActivity {
             public void onClick(View view) {
 
             Intent toEdit = new Intent(SubscriberDetails.this, EditSubscriberDetails.class);
+            toEdit.putExtra("subId", mSubscriberId.getText().toString());
             toEdit.putExtra("enrolledOn", mSubscriberEnrolledOn.getText().toString());
             toEdit.putExtra("enrolledFor", mSubscriberEnrolledFor.getText().toString());
             toEdit.putExtra("enrollmentType", mSubscriberEnrollmentType.getText().toString());
