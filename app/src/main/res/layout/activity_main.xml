@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_gravity="center"
     android:orientation="vertical"
-    android:background="#CFD8DC"
+    android:background="@android:color/background_light"
     android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
@@ -43,14 +43,15 @@
     </android.support.v7.widget.Toolbar>
 
     <GridView
+        android:background="@android:color/white"
         android:id="@+id/main_activity_grid_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:numColumns="2"
         android:gravity="center"
         android:layout_margin="8dp"
-        android:horizontalSpacing="1dp"
-        android:verticalSpacing="6dp" />
+        android:horizontalSpacing="8dp"
+        android:verticalSpacing="8dp" />
 
 </LinearLayout>
 

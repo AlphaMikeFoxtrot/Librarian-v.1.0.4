@@ -57,6 +57,13 @@ public class IssueBookFinalPhase extends AppCompatActivity {
         cancel = findViewById(R.id.issue_book_cancel_button);
         reset = findViewById(R.id.issue_book_reset_button);
 
+        bookName.setText(getIntent().getStringExtra("bookName"));
+        bookId.setText(getIntent().getStringExtra("bookId"));
+
+        Intent intent = getIntent();
+        subscriberName.setText(intent.getStringExtra("subscriberName"));
+        subscriberId.setText(intent.getStringExtra("subscriberId"));
+
         GetTempBookDetailsAsyncTask getTempBookDetailsAsyncTask = new GetTempBookDetailsAsyncTask();
         getTempBookDetailsAsyncTask.execute();
 
@@ -66,6 +73,24 @@ public class IssueBookFinalPhase extends AppCompatActivity {
                 Intent intent = getIntent();
                 IssueBookAsyncTask issueBookAsyncTask = new IssueBookAsyncTask();
                 issueBookAsyncTask.execute(bookName.getText().toString(), bookId.getText().toString(), intent.getStringExtra("subscriberName"), intent.getStringExtra("subscriberId"));
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toMainActivity = new Intent(IssueBookFinalPhase.this, MainActivity.class);
+                toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(toMainActivity);
+            }
+        });
+
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toPhaseOne = new Intent(IssueBookFinalPhase.this, IssueBookPhaseOne.class);
+                toPhaseOne.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(toPhaseOne);
             }
         });
 
@@ -142,10 +167,6 @@ public class IssueBookFinalPhase extends AppCompatActivity {
                     JSONObject nthObject = root.getJSONObject(0);
                     bookName.setText(nthObject.getString("book_name"));
                     bookId.setText(nthObject.getString("book_id"));
-
-                    Intent intent = getIntent();
-                    subscriberName.setText(intent.getStringExtra("subscriberName"));
-                    subscriberId.setText(intent.getStringExtra("subscriberId"));
 
                 } catch (JSONException e) {
                     e.printStackTrace();

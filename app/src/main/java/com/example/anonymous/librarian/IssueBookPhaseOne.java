@@ -12,6 +12,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.anonymous.librarian.IssueBookAdapter.IssueBookPhaseOneAdapter;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,7 +31,7 @@ import java.util.ArrayList;
 public class IssueBookPhaseOne extends AppCompatActivity {
 
     RecyclerView mRecyclerView;
-    public static IssuedBookPhaseOneAdapter adapter;
+    public static IssueBookPhaseOneAdapter adapter;
     public ProgressDialog progressDialog;
     public ArrayList<Books> mBooks = new ArrayList<>();
 
@@ -135,7 +137,7 @@ public class IssueBookPhaseOne extends AppCompatActivity {
                         mBooks.add(book);
                     }
 
-                    adapter = new IssuedBookPhaseOneAdapter(getApplicationContext(), mBooks);
+                    adapter = new IssueBookPhaseOneAdapter(getApplicationContext(), mBooks);
                     mRecyclerView.setAdapter(adapter);
 
                 } catch (JSONException e) {
@@ -159,15 +161,16 @@ public class IssueBookPhaseOne extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                newText = newText.toLowerCase();
-                ArrayList<Books> newList = new ArrayList<>();
-                for(Books book : mBooks){
-                    String bookId = book.getmBookId();
-                    if(bookId.toLowerCase().contains(newText)){
-                        newList.add(book);
-                    }
-                }
-                adapter.setFilter(newList);
+                adapter.getFilter().filter(newText.toUpperCase());
+//                newText = newText.toLowerCase();
+//                ArrayList<Books> newList = new ArrayList<>();
+//                for(Books book : mBooks){
+//                    String bookId = book.getmBookId();
+//                    if(bookId.toLowerCase().contains(newText)){
+//                        newList.add(book);
+//                    }
+//                }
+//                adapter.setFilter(newList);
 
                 return true;
             }

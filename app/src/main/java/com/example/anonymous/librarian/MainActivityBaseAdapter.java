@@ -66,7 +66,7 @@ public class MainActivityBaseAdapter extends BaseAdapter {
                     toIssueBookPhaseOne.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(toIssueBookPhaseOne);
 
-                } else if(itemClicked.toLowerCase().contains("register returned Book")){
+                } else if(itemClicked.toLowerCase().contains("register returned book")){
 
                     Intent toReturnBook = new Intent(context, ReturnBook.class);
                     toReturnBook.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

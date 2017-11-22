@@ -11,23 +11,42 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".IssueBookPhaseOne" />
-        <activity android:name=".IssuedBookPhaseTwo" />
-        <activity android:name=".IssueBookFinalPhase" />
-        <activity android:name=".ReturnBook" />
-        <activity android:name=".ReturnBookFinalPhase" />
-        <activity android:name=".ViewSubscribers" />
-        <activity android:name=".SubscriberDetails" />
-        <activity android:name=".ViewCurrentlyIssuedBooks" />
-        <activity android:name=".EditSubscriberDetails" />
-        <activity android:name=".AddSubscriber"></activity>
+        <activity android:name=".IssueBookPhaseOne"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".IssuedBookPhaseTwo"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".IssueBookPhaseOne"/>
+        <activity android:name=".IssueBookFinalPhase"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".IssuedBookPhaseTwo"/>
+        <activity android:name=".ReturnBook"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".ReturnBookFinalPhase"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".ReturnBook"/>
+        <activity android:name=".ViewSubscribers"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".SubscriberDetails"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".ViewSubscribers"/>
+        <activity android:name=".ViewCurrentlyIssuedBooks"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".EditSubscriberDetails"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".SubscriberDetails"/>
+        <activity android:name=".AddSubscriber"/>
     </application>
 
 </manifest>

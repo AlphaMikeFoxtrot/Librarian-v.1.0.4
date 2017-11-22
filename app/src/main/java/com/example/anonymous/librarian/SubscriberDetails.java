@@ -7,6 +7,10 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -76,6 +80,8 @@ public class SubscriberDetails extends AppCompatActivity {
 
     LinearLayout mLinearLayout;
 
+    Toolbar mToolbar;
+
     public ArrayList<SubscriberAnalysis> analysis = new ArrayList<>();
 
     JSONArray root;
@@ -84,6 +90,9 @@ public class SubscriberDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subscriber_details);
+
+        mToolbar = findViewById(R.id.subscriber_detail_toolbar);
+        setSupportActionBar(mToolbar);
 
         mSubscriberName = findViewById(R.id.subscriber_detail_name);
         mSubscriberId = findViewById(R.id.subscriber_detail_id);
@@ -100,8 +109,6 @@ public class SubscriberDetails extends AppCompatActivity {
         mSubscriberDailyToysActivity = findViewById(R.id.subscriber_detail_daily_toys_activity);
 
         mSubscriberPhoto = findViewById(R.id.subscriber_detail_image_view);
-
-        mEditButton = findViewById(R.id.edit_button);
 
         mListView = findViewById(R.id.subscriber_detail_list_view);
 
@@ -132,9 +139,19 @@ public class SubscriberDetails extends AppCompatActivity {
             }
         });
 
-        mEditButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_edit, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+
+        if(itemId == R.id.action_edit){
 
             Intent toEdit = new Intent(SubscriberDetails.this, EditSubscriberDetails.class);
             toEdit.putExtra("subId", mSubscriberId.getText().toString());
@@ -146,10 +163,8 @@ public class SubscriberDetails extends AppCompatActivity {
             toEdit.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(toEdit);
 
-
-            }
-        });
-
+        }
+        return true;
     }
 
     public class GetSubscriberDetailsAsyncTask extends AsyncTask<String, Void, String>{

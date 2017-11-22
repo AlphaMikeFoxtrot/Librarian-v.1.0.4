@@ -1,18 +1,26 @@
-package com.example.anonymous.librarian;
+package com.example.anonymous.librarian.IssueBookAdapter;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.anonymous.librarian.Books;
+import com.example.anonymous.librarian.IssueBookFilters.IssueBookPhaseOneFilter;
+import com.example.anonymous.librarian.IssueBookFinalPhase;
+import com.example.anonymous.librarian.IssueBookHolders.IssueBookPhaseOneHolder;
+import com.example.anonymous.librarian.IssueBookOnClickListeners.IssueBookPhaseOneOnItemClickListener;
+import com.example.anonymous.librarian.IssueBookPhaseOne;
+import com.example.anonymous.librarian.IssuedBookPhaseTwo;
+import com.example.anonymous.librarian.R;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -28,53 +36,51 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 
 /**
- * Created by ANONYMOUS on 12-Nov-17.
+ * Created by ANONYMOUS on 22-Nov-17.
  */
 
-public class IssuedBookPhaseOneAdapter extends RecyclerView.Adapter<IssuedBookPhaseOneAdapter.IssuedBookPhaseOneViewHolder> implements Filterable{
+public class IssueBookPhaseOneAdapter extends RecyclerView.Adapter<IssueBookPhaseOneHolder> implements Filterable{
 
-    ProgressDialog progressDialog;
+    Context context;
+    public ArrayList<Books> oldList, newList;
+    IssueBookPhaseOneFilter filter;
 
-    public static Context context;
-    ArrayList<Books> mBooks = new ArrayList<>();
-    ArrayList<Books> filteredList;
-    IssueBookFilter filter;
-
-    final String ID = "ID : ";
-
-    public IssuedBookPhaseOneAdapter(Context context, ArrayList<Books> mBooks){
+    public IssueBookPhaseOneAdapter(Context context, ArrayList<Books> oldList) {
         this.context = context;
-        this.mBooks = mBooks;
-        this.filteredList = mBooks;
+        this.oldList = oldList;
+        this.newList = oldList;
     }
 
     @Override
-    public IssuedBookPhaseOneViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItemView = layoutInflater.inflate(R.layout.issued_book_one_custom_list_view, parent, false);
+    public IssueBookPhaseOneHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View listItemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.issued_book_one_custom_list_view, parent, false);
 
-        return new IssuedBookPhaseOneViewHolder(listItemView, this.context, this.mBooks);
+        return new IssueBookPhaseOneHolder(listItemView);
     }
 
     @Override
-    public void onBindViewHolder(IssuedBookPhaseOneViewHolder holder, int position) {
+    public void onBindViewHolder(IssueBookPhaseOneHolder holder, int position) {
 
-        Books currentBook = mBooks.get(position);
+        Books currentBook = oldList.get(position);
 
-        holder.mBookName.setText(currentBook.getmBookName());
-        holder.mBookId.setText(currentBook.getmBookId());
+        holder.bookName.setText(currentBook.getmBookName());
+        holder.bookId.setText(currentBook.getmBookId());
 
-        holder.setIssueBookItemClickListener(new IssueBookOnClickListener() {
+        holder.setItemClickListener(new IssueBookPhaseOneOnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+
                 InsertTempDataAsyncTask insertTempDataAsyncTask = new InsertTempDataAsyncTask();
-                insertTempDataAsyncTask.execute(mBooks.get(position).getmBookName(), mBooks.get(position).getmBookId());
+                insertTempDataAsyncTask.execute(oldList.get(position).getmBookName(), oldList.get(position).getmBookId());
 
                 Intent toIssueBookPhaseTwo = new Intent(context, IssuedBookPhaseTwo.class);
+//                Intent finalPhase = new Intent(context, IssueBookFinalPhase.class);
+//                finalPhase.putExtra("bookName", oldList.get(position).getmBookName());
+//                finalPhase.putExtra("bookId", oldList.get(position).getmBookId());
                 toIssueBookPhaseTwo.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                // Snackbar.make(view, oldList.get(position).getmBookName(), Snackbar.LENGTH_LONG).show();
                 context.startActivity(toIssueBookPhaseTwo);
 
-                Snackbar.make(view, mBooks.get(position).getmBookName(), Snackbar.LENGTH_LONG).show();
             }
         });
 
@@ -82,55 +88,19 @@ public class IssuedBookPhaseOneAdapter extends RecyclerView.Adapter<IssuedBookPh
 
     @Override
     public int getItemCount() {
-        return mBooks.size();
+        return oldList.size();
     }
 
     @Override
     public Filter getFilter() {
         if(filter == null){
-            filter = new IssueBookFilter(this, filteredList);
+            filter = new IssueBookPhaseOneFilter(this, oldList);
         }
+
         return filter;
     }
 
-    public class IssuedBookPhaseOneViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-
-        TextView mBookName, mBookId;
-        Context context;
-        IssueBookOnClickListener issueBookOnClickListener;
-        ArrayList<Books> books;
-
-        public IssuedBookPhaseOneViewHolder(View itemView, Context context, ArrayList<Books> books) {
-            super(itemView);
-
-            this.context = context;
-            this.books = books;
-
-            itemView.setOnClickListener(this);
-
-            mBookName = itemView.findViewById(R.id.book_name);
-            mBookId = itemView.findViewById(R.id.book_id);
-        }
-
-        public void setIssueBookItemClickListener(IssueBookOnClickListener issueBookItemClickListener){
-            this.issueBookOnClickListener = issueBookItemClickListener;
-        }
-
-        @Override
-        public void onClick(View view) {
-            // TODO : add Intents to issuedbookfinalphase
-
-            this.issueBookOnClickListener.onItemClick(view, getLayoutPosition());
-
-        }
-    }
-//    public void setFilter(ArrayList<Books> newList){
-//        mBooks = new ArrayList<>();
-//        mBooks.addAll(newList);
-//        notifyDataSetChanged();
-//    }
-
-    public class InsertTempDataAsyncTask extends AsyncTask<String, Void, String>{
+    public class InsertTempDataAsyncTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected void onPreExecute() {
@@ -197,5 +167,4 @@ public class IssuedBookPhaseOneAdapter extends RecyclerView.Adapter<IssuedBookPh
             }
         }
     }
-
 }

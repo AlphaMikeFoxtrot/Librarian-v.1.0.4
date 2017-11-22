@@ -12,6 +12,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.anonymous.librarian.IssueBookAdapter.IssueBookPhaseTwoAdapter;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,7 +31,7 @@ import java.util.ArrayList;
 public class IssuedBookPhaseTwo extends AppCompatActivity {
 
     RecyclerView mRecyclerView;
-    public IssuedBookPhaseTwoAdapter adapter;
+    public IssueBookPhaseTwoAdapter adapter;
     public ArrayList<Subscribers> subscribers = new ArrayList<>();
     public ProgressDialog progressDialog;
 
@@ -137,7 +139,7 @@ public class IssuedBookPhaseTwo extends AppCompatActivity {
 
                     }
 
-                    adapter = new IssuedBookPhaseTwoAdapter(getApplicationContext(), subscribers);
+                    adapter = new IssueBookPhaseTwoAdapter(getApplicationContext(), subscribers);
                     mRecyclerView.setAdapter(adapter);
 
                 } catch (JSONException e) {
@@ -162,15 +164,7 @@ public class IssuedBookPhaseTwo extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                newText = newText.toLowerCase();
-                ArrayList<Subscribers> newList = new ArrayList<>();
-                for(Subscribers subscriber : subscribers){
-                    String subscriberId = subscriber.getmSubscriberId();
-                    if(subscriberId.toLowerCase().contains(newText)){
-                        newList.add(subscriber);
-                    }
-                }
-                adapter.setFilter(newList);
+                adapter.getFilter().filter(newText.toUpperCase());
                 return true;
             }
         });

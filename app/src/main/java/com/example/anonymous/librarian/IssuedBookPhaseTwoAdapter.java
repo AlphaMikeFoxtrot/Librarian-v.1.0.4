@@ -70,7 +70,7 @@ public class IssuedBookPhaseTwoAdapter extends RecyclerView.Adapter<IssuedBookPh
         @Override
         public void onClick(View view) {
 
-            int position = getAdapterPosition();
+            int position = getLayoutPosition();
 
             Subscribers clickedSubscriber = subscribers.get(position);
 
