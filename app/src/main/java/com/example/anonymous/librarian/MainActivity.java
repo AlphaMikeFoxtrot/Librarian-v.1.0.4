@@ -1,7 +1,9 @@
 package com.example.anonymous.librarian;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,6 +43,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if(!(isNetworkConnected())){
+            finish();
+        }
+
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
         String actualDate = dateFormat.format(date);
@@ -64,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         listItems.add(new MainActivityListViewItems("View Currently Issued Books", R.drawable.books));
         listItems.add(new MainActivityListViewItems("View all Books", R.drawable.books));
         listItems.add(new MainActivityListViewItems("View Source Code", R.drawable.view_source_code));
+        listItems.add(new MainActivityListViewItems("About Us", R.drawable.about_us));
 
         MainActivityBaseAdapter adapter = new MainActivityBaseAdapter(getApplicationContext(), listItems);
         GridView gridView = findViewById(R.id.main_activity_grid_view);
@@ -231,6 +238,12 @@ public class MainActivity extends AppCompatActivity {
                 lastDayProgressBar.dismiss();
             }
         }
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
     }
 
 }

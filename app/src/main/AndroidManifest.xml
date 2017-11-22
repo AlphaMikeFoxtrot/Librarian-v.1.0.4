@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.anonymous.librarian">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -11,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,34 +21,44 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".IssueBookPhaseOne"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".IssuedBookPhaseTwo"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".IssueBookPhaseOne"/>
-        <activity android:name=".IssueBookFinalPhase"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".IssuedBookPhaseTwo"/>
-        <activity android:name=".ReturnBook"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".ReturnBookFinalPhase"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".ReturnBook"/>
-        <activity android:name=".ViewSubscribers"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".SubscriberDetails"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".ViewSubscribers"/>
-        <activity android:name=".ViewCurrentlyIssuedBooks"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".EditSubscriberDetails"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".SubscriberDetails"/>
-        <activity android:name=".AddSubscriber"/>
+        <activity
+            android:name=".IssueBookPhaseOne"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".IssuedBookPhaseTwo"
+            android:parentActivityName=".IssueBookPhaseOne"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".IssueBookFinalPhase"
+            android:parentActivityName=".IssuedBookPhaseTwo"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ReturnBook"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ReturnBookFinalPhase"
+            android:parentActivityName=".ReturnBook"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ViewSubscribers"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SubscriberDetails"
+            android:parentActivityName=".ViewSubscribers"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ViewCurrentlyIssuedBooks"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EditSubscriberDetails"
+            android:parentActivityName=".SubscriberDetails"
+            android:screenOrientation="portrait" />
+        <activity android:name=".AddSubscriber" />
+        <activity android:name=".Credits"></activity>
     </application>
 
 </manifest>
