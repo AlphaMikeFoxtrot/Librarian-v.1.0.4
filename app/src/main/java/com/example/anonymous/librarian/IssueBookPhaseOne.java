@@ -115,7 +115,7 @@ public class IssueBookPhaseOne extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            if(s.isEmpty()){
+            if(false){
                 progressDialog.dismiss();
                 Toast.makeText(IssueBookPhaseOne.this, "The list seems to be empty!", Toast.LENGTH_SHORT).show();
             } else {

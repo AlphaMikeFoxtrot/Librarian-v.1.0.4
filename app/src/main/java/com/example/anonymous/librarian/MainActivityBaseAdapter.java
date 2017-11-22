@@ -84,6 +84,12 @@ public class MainActivityBaseAdapter extends BaseAdapter {
                     toViewIssuedBooks.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(toViewIssuedBooks);
 
+                } else if(itemClicked.toLowerCase().contains("about us")){
+
+                    Intent toCredits = new Intent(context, Credits.class);
+                    // toCredits.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(toCredits);
+
                 }
 
             }

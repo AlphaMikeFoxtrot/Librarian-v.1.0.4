@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if(!(isNetworkConnected())){
+            Toast.makeText(MainActivity.this, "No Internet connection!", Toast.LENGTH_LONG).show();
             finish();
         }
 
