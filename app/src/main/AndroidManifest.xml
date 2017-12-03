@@ -58,7 +58,8 @@
             android:parentActivityName=".SubscriberDetails"
             android:screenOrientation="portrait" />
         <activity android:name=".AddSubscriber" />
-        <activity android:name=".Credits"></activity>
+        <activity android:name=".Credits" />
+        <activity android:name=".IssueToyPhaseOne"></activity>
     </application>
 
 </manifest>

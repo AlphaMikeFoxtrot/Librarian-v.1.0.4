@@ -66,7 +66,7 @@ public class IssueBookPhaseOne extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            final String GET_BOOK_URL = "https://suppliant-fives.000webhostapp.com/librarian/get_book_details.php";
+            final String GET_BOOK_URL = "https://forlibrariandatabasetwo.000webhostapp.com/librarian/get_book_details.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedReader bufferedReader = null;
@@ -115,7 +115,7 @@ public class IssueBookPhaseOne extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            if(false){
+            if(s == null){
                 progressDialog.dismiss();
                 Toast.makeText(IssueBookPhaseOne.this, "The list seems to be empty!", Toast.LENGTH_SHORT).show();
             } else {

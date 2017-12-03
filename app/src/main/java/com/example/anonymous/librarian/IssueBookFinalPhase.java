@@ -107,7 +107,7 @@ public class IssueBookFinalPhase extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            final String GET_TEMP_DATA_URL = "https://suppliant-fives.000webhostapp.com/librarian/get_temp_book_details.php";
+            final String GET_TEMP_DATA_URL = "https://forlibrariandatabasetwo.000webhostapp.com/librarian/get_temp_book_details.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedReader bufferedReader = null;
@@ -155,7 +155,7 @@ public class IssueBookFinalPhase extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            if(s.isEmpty()){
+            if(s.toString().length() <= 0){
                 progressDialog.dismiss();
                 bookName.setText("un available");
                 bookId.setText("un available");
@@ -195,7 +195,7 @@ public class IssueBookFinalPhase extends AppCompatActivity {
             SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
             String issuedOnDate = df.format(c.getTime());
 
-            final String ISSUE_BOOK_URL = "https://suppliant-fives.000webhostapp.com/librarian/issue_book.php";
+            final String ISSUE_BOOK_URL = "https://forlibrariandatabasetwo.000webhostapp.com/librarian/issue_book.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedWriter bufferedWriter = null;
