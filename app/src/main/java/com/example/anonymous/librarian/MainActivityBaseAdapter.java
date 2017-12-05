@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.net.Inet4Address;
 import java.util.ArrayList;
 
 /**
@@ -89,6 +90,12 @@ public class MainActivityBaseAdapter extends BaseAdapter {
                     Intent toCredits = new Intent(context, Credits.class);
                     // toCredits.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(toCredits);
+
+                } else if(itemClicked.toLowerCase().contains("issue a toy")){
+
+                    Intent toIssueToyPhaseOne = new Intent(context, IssueToyPhaseOne.class);
+                    toIssueToyPhaseOne.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(toIssueToyPhaseOne);
 
                 }
 

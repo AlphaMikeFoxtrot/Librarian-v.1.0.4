@@ -30,7 +30,6 @@ public class IssueBookPhaseTwoAdapter extends RecyclerView.Adapter<IssueBookPhas
     Context context;
     public ArrayList<Subscribers> oldList, newList;
     IssueBookPhaseTwoFilter filter;
-    IssueBookPhaseTwoAdapter adapter;
 
     public IssueBookPhaseTwoAdapter(Context context, ArrayList<Subscribers> oldList) {
         this.context = context;
