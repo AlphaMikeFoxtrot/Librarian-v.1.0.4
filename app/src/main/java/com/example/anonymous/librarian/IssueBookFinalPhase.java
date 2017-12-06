@@ -79,6 +79,9 @@ public class IssueBookFinalPhase extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                IssueItemCancelProtocol issueItemCancelProtocol = new IssueItemCancelProtocol();
+                issueItemCancelProtocol.execute("book");
+
                 Intent toMainActivity = new Intent(IssueBookFinalPhase.this, MainActivity.class);
                 toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toMainActivity);
@@ -88,6 +91,8 @@ public class IssueBookFinalPhase extends AppCompatActivity {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                IssueItemCancelProtocol issueItemCancelProtocol = new IssueItemCancelProtocol();
+                issueItemCancelProtocol.execute("book");
                 Intent toPhaseOne = new Intent(IssueBookFinalPhase.this, IssueBookPhaseOne.class);
                 toPhaseOne.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toPhaseOne);

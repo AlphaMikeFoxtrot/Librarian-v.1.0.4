@@ -1,6 +1,8 @@
 package com.example.anonymous.librarian.IssueToyAdapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import com.example.anonymous.librarian.IssueBookHolders.IssueBookPhaseOneHolder;
 import com.example.anonymous.librarian.IssueBookHolders.IssueBookPhaseTwoHolder;
 import com.example.anonymous.librarian.IssueToyFilters.IssueToyPhaseTwoFilter;
+import com.example.anonymous.librarian.IssueToyFinalPhase;
 import com.example.anonymous.librarian.IssueToyHolders.IssueToyPhaseTwoViewHolder;
 import com.example.anonymous.librarian.IssueToyOnClickListeners.IssueToyPhaseTwoOnItemClickListener;
 import com.example.anonymous.librarian.IssueToyPhaseOne;
@@ -55,7 +58,12 @@ public class IssueToyPhaseTwoAdapter extends RecyclerView.Adapter<IssueToyPhaseT
         holder.setItemClickListener(new IssueToyPhaseTwoOnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(context, "name\t" + oldList.get(position).getmSubscriberName() + "\nid\t" + oldList.get(position).getmSubscriberId(), Toast.LENGTH_SHORT).show();
+                // Toast.makeText(context, "name\t" + oldList.get(position).getmSubscriberName() + "\nid\t" + oldList.get(position).getmSubscriberId(), Toast.LENGTH_SHORT).show();
+                Intent toFinalPhase = new Intent(context, IssueToyFinalPhase.class);
+                toFinalPhase.putExtra("subscriberName", oldList.get(position).getmSubscriberName());
+                toFinalPhase.putExtra("subscriberId", oldList.get(position).getmSubscriberId());
+                toFinalPhase.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(toFinalPhase);
             }
         });
 
