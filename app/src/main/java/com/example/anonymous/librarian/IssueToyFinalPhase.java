@@ -33,7 +33,7 @@ public class IssueToyFinalPhase extends AppCompatActivity {
 
     TextView toyName, toyId, subscriberName, subscriberId;
     Button submit, cancel, reset;
-    ProgressDialog progressDialog, issueToyProgressDialog;
+    ProgressDialog progressDialog, issueToyProgressDialog, cancelResetProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,23 +73,22 @@ public class IssueToyFinalPhase extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                IssueItemCancelProtocol issueItemCancelProtocol = new IssueItemCancelProtocol();
-                issueItemCancelProtocol.execute("toy");
-
-                Intent toMainActivity = new Intent(IssueToyFinalPhase.this, MainActivity.class);
-                toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(toMainActivity);
+                IssueBookCancelProtocol issueBookCancelProtocol = new IssueBookCancelProtocol();
+                issueBookCancelProtocol.execute();
+//                Intent toMainActivity = new Intent(IssueToyFinalPhase.this, MainActivity.class);
+//                toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(toMainActivity);
             }
         });
 
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                IssueItemCancelProtocol issueItemCancelProtocol = new IssueItemCancelProtocol();
-                issueItemCancelProtocol.execute("book");
-                Intent toPhaseOne = new Intent(IssueToyFinalPhase.this, IssueToyPhaseOne.class);
-                toPhaseOne.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(toPhaseOne);
+                IssueBookCancelProtocol issueBookCancelProtocol = new IssueBookCancelProtocol();
+                issueBookCancelProtocol.execute();
+//                Intent toPhaseOne = new Intent(IssueToyFinalPhase.this, IssueToyPhaseOne.class);
+//                toPhaseOne.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(toPhaseOne);
             }
         });
     }
@@ -270,6 +269,72 @@ public class IssueToyFinalPhase extends AppCompatActivity {
                 TextView error = findViewById(R.id.error);
                 error.setText(s);
             }
+        }
+    }
+
+    public class IssueBookCancelProtocol extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected void onPreExecute() {
+            cancelResetProgressDialog = new ProgressDialog(IssueToyFinalPhase.this);
+            cancelResetProgressDialog.setMessage("running protocol....");
+            cancelResetProgressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            final String CANCEL_PROTOCOL_URL = "https://forlibrariandatabasetwo.000webhostapp.com/librarian/issue_book_cancel_protocol.php";
+
+            String cancelled_item = strings[0];
+
+            HttpURLConnection httpURLConnection = null;
+            BufferedReader bufferedReader = null;
+
+            try {
+
+                URL url = new URL(CANCEL_PROTOCOL_URL);
+                httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.connect();
+
+                InputStreamReader inputStreamReader = new InputStreamReader(httpURLConnection.getInputStream());
+                bufferedReader = new BufferedReader(inputStreamReader);
+
+                String line;
+                StringBuilder response = new StringBuilder();
+
+                while ((line = bufferedReader.readLine()) != null) {
+
+                    response.append(line);
+
+                }
+
+                return response.toString();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return null;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            } finally {
+                if(httpURLConnection != null){
+                    httpURLConnection.disconnect();
+                }
+                if(bufferedReader != null){
+                    try {
+                        bufferedReader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            cancelResetProgressDialog.dismiss();
         }
     }
 }

@@ -36,13 +36,15 @@ import java.util.Date;
 public class IssueBookFinalPhase extends AppCompatActivity {
 
     TextView bookName, bookId, subscriberName, subscriberId;
-    Button submit, cancel, reset;
-    ProgressDialog progressDialog, issueBookProgressDialog;
+    Button issueBookSubmit, issueBookCancel, issueBookReset;
+    ProgressDialog progressDialog, issueBookProgressDialog, p;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_issue_book_final_phase);
+
+        p = new ProgressDialog(IssueBookFinalPhase.this);
 
         Toolbar mToolbar = findViewById(R.id.issue_book_final_toolbar);
         setSupportActionBar(mToolbar);
@@ -53,9 +55,9 @@ public class IssueBookFinalPhase extends AppCompatActivity {
         subscriberName = findViewById(R.id.issue_book_final_subscriber_name);
         subscriberId = findViewById(R.id.issue_book_final_subscriber_id);
 
-        submit = findViewById(R.id.issue_book_submit_button);
-        cancel = findViewById(R.id.issue_book_cancel_button);
-        reset = findViewById(R.id.issue_book_reset_button);
+        issueBookSubmit = findViewById(R.id.issue_book_submit_button);
+        issueBookCancel = findViewById(R.id.issue_book_cancel_button);
+        issueBookReset = findViewById(R.id.issue_book_reset_button);
 
         bookName.setText(getIntent().getStringExtra("bookName"));
         bookId.setText(getIntent().getStringExtra("bookId"));
@@ -67,7 +69,7 @@ public class IssueBookFinalPhase extends AppCompatActivity {
         GetTempBookDetailsAsyncTask getTempBookDetailsAsyncTask = new GetTempBookDetailsAsyncTask();
         getTempBookDetailsAsyncTask.execute();
 
-        submit.setOnClickListener(new View.OnClickListener() {
+        issueBookSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = getIntent();
@@ -76,11 +78,14 @@ public class IssueBookFinalPhase extends AppCompatActivity {
             }
         });
 
-        cancel.setOnClickListener(new View.OnClickListener() {
+        issueBookCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                p.setMessage("cancel");
+                p.show();
                 IssueItemCancelProtocol issueItemCancelProtocol = new IssueItemCancelProtocol();
                 issueItemCancelProtocol.execute("book");
+                p.dismiss();
 
                 Intent toMainActivity = new Intent(IssueBookFinalPhase.this, MainActivity.class);
                 toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -88,11 +93,15 @@ public class IssueBookFinalPhase extends AppCompatActivity {
             }
         });
 
-        reset.setOnClickListener(new View.OnClickListener() {
+        issueBookReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                p.setMessage("reset");
+                p.show();
                 IssueItemCancelProtocol issueItemCancelProtocol = new IssueItemCancelProtocol();
                 issueItemCancelProtocol.execute("book");
+                p.dismiss();
+
                 Intent toPhaseOne = new Intent(IssueBookFinalPhase.this, IssueBookPhaseOne.class);
                 toPhaseOne.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toPhaseOne);
