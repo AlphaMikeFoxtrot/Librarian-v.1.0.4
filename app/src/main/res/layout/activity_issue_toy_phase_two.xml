@@ -16,6 +16,14 @@
         app:title="Select Subscriber"
         android:id="@+id/issue_toy_two_toolbar"/>
 
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/error_text_view"-->
+        <!--android:fontFamily="sans-serif-smallcaps"-->
+        <!--android:textStyle="bold"-->
+        <!--android:padding="6dp" />-->
+
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

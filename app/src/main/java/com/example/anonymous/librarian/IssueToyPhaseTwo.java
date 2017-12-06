@@ -10,6 +10,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.anonymous.librarian.IssueToyAdapters.IssueToyPhaseTwoAdapter;
@@ -32,7 +33,7 @@ public class IssueToyPhaseTwo extends AppCompatActivity {
     public RecyclerView mRecyclerView;
     public ProgressDialog progressDialog;
     public IssueToyPhaseTwoAdapter adapter;
-    public ArrayList<Subscribers> subscribers;
+    public ArrayList<Subscribers> subscribers = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +87,8 @@ public class IssueToyPhaseTwo extends AppCompatActivity {
                     response.append(line);
                 }
 
-                return response.toString();
+                String jsonResponse  = response.toString();
+                return jsonResponse;
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -111,9 +113,12 @@ public class IssueToyPhaseTwo extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+
             if(s.length() <= 0){
+
                 progressDialog.dismiss();
                 Toast.makeText(IssueToyPhaseTwo.this, "List seems to be empty! Try again after some time", Toast.LENGTH_SHORT).show();
+
             } else {
 
                 String subName, subId;
@@ -121,7 +126,7 @@ public class IssueToyPhaseTwo extends AppCompatActivity {
                 progressDialog.dismiss();
                 try {
 
-                    JSONArray root = new JSONArray(s);
+                    JSONArray root = new JSONArray(s.toString());
 
                     for(int i = 0; i < root.length(); i++){
 

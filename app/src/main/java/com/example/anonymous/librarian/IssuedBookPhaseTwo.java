@@ -10,6 +10,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.anonymous.librarian.IssueBookAdapter.IssueBookPhaseTwoAdapter;
@@ -113,6 +114,7 @@ public class IssuedBookPhaseTwo extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+
             if(s.isEmpty()){
                 progressDialog.dismiss();
                 Toast.makeText(IssuedBookPhaseTwo.this, "List seems to be empty! Try again after some time", Toast.LENGTH_SHORT).show();
