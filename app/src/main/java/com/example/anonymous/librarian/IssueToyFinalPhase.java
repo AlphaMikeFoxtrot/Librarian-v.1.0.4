@@ -177,7 +177,7 @@ public class IssueToyFinalPhase extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             issueToyProgressDialog = new ProgressDialog(IssueToyFinalPhase.this);
-            issueToyProgressDialog.setMessage("Issuing Book.......");
+            issueToyProgressDialog.setMessage("Issuing Toy.......");
             issueToyProgressDialog.show();
         }
 
@@ -212,7 +212,7 @@ public class IssueToyFinalPhase extends AppCompatActivity {
 
                 String dataToWrite = URLEncoder.encode("toy_name", "UTF-8") +"="+ URLEncoder.encode(toyName, "UTF-8") +"&"+
                                 URLEncoder.encode("toy_id", "UTF-8") +"="+ URLEncoder.encode(toyId, "UTF-8") +"&"+
-                                URLEncoder.encode("subscriber_id", "UTF-8") +"="+ URLEncoder.encode(subscriberName, "UTF-8") +"&"+
+                                URLEncoder.encode("subscriber_name", "UTF-8") +"="+ URLEncoder.encode(subscriberName, "UTF-8") +"&"+
                                 URLEncoder.encode("subscriber_id", "UTF-8") +"="+ URLEncoder.encode(subscriberId, "UTF-8") +"&"+
                                 URLEncoder.encode("issued_on", "UTF-8") +"="+ URLEncoder.encode(issuedOnDate, "UTF-8");
 

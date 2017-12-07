@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
@@ -37,6 +38,9 @@ public class ViewCurrentlyIssuedBooks extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.view_currently_issued_book_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(ViewCurrentlyIssuedBooks.this));
         mRecyclerView.setHasFixedSize(true);
+
+        Toolbar mToolbar = findViewById(R.id.issued_books_toolbar);
+        setSupportActionBar(mToolbar);
 
         GetIssuedBooksAsyncTask getIssuedBooksAsyncTask = new GetIssuedBooksAsyncTask();
         getIssuedBooksAsyncTask.execute();

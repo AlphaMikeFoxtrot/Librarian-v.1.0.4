@@ -61,7 +61,8 @@
         <activity android:name=".Credits" />
         <activity android:name=".IssueToyPhaseOne" />
         <activity android:name=".IssueToyPhaseTwo" />
-        <activity android:name=".IssueToyFinalPhase"></activity>
+        <activity android:name=".IssueToyFinalPhase" />
+        <activity android:name=".ViewCurrentlyIssuedToys"></activity>
     </application>
 
 </manifest>
