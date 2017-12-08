@@ -62,7 +62,8 @@
         <activity android:name=".IssueToyPhaseOne" />
         <activity android:name=".IssueToyPhaseTwo" />
         <activity android:name=".IssueToyFinalPhase" />
-        <activity android:name=".ViewCurrentlyIssuedToys"></activity>
+        <activity android:name=".ViewCurrentlyIssuedToys" />
+        <activity android:name=".IssuedToyDetail"></activity>
     </application>
 
 </manifest>
