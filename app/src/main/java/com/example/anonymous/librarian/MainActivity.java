@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         listItems.add(new MainActivityListViewItems("Issue a Book", R.drawable.issue_book));
         listItems.add(new MainActivityListViewItems("Issue a Toy", R.drawable.toys));
-        listItems.add(new MainActivityListViewItems("Register Returned Toy", R.drawable.toys));
+        listItems.add(new MainActivityListViewItems("View Currently Issued Toys", R.drawable.books));
         listItems.add(new MainActivityListViewItems("Register Returned Book", R.drawable.return_book));
         listItems.add(new MainActivityListViewItems("View subscribers Details", R.drawable.subscribers));
         listItems.add(new MainActivityListViewItems("View Currently Issued Books", R.drawable.books));

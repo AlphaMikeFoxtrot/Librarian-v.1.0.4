@@ -97,6 +97,12 @@ public class MainActivityBaseAdapter extends BaseAdapter {
                     toIssueToyPhaseOne.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(toIssueToyPhaseOne);
 
+                } else if(itemClicked.toLowerCase().contains("View Currently Issued Toys".toLowerCase())){
+
+                    Intent toCurrentlyIssuedToys = new Intent(context, ViewCurrentlyIssuedToys.class);
+                    toCurrentlyIssuedToys.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(toCurrentlyIssuedToys);
+
                 }
 
             }

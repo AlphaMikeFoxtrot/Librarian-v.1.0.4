@@ -6,7 +6,9 @@ package com.example.anonymous.librarian;
 
 public class Toys {
 
-    private String mToyName, mToyId, issuedOn, issuedTo;
+    private String mToyName, mToyId, issuedOn, issuedTo, issuedToId;
+
+    // issuedTo is the name of the person issued to
 
     public String getmToyName() {
         return mToyName;
@@ -38,5 +40,13 @@ public class Toys {
 
     public void setIssuedTo(String issuedTo) {
         this.issuedTo = issuedTo;
+    }
+
+    public String getIssuedToId() {
+        return issuedToId;
+    }
+
+    public void setIssuedToId(String issuedToId) {
+        this.issuedToId = issuedToId;
     }
 }

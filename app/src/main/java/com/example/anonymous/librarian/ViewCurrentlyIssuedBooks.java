@@ -106,7 +106,8 @@ public class ViewCurrentlyIssuedBooks extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            if(s.isEmpty() || s == null){
+
+            if(s.isEmpty() || s.length() < 0){
                 progressDialog.dismiss();
                 Toast.makeText(ViewCurrentlyIssuedBooks.this, "Sorry! There seems to be no issued books at the moment", Toast.LENGTH_SHORT).show();
             } else {
