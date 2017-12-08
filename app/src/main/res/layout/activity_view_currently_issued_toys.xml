@@ -11,7 +11,7 @@
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:id="@+id/issued_books_toolbar"
+        android:id="@+id/currently_issued_toys_toolbar"
         android:background="@color/colorPrimary"
         android:theme="@style/Base.ThemeOverlay.AppCompat.Dark">
 
@@ -28,7 +28,7 @@
     </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/view_currently_issued_book_recycler_view"
+        android:id="@+id/view_currently_issued_toys_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
