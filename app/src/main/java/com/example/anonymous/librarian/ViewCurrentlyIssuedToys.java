@@ -24,6 +24,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 
 import javax.xml.parsers.SAXParser;
@@ -111,16 +112,16 @@ public class ViewCurrentlyIssuedToys extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
 
-            Toast.makeText(ViewCurrentlyIssuedToys.this, "" + s, Toast.LENGTH_SHORT).show();
+            // Toast.makeText(ViewCurrentlyIssuedToys.this, "" + s, Toast.LENGTH_SHORT).show();
 
             progressDialog.dismiss();
             if(!s.isEmpty() || true){
 
-                Toast.makeText(ViewCurrentlyIssuedToys.this, "s.length() > 0", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(ViewCurrentlyIssuedToys.this, "s.length() > 0", Toast.LENGTH_SHORT).show();
 
                 try {
 
-                    Toast.makeText(ViewCurrentlyIssuedToys.this, "inside Try block", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(ViewCurrentlyIssuedToys.this, "inside Try block", Toast.LENGTH_SHORT).show();
                     JSONArray root = new JSONArray(s);
                     for(int i = 0; i < root.length(); i++){
 
@@ -131,7 +132,14 @@ public class ViewCurrentlyIssuedToys extends AppCompatActivity {
                         toy.setmToyId(nthObject.getString("issued_toy_id"));
                         toy.setIssuedToId(nthObject.getString("issued_toy_to_id"));
                         toy.setIssuedTo(nthObject.getString("issued_toy_to_name"));
-                        toy.setIssuedOn(nthObject.getString("issued_toy_on"));
+                        String[] date = nthObject.getString("issued_toy_on").split(" ");
+                        // String[] dateActual = date[0].toString().split("."););
+                        String[] dates = date[0].toString().replace(".", " ").split(" ");
+                        if(dates.length > 1){
+                            toy.setIssuedOn(dates[2] + " " + new DateFormatSymbols().getMonths()[Integer.parseInt(dates[1])-1] + " " + dates[0]);
+                        } else {
+                            toy.setIssuedOn(date[0]);
+                        }
 
                         toys.add(toy);
 
@@ -140,16 +148,7 @@ public class ViewCurrentlyIssuedToys extends AppCompatActivity {
                     adapter = new CurrentlyIssuedToysAdapter(toys, ViewCurrentlyIssuedToys.this);
                     mRecyclerView.setAdapter(adapter);
 
-//                    adapter = new CurrentlyIssuedToysAdapter(toys, ViewCurrentlyIssuedToys.this);
-//                    mRecyclerView.setAdapter(adapter);
-
                 } catch (JSONException e) {
-
-                    TextView error = (TextView) findViewById(R.id.error);
-                    error.setText(e.toString());
-                    error.setVisibility(View.VISIBLE);
-                    // Toast.makeText(ViewCurrentlyIssuedToys.this, "inside Catch block", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(ViewCurrentlyIssuedToys.this, "Error : \n" + e.toString(), Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
 
