@@ -104,7 +104,7 @@ public class IssueToyPhaseOneAdapter extends RecyclerView.Adapter<IssueToyPhaseO
             String toyName = strings[0];
             String toyId = strings[1];
 
-            final String INSERT_URL = "https://forlibrariandatabasetwo.000webhostapp.com/librarian/insert_temp_toy_details.php";
+            final String INSERT_URL = "http://fardeenpanjwani.com/librarian/insert_temp_toy_details.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedReader bufferedReader = null;

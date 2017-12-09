@@ -20,7 +20,7 @@ public class IssueItemCancelProtocol extends AsyncTask<String, Void, Void> {
 
     @Override
     protected Void doInBackground(String... strings) {
-        final String CANCEL_PROTOCOL_URL = "https://forlibrariandatabasetwo.000webhostapp.com/librarian/issue_cancel_protocol.php";
+        final String CANCEL_PROTOCOL_URL = "http://fardeenpanjwani.com/librarian/issue_cancel_protocol.php";
 
         String cancelled_item = strings[0];
 

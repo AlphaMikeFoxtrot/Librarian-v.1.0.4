@@ -1,13 +1,17 @@
 package com.example.anonymous.librarian.CurrentlyIssuedToysAdapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.anonymous.librarian.CurrentlyIssuedToysViewHolder.CurrentlyIssuedToysViewHolder;
+import com.example.anonymous.librarian.IssueToyOnClickListeners.IssueToyPhaseOneOnItemClickListener;
+import com.example.anonymous.librarian.IssuedToyDetail;
 import com.example.anonymous.librarian.R;
 import com.example.anonymous.librarian.Toys;
 
@@ -42,6 +46,18 @@ public class CurrentlyIssuedToysAdapter extends RecyclerView.Adapter<CurrentlyIs
         holder.toyId.setText(currentToy.getmToyId());
         holder.issuedOn.setText(currentToy.getIssuedOn());
         holder.issuedTo.setText(currentToy.getIssuedTo());
+
+        holder.setOneOnItemClickListener(new IssueToyPhaseOneOnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                Intent toDetails = new Intent(context, IssuedToyDetail.class);
+                toDetails.putExtra("clickedItem", issuedToys.get(position).getmToyName());
+                toDetails.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(toDetails);
+
+            }
+        });
 
     }
 

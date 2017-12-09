@@ -86,7 +86,7 @@ public class IssueToyPhaseOne extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            final String GET_TOYS_URL = "https://forlibrariandatabasetwo.000webhostapp.com/librarian/get_toy_details.php";
+            final String GET_TOYS_URL = "http://fardeenpanjwani.com/librarian/get_toy_details.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedReader bufferedReader = null;

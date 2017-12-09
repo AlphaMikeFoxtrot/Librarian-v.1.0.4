@@ -111,7 +111,7 @@ public class IssueBookPhaseOneAdapter extends RecyclerView.Adapter<IssueBookPhas
             String bookName = strings[0];
             String bookId = strings[1];
 
-            final String INSERT_TEMP_DATA_URL = "https://forlibrariandatabasetwo.000webhostapp.com/librarian/insert_temp_book_details.php";
+            final String INSERT_TEMP_DATA_URL = "http://fardeenpanjwani.com/librarian/insert_temp_book_details.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedWriter bufferedWriter = null;

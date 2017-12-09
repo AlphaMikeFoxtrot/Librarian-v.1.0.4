@@ -63,7 +63,7 @@ public class ViewCurrentlyIssuedToys extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            final String GET_TOYS_URL = "https://forlibrariandatabasetwo.000webhostapp.com/librarian/view_currently_issued_toys.php";
+            final String GET_TOYS_URL = "http://fardeenpanjwani.com/librarian/view_currently_issued_toys.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedReader bufferedReader = null;

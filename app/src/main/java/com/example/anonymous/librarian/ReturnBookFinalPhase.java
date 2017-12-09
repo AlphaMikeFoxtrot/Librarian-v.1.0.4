@@ -88,7 +88,7 @@ public class ReturnBookFinalPhase extends AppCompatActivity {
             bookId = strings[0];
             bookName = strings[1];
 
-            final String GET_ISSUED_BOOK_DETAILS_URL = "https://forlibrariandatabasetwo.000webhostapp.com/librarian/get_single_issued_book_details.php";
+            final String GET_ISSUED_BOOK_DETAILS_URL = "http://fardeenpanjwani.com/librarian/get_single_issued_book_details.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedReader bufferedReader = null;
@@ -183,7 +183,7 @@ public class ReturnBookFinalPhase extends AppCompatActivity {
             String bookId = strings[0];
             String returnedOn = strings[1];
 
-            final String RETURN_BOOK_URL = "https://forlibrariandatabasetwo.000webhostapp.com/librarian/return_book.php";
+            final String RETURN_BOOK_URL = "http://fardeenpanjwani.com/librarian/return_book.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedWriter bufferedWriter = null;

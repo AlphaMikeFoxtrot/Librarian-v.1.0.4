@@ -57,7 +57,7 @@ public class ViewCurrentlyIssuedBooks extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            final String GET_BOOKS_URL = "https://forlibrariandatabasetwo.000webhostapp.com/librarian/get_issued_books.php";
+            final String GET_BOOKS_URL = "http://fardeenpanjwani.com/librarian/get_issued_books.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedReader bufferedReader = null;

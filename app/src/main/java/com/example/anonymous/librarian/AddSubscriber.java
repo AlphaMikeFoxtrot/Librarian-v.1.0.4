@@ -106,7 +106,7 @@ public class AddSubscriber extends AppCompatActivity {
         @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         protected String doInBackground(String... strings) {
-            final String ADD_SUBSCRIBER_URL = "https://forlibrariandatabasetwo.000webhostapp.com/librarian/add_subscriber.php";
+            final String ADD_SUBSCRIBER_URL = "http://fardeenpanjwani.com/librarian/add_subscriber.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedWriter bufferedWriter = null;

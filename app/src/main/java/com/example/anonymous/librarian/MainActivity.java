@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             String month = strings[0];
 
-            final String LAST_DAY_PROTOCOL_URL = "https://forlibrariandatabasetwo.000webhostapp.com/librarian/last_day_protocol.php";
+            final String LAST_DAY_PROTOCOL_URL = "http://fardeenpanjwani.com/librarian/last_day_protocol.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedReader bufferedReader = null;

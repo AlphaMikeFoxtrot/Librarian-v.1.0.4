@@ -182,7 +182,7 @@ public class SubscriberDetails extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             subscriberId = strings[0];
 
-            final String GET_SUBSCRIBER_URL = "https://forlibrariandatabasetwo.000webhostapp.com/librarian/get_individual_subscriber_details.php";
+            final String GET_SUBSCRIBER_URL = "http://fardeenpanjwani.com/librarian/get_individual_subscriber_details.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedReader bufferedReader = null;
@@ -300,7 +300,7 @@ public class SubscriberDetails extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             String subscriberId = strings[0];
 
-            final String GET_ANALYSIS_URL = "https://forlibrariandatabasetwo.000webhostapp.com/librarian/get_subscriber_analysis.php";
+            final String GET_ANALYSIS_URL = "http://fardeenpanjwani.com/librarian/get_subscriber_analysis.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedReader bufferedReader = null;

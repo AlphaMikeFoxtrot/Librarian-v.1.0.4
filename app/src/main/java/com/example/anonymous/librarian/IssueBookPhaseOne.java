@@ -66,7 +66,7 @@ public class IssueBookPhaseOne extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            final String GET_BOOK_URL = "https://forlibrariandatabasetwo.000webhostapp.com/librarian/get_book_details.php";
+            final String GET_BOOK_URL = "http://fardeenpanjwani.com/librarian/get_book_details.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedReader bufferedReader = null;

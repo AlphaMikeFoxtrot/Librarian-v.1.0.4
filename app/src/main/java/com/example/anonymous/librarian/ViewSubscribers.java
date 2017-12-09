@@ -101,7 +101,7 @@ public class ViewSubscribers extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
 
-            final String GET_SUBSCRIBERS_URL = "https://forlibrariandatabasetwo.000webhostapp.com/librarian/get_subscribers_details.php";
+            final String GET_SUBSCRIBERS_URL = "http://fardeenpanjwani.com/librarian/get_subscribers_details.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedReader bufferedReader = null;

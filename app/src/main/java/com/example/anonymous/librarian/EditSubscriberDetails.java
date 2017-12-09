@@ -145,7 +145,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             String subscriberId = getIntent().getStringExtra("subId");
 
-            final String UPDATE_DATA_URL = "https://forlibrariandatabasetwo.000webhostapp.com/librarian/update_subscriber_details.php";
+            final String UPDATE_DATA_URL = "http://fardeenpanjwani.com/librarian/update_subscriber_details.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedReader bufferedReader = null;
@@ -254,7 +254,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             String subId = getIntent().getStringExtra("subId");
-            final String DELETE_SUBCRIBER_URL = "https://forlibrariandatabasetwo.000webhostapp.com/librarian/delete_subscriber.php";
+            final String DELETE_SUBCRIBER_URL = "http://fardeenpanjwani.com/librarian/delete_subscriber.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedReader bufferedReader = null;
