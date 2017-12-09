@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.anonymous.librarian.IssueToyOnClickListeners.IssueToyPhaseOneOnItemClickListener;
 
 import java.lang.reflect.Array;
 import java.text.DateFormat;
@@ -42,7 +45,7 @@ public class ViewCurrentlyIssuedBookAdapter extends RecyclerView.Adapter<ViewCur
     @Override
     public void onBindViewHolder(ViewCurrentlyIssuedBookAdapterViewHolder holder, int position) {
 
-        Books book = this.issuedBooks.get(position);
+        final Books book = this.issuedBooks.get(position);
 
         holder.bookName.setText(book.getmBookName());
         holder.bookId.setText(book.getmBookId());
@@ -63,6 +66,16 @@ public class ViewCurrentlyIssuedBookAdapter extends RecyclerView.Adapter<ViewCur
             e.printStackTrace();
         }
 
+        holder.setOnItemClickListener(new IssueToyPhaseOneOnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                // TODO :
+                Toast.makeText(context, "book name " + book.getmBookName(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
         // holder.issuedOn.setText(book.getmBookIssuedOn());
 
     }
@@ -73,11 +86,12 @@ public class ViewCurrentlyIssuedBookAdapter extends RecyclerView.Adapter<ViewCur
     }
 
 
-    public class ViewCurrentlyIssuedBookAdapterViewHolder extends RecyclerView.ViewHolder{
+    public class ViewCurrentlyIssuedBookAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView bookName, bookId, issuedTo, issuedOn;
         Context context;
         ArrayList<Books> books;
+        IssueToyPhaseOneOnItemClickListener onItemClickListener;
 
         public ViewCurrentlyIssuedBookAdapterViewHolder(View itemView, Context context, ArrayList<Books> books) {
             super(itemView);
@@ -89,6 +103,18 @@ public class ViewCurrentlyIssuedBookAdapter extends RecyclerView.Adapter<ViewCur
             bookId = itemView.findViewById(R.id.currently_issued_book_id);
             issuedTo = itemView.findViewById(R.id.currently_issued_book_to);
             issuedOn = itemView.findViewById(R.id.currently_issued_book_on);
+
+            itemView.setOnClickListener(this);
+        }
+
+
+        @Override
+        public void onClick(View view) {
+            this.onItemClickListener.onItemClick(view, getLayoutPosition());
+        }
+
+        public void setOnItemClickListener(IssueToyPhaseOneOnItemClickListener onItemClickListener) {
+            this.onItemClickListener = onItemClickListener;
         }
     }
 
