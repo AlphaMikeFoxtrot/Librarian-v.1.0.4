@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ImageView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:src="@drawable/credits_actual"
-    android:scaleType="fitCenter"
+    android:orientation="vertical"
     tools:context="com.example.anonymous.librarian.Credits">
 
-</ImageView>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/credits_actual"
+        android:scaleType="fitCenter"/>
+
+</LinearLayout>
