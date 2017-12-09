@@ -88,7 +88,7 @@ public class MainActivityBaseAdapter extends BaseAdapter {
                 } else if(itemClicked.toLowerCase().contains("about us")){
 
                     Intent toCredits = new Intent(context, Credits.class);
-                    // toCredits.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    toCredits.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(toCredits);
 
                 } else if(itemClicked.toLowerCase().contains("issue a toy")){
