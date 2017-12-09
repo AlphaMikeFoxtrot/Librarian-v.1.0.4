@@ -3,67 +3,103 @@
     package="com.example.anonymous.librarian">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <uses-permission android:name="android.permission.INTERNET" />
+
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Read For Children"
+        android:label="Read For C"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
+
         <activity
             android:name=".IssueBookPhaseOne"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".IssuedBookPhaseTwo"
             android:parentActivityName=".IssueBookPhaseOne"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".IssueBookFinalPhase"
             android:parentActivityName=".IssuedBookPhaseTwo"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".ReturnBook"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".ReturnBookFinalPhase"
             android:parentActivityName=".ReturnBook"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".ViewSubscribers"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".SubscriberDetails"
             android:parentActivityName=".ViewSubscribers"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".ViewCurrentlyIssuedBooks"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".EditSubscriberDetails"
             android:parentActivityName=".SubscriberDetails"
             android:screenOrientation="portrait" />
-        <activity android:name=".AddSubscriber" />
-        <activity android:name=".Credits" />
-        <activity android:name=".IssueToyPhaseOne" />
-        <activity android:name=".IssueToyPhaseTwo" />
-        <activity android:name=".IssueToyFinalPhase" />
-        <activity android:name=".ViewCurrentlyIssuedToys" />
-        <activity android:name=".IssuedToyDetail"></activity>
+
+        <activity android:name=".AddSubscriber"
+            android:parentActivityName=".ViewSubscribers"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".Credits"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".IssueToyPhaseOne"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".IssueToyPhaseTwo"
+            android:parentActivityName=".IssueToyPhaseOne"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".IssueToyFinalPhase"
+            android:parentActivityName=".IssueToyPhaseTwo"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".ViewCurrentlyIssuedToys"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".IssuedToyDetail"
+            android:parentActivityName=".ViewCurrentlyIssuedToys"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

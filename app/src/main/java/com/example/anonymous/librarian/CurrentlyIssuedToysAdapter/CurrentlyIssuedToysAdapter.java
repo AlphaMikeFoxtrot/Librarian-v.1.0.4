@@ -15,7 +15,12 @@ import com.example.anonymous.librarian.IssuedToyDetail;
 import com.example.anonymous.librarian.R;
 import com.example.anonymous.librarian.Toys;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by ANONYMOUS on 07-Dec-17.
@@ -44,7 +49,24 @@ public class CurrentlyIssuedToysAdapter extends RecyclerView.Adapter<CurrentlyIs
 
         holder.toyName.setText(currentToy.getmToyName());
         holder.toyId.setText(currentToy.getmToyId());
-        holder.issuedOn.setText(currentToy.getIssuedOn());
+        // holder.issuedOn.setText(currentToy.getIssuedOn());
+
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        Date startDate;
+
+        try {
+
+            startDate = df.parse(currentToy.getIssuedOn());
+            GregorianCalendar cal = new GregorianCalendar();
+            cal.setTime(startDate);
+            String date = cal.getTime().toString();
+            String[] dueDatesOne = date.split(" ");
+            holder.issuedOn.setText(dueDatesOne[0] + " " + dueDatesOne[1] + " " + dueDatesOne[2] + " " + dueDatesOne[dueDatesOne.length - 1]);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         holder.issuedTo.setText(currentToy.getIssuedTo());
 
         holder.setOneOnItemClickListener(new IssueToyPhaseOneOnItemClickListener() {
@@ -57,7 +79,7 @@ public class CurrentlyIssuedToysAdapter extends RecyclerView.Adapter<CurrentlyIs
                 toDetails.putExtra("toyId", issuedToys.get(position).getmToyId());
                 toDetails.putExtra("issuedToId", issuedToys.get(position).getIssuedToId());
                 toDetails.putExtra("issuedToName", issuedToys.get(position).getIssuedTo());
-                toDetails.putExtra("issuedON", issuedToys.get(position).getIssuedOn());
+                toDetails.putExtra("issuedOn", issuedToys.get(position).getIssuedOn());
                 toDetails.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(toDetails);
 

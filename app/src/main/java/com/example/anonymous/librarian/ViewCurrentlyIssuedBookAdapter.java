@@ -12,7 +12,12 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by ANONYMOUS on 19-Nov-17.
@@ -42,7 +47,23 @@ public class ViewCurrentlyIssuedBookAdapter extends RecyclerView.Adapter<ViewCur
         holder.bookName.setText(book.getmBookName());
         holder.bookId.setText(book.getmBookId());
         holder.issuedTo.setText(book.getmBookIssuedTo());
-        holder.issuedOn.setText(book.getmBookIssuedOn());
+
+        DateFormat df = new SimpleDateFormat("yyyy.MM.dd");
+        Date date;
+        try {
+
+            date = df.parse(book.getmBookIssuedOn());
+            GregorianCalendar cal = new GregorianCalendar();
+            cal.setTime(date);
+            String currentDate = cal.getTime().toString();
+            String[] dueDatesOne = currentDate.split(" ");
+            holder.issuedOn.setText(dueDatesOne[0] + " " + dueDatesOne[1] + " " + dueDatesOne[2] + " " + dueDatesOne[dueDatesOne.length - 1]);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        // holder.issuedOn.setText(book.getmBookIssuedOn());
 
     }
 

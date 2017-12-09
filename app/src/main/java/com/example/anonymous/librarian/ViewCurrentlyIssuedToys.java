@@ -136,7 +136,8 @@ public class ViewCurrentlyIssuedToys extends AppCompatActivity {
                         // String[] dateActual = date[0].toString().split("."););
                         String[] dates = date[0].toString().replace(".", " ").split(" ");
                         if(dates.length > 1){
-                            toy.setIssuedOn(dates[2] + " " + new DateFormatSymbols().getMonths()[Integer.parseInt(dates[1])-1] + " " + dates[0]);
+                            // new DateFormatSymbols().getMonths()[Integer.parseInt(dates[1])-1]
+                            toy.setIssuedOn(dates[2] + "/" + dates[1] + "/" + dates[0]);
                         } else {
                             toy.setIssuedOn(date[0]);
                         }
