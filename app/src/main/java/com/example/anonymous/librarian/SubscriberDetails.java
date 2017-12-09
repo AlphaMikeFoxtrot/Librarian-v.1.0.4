@@ -69,22 +69,21 @@ public class SubscriberDetails extends AppCompatActivity {
             mSubscriberToysActivity,
             mSubscriberDailyBookActivity,
             mSubscriberDailyToysActivity;
-
     ImageView mSubscriberPhoto;
-
     Button mEditButton;
-
     SubscriberAnalysisAdapter adapter;
-
     ListView mListView;
-
     LinearLayout mLinearLayout;
-
     Toolbar mToolbar;
-
     public ArrayList<SubscriberAnalysis> analysis = new ArrayList<>();
-
     JSONArray root;
+
+    @Override
+    public void onBackPressed() {
+        Intent toPreviousActivity = new Intent(this, ViewSubscribers.class);
+        toPreviousActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(toPreviousActivity);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

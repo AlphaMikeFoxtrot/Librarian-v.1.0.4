@@ -34,6 +34,13 @@ public class EditSubscriberDetails extends AppCompatActivity {
     public ProgressDialog progressDialog, deleteProgressDialog;
 
     @Override
+    public void onBackPressed() {
+        Intent toPreviousActivity = new Intent(this, SubscriberDetails.class);
+        toPreviousActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(toPreviousActivity);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_subscriber_details);

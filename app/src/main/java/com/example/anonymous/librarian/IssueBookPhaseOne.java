@@ -1,6 +1,7 @@
 package com.example.anonymous.librarian;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,6 +35,13 @@ public class IssueBookPhaseOne extends AppCompatActivity {
     public static IssueBookPhaseOneAdapter adapter;
     public ProgressDialog progressDialog;
     public ArrayList<Books> mBooks = new ArrayList<>();
+
+    @Override
+    public void onBackPressed() {
+        Intent toMainActivity = new Intent(this, MainActivity.class);
+        toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(toMainActivity);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

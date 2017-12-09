@@ -36,6 +36,13 @@ public class IssueToyFinalPhase extends AppCompatActivity {
     ProgressDialog progressDialog, issueToyProgressDialog, cancelResetProgressDialog;
 
     @Override
+    public void onBackPressed() {
+        Intent toPreviousActivity = new Intent(this, IssueToyPhaseTwo.class);
+        toPreviousActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(toPreviousActivity);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_issue_toy_final_phase);

@@ -37,6 +37,13 @@ public class IssueToyPhaseOne extends AppCompatActivity {
     IssueToyPhaseOneAdapter adapter;
 
     @Override
+    public void onBackPressed() {
+        Intent toMainActivity = new Intent(this, MainActivity.class);
+        toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(toMainActivity);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_issue_toy_phase_one);

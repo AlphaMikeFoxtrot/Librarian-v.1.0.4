@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.anonymous.librarian.CurrentlyIssuedToysAdapter.CurrentlyIssuedToysAdapter;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -32,6 +34,13 @@ public class IssuedToyDetail extends AppCompatActivity {
     TextView mIssuedToyId, mIssuedToyName, mIssuedToyToId, mIssuedToyToName, mIssuedToyOn, mIssuedToyDueDate;
     Button mBack, mReturnToy;
     ProgressDialog progressDialog;
+
+    @Override
+    public void onBackPressed() {
+        Intent toPreviousActivity = new Intent(this, ViewCurrentlyIssuedToys.class);
+        toPreviousActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(toPreviousActivity);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
