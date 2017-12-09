@@ -51,8 +51,13 @@ public class CurrentlyIssuedToysAdapter extends RecyclerView.Adapter<CurrentlyIs
             @Override
             public void onItemClick(View view, int position) {
 
+                // Toast.makeText(context, "" + issuedToys.get(position).getmToyName(), Toast.LENGTH_SHORT).show();
                 Intent toDetails = new Intent(context, IssuedToyDetail.class);
-                toDetails.putExtra("clickedItem", issuedToys.get(position).getmToyName());
+                toDetails.putExtra("toyName", issuedToys.get(position).getmToyName());
+                toDetails.putExtra("toyId", issuedToys.get(position).getmToyId());
+                toDetails.putExtra("issuedToId", issuedToys.get(position).getIssuedToId());
+                toDetails.putExtra("issuedToName", issuedToys.get(position).getIssuedTo());
+                toDetails.putExtra("issuedON", issuedToys.get(position).getIssuedOn());
                 toDetails.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(toDetails);
 

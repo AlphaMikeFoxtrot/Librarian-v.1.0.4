@@ -33,6 +33,8 @@ public class CurrentlyIssuedToysViewHolder extends RecyclerView.ViewHolder imple
         toyId = itemView.findViewById(R.id.currently_issued_book_id);
         issuedTo = itemView.findViewById(R.id.currently_issued_book_to);
         issuedOn = itemView.findViewById(R.id.currently_issued_book_on);
+
+        itemView.setOnClickListener(this);
     }
 
 
