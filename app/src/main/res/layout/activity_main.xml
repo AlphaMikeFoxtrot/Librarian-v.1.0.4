@@ -27,12 +27,12 @@
                 android:layout_height="48dp"
                 android:scaleType="fitCenter"
                 android:layout_margin="3dp"
-                android:src="@drawable/librarian_logo_for_toolbar"/>
+                android:src="@mipmap/ic_launcher"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Librarian"
+                android:text="Read For Children"
                 android:textColor="@android:color/white"
                 style="@style/TextAppearance.AppCompat.Headline"
                 android:fontFamily="sans-serif-smallcaps"

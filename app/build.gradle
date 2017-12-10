@@ -32,5 +32,8 @@ dependencies {
     compile 'com.jjoe64:graphview:4.2.1'
     compile 'com.androidplot:androidplot-core:1.5.1'
     compile 'com.android.support:design:26.1.0'
+    compile 'com.mcxiaoke.volley:library:1.0.19'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.PhilJay:MPAndroidChart:v2.1.6'
     implementation 'com.google.android.gms:play-services-vision:11.6.2'
 }

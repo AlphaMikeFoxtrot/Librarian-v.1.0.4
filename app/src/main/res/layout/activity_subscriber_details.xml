@@ -48,16 +48,34 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="200dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="12dp"
-                android:alpha="0.5"
-                android:id="@+id/subscriber_detail_image_view"
-                android:background="@drawable/image_view_border"
-                tools:src="@drawable/subscribers"
-                android:scaleType="fitCenter"/>
+            <android.support.design.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="12dp"
+                    android:alpha="0.5"
+                    android:id="@+id/subscriber_detail_image_view"
+                    android:background="@drawable/image_view_border"
+                    tools:src="@drawable/subscribers"
+                    android:scaleType="fitCenter"/>
+
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:scaleType="fitXY"
+                    app:layout_anchor="@id/subscriber_detail_image_view"
+                    app:layout_anchorGravity="bottom|end"
+                    android:id="@+id/fab"
+                    android:src="@drawable/ic_action_edit"
+                    app:elevation="12dp"
+                    app:pressedTranslationZ="12dp"/>
+
+            </android.support.design.widget.CoordinatorLayout>
 
             <TextView
                 android:gravity="center_horizontal"
@@ -589,7 +607,6 @@
                 android:layout_margin="6dp">
 
                 <ListView
-                    android:background="@android:color/darker_gray"
                     android:layout_width="match_parent"
                     android:layout_height="200dip"
                     android:id="@+id/subscriber_detail_list_view"/>

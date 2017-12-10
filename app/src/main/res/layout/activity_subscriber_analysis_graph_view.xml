@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:id="@+id/analysis_toolbar">
+
+        <TextView
+            android:id="@+id/toolbar_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Monthly Analysis : December"
+            android:fontFamily="sans-serif-smallcaps"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context="com.example.anonymous.librarian.SubscriberAnalysisGraphView">
+
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_margin="6dp"
+                android:fontFamily="sans-serif-smallcaps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Books taken in the month of December : 12"
+                android:id="@+id/month_book_activity"/>
+
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_margin="6dp"
+                android:fontFamily="sans-serif-smallcaps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Toys taken in the month of December : 12"
+                android:id="@+id/month_toy_activity"/>
+
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_margin="6dp"
+                android:fontFamily="sans-serif-smallcaps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total number of Books taken : 12"
+                android:id="@+id/total_book_activity"/>
+
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_margin="6dp"
+                android:fontFamily="sans-serif-smallcaps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total number of Toys taken : 12"
+                android:id="@+id/total_toy_activity"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:background="@android:color/transparent"/>
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_margin="18dp"
+                android:id="@+id/analysis_bar_graph"
+                style="@style/APDefacto.Light" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
