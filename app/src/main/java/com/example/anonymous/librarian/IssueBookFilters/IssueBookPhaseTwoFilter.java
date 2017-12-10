@@ -32,7 +32,7 @@ public class IssueBookPhaseTwoFilter extends Filter {
             charSequence = charSequence.toString().toUpperCase();
             ArrayList<Subscribers> newList = new ArrayList<>();
             for(int i = 0; i < oldList.size(); i++){
-                if(oldList.get(i).getmSubscriberName().toUpperCase().contains(charSequence)){
+                if(oldList.get(i).getmSubscriberName().toUpperCase().contains(charSequence) || oldList.get(i).getmSubscriberId().toUpperCase().contains(charSequence)){
                     newList.add(oldList.get(i));
                 }
             }

@@ -165,7 +165,7 @@ public class IssuedBookPhaseTwo extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.search_toolbar, menu);
         MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) menuItem.getActionView();
-        searchView.setQueryHint("Enter subscriber\'s id");
+        searchView.setQueryHint("Enter subscriber\'s id, name");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

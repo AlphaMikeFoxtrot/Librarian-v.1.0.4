@@ -87,11 +87,6 @@
                 android:text="Total number of Toys taken : 12"
                 android:id="@+id/total_toy_activity"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:background="@android:color/transparent"/>
-
             <com.github.mikephil.charting.charts.BarChart
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
