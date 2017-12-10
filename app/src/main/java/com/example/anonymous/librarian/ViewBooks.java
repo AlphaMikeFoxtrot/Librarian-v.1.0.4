@@ -66,7 +66,7 @@ public class ViewBooks extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_toolbar, menu);
+        getMenuInflater().inflate(R.menu.add_book_and_search, menu);
 
         MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView mSearchView = (SearchView) menuItem.getActionView();
@@ -87,6 +87,20 @@ public class ViewBooks extends AppCompatActivity {
                 return true;
             }
         });
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+
+        switch (itemId){
+
+            case R.id.action_add:
+                // TODO;
+
+        }
+
         return true;
     }
 
