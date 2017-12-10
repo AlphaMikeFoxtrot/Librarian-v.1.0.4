@@ -1,6 +1,7 @@
 package com.example.anonymous.librarian;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +10,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.anonymous.librarian.ViewBooksAdapter.ViewBooksAdapter;
 
@@ -30,6 +36,16 @@ public class ViewBooks extends AppCompatActivity {
     RecyclerView mRecyclerView;
     ProgressDialog progressDialog;
     ViewBooksAdapter adapter;
+    // ListView listView;
+    // ArrayAdapter<String> adapter;
+
+
+    @Override
+    public void onBackPressed() {
+        Intent toMainAcitivity = new Intent(ViewBooks.this, MainActivity.class);
+        toMainAcitivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(toMainAcitivity);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +56,11 @@ public class ViewBooks extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);
 
+        android.support.v7.widget.Toolbar mToolbar = findViewById(R.id.view_books_toolbar);
+        setSupportActionBar(mToolbar);
+
+        // listView = findViewById(R.id.list_view);
+
         new GetBooksAsyncTask().execute();
     }
 
@@ -47,8 +68,12 @@ public class ViewBooks extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_toolbar, menu);
 
-        MenuItem menuItem = menu.getItem(R.id.action_search);
+        MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView mSearchView = (SearchView) menuItem.getActionView();
+        EditText searchEditText = (EditText) mSearchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
+        searchEditText.setTextColor(getResources().getColor(android.R.color.white));
+        searchEditText.setHintTextColor(getResources().getColor(android.R.color.white));
+        mSearchView.setQueryHint("Enter book name or id");
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -76,7 +101,7 @@ public class ViewBooks extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            final String GET_BOOK_URL = "http://fardeenpanjwani.com/librarian/get_book_details.php";
+            final String GET_BOOK_URL = "http://www.fardeenpanjwani.com/librarian/get_book_details.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedReader bufferedReader = null;
@@ -130,25 +155,36 @@ public class ViewBooks extends AppCompatActivity {
             if(s != null){
 
                 ArrayList<Books> books = new ArrayList<>();
+                ArrayList<String> list = new ArrayList<>();
 
                 try {
 
                     JSONArray root = new JSONArray(s);
+                    // JSONObject rootTwo = root.getJSONObject(0);
+//                    String data = "name : " + rootTwo.getString("book_name") + "\nID : " + rootTwo.getString("book_id");
+//                    TextView error = findViewById(R.id.error);
+//                    error.setText(data);
                     for(int i = 0; i < root.length(); i++){
 
                         JSONObject nthObject = root.getJSONObject(i);
-                        String bookName = nthObject.getString("book_name");
-                        String bookId = nthObject.getString("book_id");
-
                         Books book = new Books();
 
-                        book.setmBookName(bookName);
-                        book.setmBookId(bookId);
+                        // list.add(nthObject.getString("book_name"));
+                        book.setmBookName(nthObject.getString("book_name"));
+                        book.setmBookId(nthObject.getString("book_id"));
 
+                        // books.add(book);
+                        // list.add(book.getmBookName());
                         books.add(book);
 
                     }
 
+                    Toast.makeText(ViewBooks.this, "" + books.get(0).getmBookName() + " \n" + books.size(), Toast.LENGTH_SHORT).show();
+
+                    // adapter = new ViewBooksAdapter(ViewBooks.this, books);
+                    // mRecyclerView.setAdapter(adapter);
+                    // adapter = new ArrayAdapter<String>(ViewBooks.this, android.R.layout.simple_list_item_1, list);
+                    // listView.setAdapter(adapter);
                     adapter = new ViewBooksAdapter(ViewBooks.this, books);
                     mRecyclerView.setAdapter(adapter);
 
