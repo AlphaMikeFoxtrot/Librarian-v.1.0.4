@@ -103,6 +103,12 @@ public class MainActivityBaseAdapter extends BaseAdapter {
                     toCurrentlyIssuedToys.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(toCurrentlyIssuedToys);
 
+                } else if(itemClicked.toLowerCase().contains("view book details")){
+
+                    Intent toBooks = new Intent(context, ViewBooks.class);
+                    toBooks.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(toBooks);
+
                 }
 
             }
