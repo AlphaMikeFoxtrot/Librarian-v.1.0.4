@@ -1,6 +1,7 @@
 package com.example.anonymous.librarian.CurrentlyIssuedBooksAdapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.anonymous.librarian.Books;
 import com.example.anonymous.librarian.IssueToyOnClickListeners.IssueToyPhaseOneOnItemClickListener;
+import com.example.anonymous.librarian.IssuedBookDetail;
 import com.example.anonymous.librarian.R;
 import com.example.anonymous.librarian.ViewCurrentlyIssuedBooks;
 
@@ -69,7 +71,14 @@ public class ViewCurrentlyIssuedBookAdapter extends RecyclerView.Adapter<ViewCur
             public void onItemClick(View view, int position) {
 
                 // TODO :
-                Toast.makeText(context, "book name " + book.getmBookName(), Toast.LENGTH_SHORT).show();
+                // Toast.makeText(context, "book name " + book.getmBookName(), Toast.LENGTH_SHORT).show();
+                Intent toDetail = new Intent(context, IssuedBookDetail.class);
+                toDetail.putExtra("bookName", book.getmBookName());
+                toDetail.putExtra("bookId", book.getmBookId());
+                toDetail.putExtra("issuedOn", book.getmBookIssuedOn());
+                toDetail.putExtra("issuedToName", book.getmBookIssuedTo());
+                toDetail.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(toDetail);
 
             }
         });
