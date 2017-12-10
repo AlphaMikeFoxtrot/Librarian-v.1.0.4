@@ -50,6 +50,7 @@ public class ViewSubscribers extends AppCompatActivity {
         setContentView(R.layout.activity_view_subscribers);
 
         mListView = findViewById(R.id.view_subscriber_list_view);
+        mListView.setTextFilterEnabled(true);
 
         Toolbar mToolbar = findViewById(R.id.view_subscriber_toolbar);
         setSupportActionBar(mToolbar);
@@ -81,19 +82,66 @@ public class ViewSubscribers extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.add_subscriber, menu);
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        android.support.v7.widget.SearchView searchView = (android.support.v7.widget.SearchView) menuItem.getActionView();
+        searchView.setQueryHint("Enter subscriber\'s id, name");
+
+        searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(newText.length() > 0 && newText != null){
+
+                    newText = newText.toLowerCase();
+                    ArrayList<Subscribers> newList = new ArrayList<>();
+                    for(int i = 0; i< subscribers.size(); i++){
+
+                        if(subscribers.get(i).getmSubscriberId().toLowerCase().contains(newText) || subscribers.get(i).getmSubscriberName().contains(newText)){
+
+                            newList.add(subscribers.get(i));
+
+                        }
+
+                        adapter = new ViewSubscriberListViewAdapter(ViewSubscribers.this, newList);
+                        mListView.setAdapter(adapter);
+
+                    }
+
+                }
+
+                return false;
+            }
+        });
+
         return true;
     }
+
+//    if(newText.length() > 0 && newText != null){
+//
+//        newText = newText.toString().toUpperCase();
+//        ArrayList<Subscribers> newList = new ArrayList<>();
+//        for(int i = 0; i < subscribers.size(); i++){
+//
+//            if(subscribers.get(i).getmSubscriberName().toUpperCase().contains(newText) || subscribers.get(i).getmSubscriberId().toUpperCase().contains(newText)){
+//                newList.add(subscribers.get(i));
+//            }
+//
+//        }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
 
         if(itemId == R.id.action_add){
-            // TODO:
             Intent toAddSubscriber = new Intent(ViewSubscribers.this, AddSubscriber.class);
             toAddSubscriber.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(toAddSubscriber);
         }
+
         return true;
     }
 
