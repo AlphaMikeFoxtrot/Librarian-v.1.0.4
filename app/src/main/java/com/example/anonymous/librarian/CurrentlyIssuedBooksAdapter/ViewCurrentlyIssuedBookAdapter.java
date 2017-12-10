@@ -1,20 +1,18 @@
-package com.example.anonymous.librarian;
+package com.example.anonymous.librarian.CurrentlyIssuedBooksAdapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.anonymous.librarian.Books;
 import com.example.anonymous.librarian.IssueToyOnClickListeners.IssueToyPhaseOneOnItemClickListener;
+import com.example.anonymous.librarian.R;
+import com.example.anonymous.librarian.ViewCurrentlyIssuedBooks;
 
-import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

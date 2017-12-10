@@ -83,39 +83,22 @@ public class ViewSubscribers extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.add_subscriber, menu);
         MenuItem menuItem = menu.findItem(R.id.action_search);
-        android.support.v7.widget.SearchView searchView = (android.support.v7.widget.SearchView) menuItem.getActionView();
-        searchView.setQueryHint("Enter subscriber\'s id, name");
-
-        searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if(newText.length() > 0 && newText != null){
-
-                    newText = newText.toLowerCase();
-                    ArrayList<Subscribers> newList = new ArrayList<>();
-                    for(int i = 0; i< subscribers.size(); i++){
-
-                        if(subscribers.get(i).getmSubscriberId().toLowerCase().contains(newText) || subscribers.get(i).getmSubscriberName().contains(newText)){
-
-                            newList.add(subscribers.get(i));
-
-                        }
-
-                        adapter = new ViewSubscriberListViewAdapter(ViewSubscribers.this, newList);
-                        mListView.setAdapter(adapter);
-
-                    }
-
-                }
-
-                return false;
-            }
-        });
+//        android.support.v7.widget.SearchView searchView = (android.support.v7.widget.SearchView) menuItem.getActionView();
+//        searchView.setQueryHint("Enter subscriber\'s id, name");
+//
+//        searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//
+//
+//                return false;
+//            }
+//        });
 
         return true;
     }
