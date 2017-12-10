@@ -30,6 +30,7 @@ public class ViewCurrentlyIssuedBookAdapter extends RecyclerView.Adapter<ViewCur
 
     ArrayList<Books> issuedBooks;
     Context context;
+    public Intent toDetail;
 
     public ViewCurrentlyIssuedBookAdapter(ArrayList<Books> issuedBooks, ViewCurrentlyIssuedBooks context) {
         this.issuedBooks = issuedBooks;
@@ -51,7 +52,7 @@ public class ViewCurrentlyIssuedBookAdapter extends RecyclerView.Adapter<ViewCur
         holder.bookId.setText(book.getmBookId());
         holder.issuedTo.setText(book.getmBookIssuedTo());
 
-        DateFormat df = new SimpleDateFormat("yyyy.MM.dd");
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         Date date;
         try {
 
@@ -75,8 +76,8 @@ public class ViewCurrentlyIssuedBookAdapter extends RecyclerView.Adapter<ViewCur
                 Intent toDetail = new Intent(context, IssuedBookDetail.class);
                 toDetail.putExtra("bookName", book.getmBookName());
                 toDetail.putExtra("bookId", book.getmBookId());
-                toDetail.putExtra("issuedOn", book.getmBookIssuedOn());
                 toDetail.putExtra("issuedToName", book.getmBookIssuedTo());
+                toDetail.putExtra("issuedOn", book.getmBookIssuedOn());
                 toDetail.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(toDetail);
 

@@ -116,8 +116,9 @@ public class ViewCurrentlyIssuedBooks extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
 
+            progressDialog.dismiss();
+
             if(s.isEmpty() || s.length() < 0){
-                progressDialog.dismiss();
                 Toast.makeText(ViewCurrentlyIssuedBooks.this, "Sorry! There seems to be no issued books at the moment", Toast.LENGTH_SHORT).show();
             } else {
 
@@ -136,12 +137,18 @@ public class ViewCurrentlyIssuedBooks extends AppCompatActivity {
                         String issuedOn = nthObject.getString("issued_on");
 
                         String[] issuedOnDates = issuedOn.split(" ");
+                        String[] dates = issuedOnDates[0].replace(".", " ").split(" ");
 
                         Books book = new Books();
                         book.setmBookName(issuedBookName);
                         book.setmBookId(issuedBookId);
                         book.setmBookIssuedTo(issuedTo);
-                        book.setmBookIssuedOn(issuedOnDates[0]);
+                        if(dates.length > 1){
+                            // new DateFormatSymbols().getMonths()[Integer.parseInt(dates[1])-1]
+                            book.setmBookIssuedOn(dates[2] + "/" + dates[1] + "/" + dates[0]);
+                        } else {
+                            book.setmBookIssuedOn(issuedOnDates[0]);
+                        }
 
                         mIssuedBooks.add(book);
 

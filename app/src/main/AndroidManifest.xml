@@ -91,7 +91,8 @@
             android:parentActivityName=".ViewCurrentlyIssuedToys"
             android:screenOrientation="portrait" />
         <activity android:name=".SubscriberAnalysisGraphView" />
-        <activity android:name=".IssuedBookDetail"></activity>
+        <activity android:name=".IssuedBookDetail" />
+        <activity android:name=".ViewBooks"></activity>
     </application>
 
 </manifest>
