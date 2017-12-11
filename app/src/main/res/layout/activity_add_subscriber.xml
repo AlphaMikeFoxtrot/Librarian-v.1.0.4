@@ -92,16 +92,27 @@
                     android:layout_weight="0.1"
                     android:background="@android:color/transparent"/>
 
-                <EditText
+                <!--<EditText-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:id="@+id/add_subscriber_id"-->
+                    <!--android:hint="SB/Lib/94.."-->
+                    <!--style="@style/Base.V12.Widget.AppCompat.EditText"-->
+                    <!--android:layout_marginLeft="6dp"-->
+                    <!--android:fontFamily="sans-serif-smallcaps"-->
+                    <!--android:gravity="center_vertical|left" />-->
+
+                <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/add_subscriber_id"
-                    android:hint="SB/Lib/94.."
-                    style="@style/Base.V12.Widget.AppCompat.EditText"
-                    android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
-                    android:gravity="center_vertical|left" />
+                    tools:text="SB/Lib/124"
+                    android:layout_marginLeft="6dp"
+                    android:gravity="center_vertical|left"
+                    android:textSize="20sp"/>
 
             </LinearLayout>
 

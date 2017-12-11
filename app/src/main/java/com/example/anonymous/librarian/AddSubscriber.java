@@ -10,7 +10,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -30,9 +35,10 @@ import java.util.Date;
 
 public class AddSubscriber extends AppCompatActivity {
 
-    public EditText newName, newId, newDOB, newPhone, newGender, newREB, newLEB, newCenter, newEnrolledFor, newEnrollmentType;
+    public EditText newName, newDOB, newPhone, newGender, newREB, newLEB, newCenter, newEnrolledFor, newEnrollmentType;
+    TextView newId;
     Button mSubmit, mCancel, mReset;
-    ProgressDialog progressDialog;
+    ProgressDialog progressDialog, generateIdProgressDialog;
 
     @Override
     public void onBackPressed() {
@@ -57,6 +63,8 @@ public class AddSubscriber extends AppCompatActivity {
         newEnrolledFor = findViewById(R.id.add_subscriber_enrolled_for);
         newEnrollmentType = findViewById(R.id.add_subscriber_enrollment_type);
 
+        new GenerateSubscriberId().execute();
+
         mSubmit = findViewById(R.id.add_subscriber_submit);
         mCancel = findViewById(R.id.add_subscriber_cancel);
         mReset = findViewById(R.id.add_subscriber_reset);
@@ -77,7 +85,7 @@ public class AddSubscriber extends AppCompatActivity {
             public void onClick(View view) {
 
                 newName.setText("");
-                newId.setText("");
+                // newId.setText("");
                 newPhone.setText("");
                 newDOB.setText("");
                 newGender.setText("");
@@ -194,6 +202,95 @@ public class AddSubscriber extends AppCompatActivity {
             } else {
                 progressDialog.dismiss();
                 Toast.makeText(AddSubscriber.this, "Something Went Wrong\n" + s, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public class GenerateSubscriberId extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected void onPreExecute() {
+            generateIdProgressDialog = new ProgressDialog(AddSubscriber.this);
+            generateIdProgressDialog.setMessage("Generating Id...");
+            generateIdProgressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            final String GET_SUBSCRIBERS = "http://www.fardeenpanjwani.com/librarian/get_subscribers_details.php";
+
+            HttpURLConnection httpURLConnection = null;
+            BufferedReader bufferedReader = null;
+
+            try {
+
+                URL url = new URL(GET_SUBSCRIBERS);
+                httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.connect();
+
+                InputStreamReader inputStreamReader = new InputStreamReader(httpURLConnection.getInputStream());
+                bufferedReader = new BufferedReader(inputStreamReader);
+
+                String line;
+                StringBuilder response = new StringBuilder();
+
+                while((line = bufferedReader.readLine()) != null){
+
+                    response.append(line);
+
+                }
+
+                return response.toString();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return null; // "MalformedURLException";
+            } catch (IOException e) {
+                e.printStackTrace();
+                newId.setText(e.toString());
+                return null; // "IOException\n" + e.toString();
+            } finally {
+                if(httpURLConnection != null){
+                    httpURLConnection.disconnect();
+                }
+                if(bufferedReader != null){
+                    try {
+                        bufferedReader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            generateIdProgressDialog.dismiss();
+
+            // Toast.makeText(AddSubscriber.this, "" + s, Toast.LENGTH_SHORT).show();
+
+            if(s == null){
+
+                // Toast.makeText(AddSubscriber.this, "s == null", Toast.LENGTH_SHORT).show();
+                // TODO :
+                // Toast.makeText(AddSubscriber.this, "", Toast.LENGTH_SHORT).show();
+
+            } else {
+
+                try {
+
+                    JSONArray root = new JSONArray(s);
+                    JSONObject lastObject = root.getJSONObject(root.length() - 1);
+                    String subscriber_id = lastObject.getString("subscriber_id");
+                    String[] ids = subscriber_id.split("/");
+                    String generated_id = "SB/Lib/" + Integer.parseInt(ids[ids.length - 1]) + 1;
+                    newId.setText(generated_id);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         }
     }
