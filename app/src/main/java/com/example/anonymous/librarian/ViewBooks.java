@@ -186,6 +186,8 @@ public class ViewBooks extends AppCompatActivity {
                         // list.add(nthObject.getString("book_name"));
                         book.setmBookName(nthObject.getString("book_name"));
                         book.setmBookId(nthObject.getString("book_id"));
+                        book.setmBookAddedOn(nthObject.getString("book_added_on"));
+                        book.setmBookAuthor(nthObject.getString("book_author"));
 
                         // books.add(book);
                         // list.add(book.getmBookName());
@@ -193,7 +195,7 @@ public class ViewBooks extends AppCompatActivity {
 
                     }
 
-                    Toast.makeText(ViewBooks.this, "" + books.get(0).getmBookName() + " \n" + books.size(), Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(ViewBooks.this, "" + books.get(0).getmBookName() + " \n" + books.size(), Toast.LENGTH_SHORT).show();
 
                     // adapter = new ViewBooksAdapter(ViewBooks.this, books);
                     // mRecyclerView.setAdapter(adapter);

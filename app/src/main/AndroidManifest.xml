@@ -92,7 +92,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".SubscriberAnalysisGraphView" />
         <activity android:name=".IssuedBookDetail" />
-        <activity android:name=".ViewBooks"></activity>
+        <activity android:name=".ViewBooks" />
+        <activity android:name=".BookDetail"></activity>
     </application>
 
 </manifest>

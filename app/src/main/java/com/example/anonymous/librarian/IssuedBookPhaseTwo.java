@@ -35,10 +35,12 @@ public class IssuedBookPhaseTwo extends AppCompatActivity {
     RecyclerView mRecyclerView;
     public IssueBookPhaseTwoAdapter adapter;
     public ArrayList<Subscribers> subscribers = new ArrayList<>();
-    public ProgressDialog progressDialog;
+    public ProgressDialog progressDialog, p;
 
     @Override
     public void onBackPressed() {
+        new IssueBookCancelProtocol().execute();
+
         Intent toPreviousActivity = new Intent(this, IssueBookPhaseOne.class);
         toPreviousActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(toPreviousActivity);
@@ -156,6 +158,83 @@ public class IssuedBookPhaseTwo extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    public class IssueBookCancelProtocol extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected void onPreExecute() {
+            p = new ProgressDialog(IssuedBookPhaseTwo.this);
+            p.setMessage("running protocol");
+            p.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            final String CANCEL_PROTOCOL_URL = "http://www.fardeenpanjwani.com/librarian/cancel_issue_protocol/cancel_issue_book_protocol.php";
+
+            HttpURLConnection httpURLConnection = null;
+            BufferedReader bufferedReader = null;
+
+            try {
+
+                URL url = new URL(CANCEL_PROTOCOL_URL);
+                httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.connect();
+
+                InputStreamReader inputStreamReader = new InputStreamReader(httpURLConnection.getInputStream());
+                bufferedReader = new BufferedReader(inputStreamReader);
+
+                String line;
+                StringBuilder response = new StringBuilder();
+
+                while((line = bufferedReader.readLine()) != null){
+
+                    response.append(line);
+
+                }
+
+                return response.toString();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return "fail";
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "fail";
+            } finally {
+                if(httpURLConnection != null){
+                    httpURLConnection.disconnect();
+                }
+                if(bufferedReader != null){
+                    try {
+                        bufferedReader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            p.dismiss();
+//            if(s.contains("fail")){
+//
+//                Toast.makeText(IssueBookFinalPhase.this, "Something went wrong when running cancel protocol" + s, Toast.LENGTH_SHORT).show();
+//
+//            } else if(s.contains("success")){
+//
+//                // Toast.makeText(IssueBookFinalPhase.this, "Book successfully deleted", Toast.LENGTH_SHORT).show();
+//                Intent toList = new Intent(IssueBookFinalPhase.this, IssueBookPhaseOne.class);
+//                toList.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(toList);
+//
+//            }
         }
     }
 

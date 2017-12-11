@@ -64,7 +64,7 @@ public class IssuedToyDetail extends AppCompatActivity {
 
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         final Date startDate, startDateTwo;
-        Toast.makeText(this, "" + getIntent().getStringExtra("issuedOn"), Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, "" + getIntent().getStringExtra("issuedOn"), Toast.LENGTH_SHORT).show();
         try {
             startDate = df.parse(getIntent().getStringExtra("issuedOn"));
             // mIssuedToyDueDate.setText(startDate.toString());

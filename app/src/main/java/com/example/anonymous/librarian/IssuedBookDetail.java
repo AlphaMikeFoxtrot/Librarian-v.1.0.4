@@ -57,16 +57,16 @@ public class IssuedBookDetail extends AppCompatActivity {
 
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         final Date startDate;
-        Toast.makeText(this, "" + getIntent().getStringExtra("issuedOn"), Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, "" + getIntent().getStringExtra("issuedOn"), Toast.LENGTH_SHORT).show();
         try {
-            Toast.makeText(this, "inside date try block", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, "inside date try block", Toast.LENGTH_SHORT).show();
             startDate = df.parse(getIntent().getStringExtra("issuedOn"));
             // mIssuedBookDueDate.setText(startDate.toString());
             GregorianCalendar cal = new GregorianCalendar();
             cal.setTime(startDate);
             String dueDateOne = cal.getTime().toString();
             String[] dueDatesOne = dueDateOne.split(" ");
-            Toast.makeText(this, ""+dueDatesOne[0] + " " + dueDatesOne[1] + " " + dueDatesOne[2] + " " + dueDatesOne[dueDatesOne.length - 1], Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, ""+dueDatesOne[0] + " " + dueDatesOne[1] + " " + dueDatesOne[2] + " " + dueDatesOne[dueDatesOne.length - 1], Toast.LENGTH_SHORT).show();
             mIssuedBookOn.setText(dueDatesOne[0] + " " + dueDatesOne[1] + " " + dueDatesOne[2] + " " + dueDatesOne[dueDatesOne.length - 1]);
             cal.add(Calendar.DAY_OF_MONTH, 25);
             // mIssuedBookDueDate.setText(cal.getTime().toString());
@@ -74,7 +74,7 @@ public class IssuedBookDetail extends AppCompatActivity {
             String[] dueDates = dueDate.split(" ");
             mIssuedBookDueDate.setText(dueDates[0] + " " + dueDates[1] + " " + dueDates[2] + " " + dueDates[dueDates.length - 1]);
         } catch (ParseException e) {
-            Toast.makeText(this, "inside date catch block", Toast.LENGTH_SHORT).show();
+            // Toast.makeText(this, "inside date catch block", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
             mIssuedBookOn.setText(getIntent().getStringExtra("issuedOn"));
             mIssuedBookDueDate.setText("Unavailable");

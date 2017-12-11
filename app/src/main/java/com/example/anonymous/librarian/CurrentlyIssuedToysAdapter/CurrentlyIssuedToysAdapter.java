@@ -53,7 +53,7 @@ public class CurrentlyIssuedToysAdapter extends RecyclerView.Adapter<CurrentlyIs
 
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         Date startDate;
-        Toast.makeText(context, "" + currentToy.getIssuedOn(), Toast.LENGTH_SHORT).show();
+        // Toast.makeText(context, "" + currentToy.getIssuedOn(), Toast.LENGTH_SHORT).show();
         try {
 
             startDate = df.parse(currentToy.getIssuedOn());

@@ -10,6 +10,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.Toast;
 
+import com.example.anonymous.librarian.BookDetail;
 import com.example.anonymous.librarian.Books;
 import com.example.anonymous.librarian.IssueToyFilters.IssueToyPhaseOneFilter;
 import com.example.anonymous.librarian.IssueToyHolders.IssueToyPhaseOneViewHolder;
@@ -107,7 +108,15 @@ public class ViewBooksAdapter extends RecyclerView.Adapter<ViewBooksViewHolder> 
             @Override
             public void onItemClick(View view, int position) {
 
-                Toast.makeText(context, "book name : " + oldList.get(position).getmBookName(), Toast.LENGTH_SHORT).show();
+                // Toast.makeText(context, "book name : " + oldList.get(position).getmBookName(), Toast.LENGTH_SHORT).show();
+                Books clickedBook = oldList.get(position);
+                Intent toBookDetail = new Intent(context, BookDetail.class);
+                toBookDetail.putExtra("bookName", clickedBook.getmBookName());
+                toBookDetail.putExtra("bookId", clickedBook.getmBookId());
+                toBookDetail.putExtra("bookAuthor", clickedBook.getmBookAuthor());
+                toBookDetail.putExtra("addedOn", clickedBook.getmBookAddedOn());
+                toBookDetail.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(toBookDetail);
 
             }
         });

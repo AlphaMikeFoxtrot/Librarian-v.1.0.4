@@ -33,7 +33,7 @@ public class IssueToyFinalPhase extends AppCompatActivity {
 
     TextView toyName, toyId, subscriberName, subscriberId;
     Button submit, cancel, reset;
-    ProgressDialog progressDialog, issueToyProgressDialog, cancelResetProgressDialog;
+    ProgressDialog progressDialog, issueToyProgressDialog, cancelResetProgressDialog, p;
 
     @Override
     public void onBackPressed() {
@@ -80,22 +80,24 @@ public class IssueToyFinalPhase extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                IssueBookCancelProtocol issueBookCancelProtocol = new IssueBookCancelProtocol();
+                IssueToyCancelProtocol issueBookCancelProtocol = new IssueToyCancelProtocol();
                 issueBookCancelProtocol.execute();
-//                Intent toMainActivity = new Intent(IssueToyFinalPhase.this, MainActivity.class);
-//                toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                startActivity(toMainActivity);
+
+                Intent toMainActivity = new Intent(IssueToyFinalPhase.this, MainActivity.class);
+                toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(toMainActivity);
             }
         });
 
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                IssueBookCancelProtocol issueBookCancelProtocol = new IssueBookCancelProtocol();
+                IssueToyCancelProtocol issueBookCancelProtocol = new IssueToyCancelProtocol();
                 issueBookCancelProtocol.execute();
-//                Intent toPhaseOne = new Intent(IssueToyFinalPhase.this, IssueToyPhaseOne.class);
-//                toPhaseOne.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                startActivity(toPhaseOne);
+
+                Intent toPhaseOne = new Intent(IssueToyFinalPhase.this, IssueToyPhaseOne.class);
+                toPhaseOne.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(toPhaseOne);
             }
         });
     }
@@ -279,20 +281,19 @@ public class IssueToyFinalPhase extends AppCompatActivity {
         }
     }
 
-    public class IssueBookCancelProtocol extends AsyncTask<String, Void, String>{
+    public class IssueToyCancelProtocol extends AsyncTask<String, Void, String>{
 
         @Override
         protected void onPreExecute() {
-            cancelResetProgressDialog = new ProgressDialog(IssueToyFinalPhase.this);
-            cancelResetProgressDialog.setMessage("running protocol....");
-            cancelResetProgressDialog.show();
+            p = new ProgressDialog(IssueToyFinalPhase.this);
+            p.setMessage("running protocol");
+            p.show();
         }
 
         @Override
         protected String doInBackground(String... strings) {
-            final String CANCEL_PROTOCOL_URL = "http://fardeenpanjwani.com/librarian/issue_book_cancel_protocol.php";
 
-            String cancelled_item = strings[0];
+            final String CANCEL_PROTOCOL_URL = "http://www.fardeenpanjwani.com/librarian/cancel_issue_protocol/cancel_issue_toy_protocol.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedReader bufferedReader = null;
@@ -301,7 +302,6 @@ public class IssueToyFinalPhase extends AppCompatActivity {
 
                 URL url = new URL(CANCEL_PROTOCOL_URL);
                 httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.connect();
 
@@ -311,7 +311,7 @@ public class IssueToyFinalPhase extends AppCompatActivity {
                 String line;
                 StringBuilder response = new StringBuilder();
 
-                while ((line = bufferedReader.readLine()) != null) {
+                while((line = bufferedReader.readLine()) != null){
 
                     response.append(line);
 
@@ -321,10 +321,10 @@ public class IssueToyFinalPhase extends AppCompatActivity {
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-                return null;
+                return "fail";
             } catch (IOException e) {
                 e.printStackTrace();
-                return null;
+                return "fail";
             } finally {
                 if(httpURLConnection != null){
                     httpURLConnection.disconnect();
@@ -337,11 +337,24 @@ public class IssueToyFinalPhase extends AppCompatActivity {
                     }
                 }
             }
+
         }
 
         @Override
         protected void onPostExecute(String s) {
-            cancelResetProgressDialog.dismiss();
+            p.dismiss();
+//            if(s.contains("fail")){
+//
+//                Toast.makeText(IssueBookFinalPhase.this, "Something went wrong when running cancel protocol" + s, Toast.LENGTH_SHORT).show();
+//
+//            } else if(s.contains("success")){
+//
+//                // Toast.makeText(IssueBookFinalPhase.this, "Book successfully deleted", Toast.LENGTH_SHORT).show();
+//                Intent toList = new Intent(IssueBookFinalPhase.this, IssueBookPhaseOne.class);
+//                toList.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(toList);
+//
+//            }
         }
     }
 }
