@@ -106,7 +106,7 @@ public class AddBook extends AppCompatActivity {
             String newBookAuthor = strings[2];
             String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
             DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-            String addedOn = format.format(currentDateTimeString);
+            String addedOn = format.format(new Date());
 
             HttpURLConnection httpURLConnection = null;
             BufferedReader bufferedReader = null;
