@@ -33,7 +33,7 @@
                     android:layout_height="match_parent"
                     android:text="Subscriber details"
                     style="@style/TextAppearance.AppCompat.Headline"
-                    android:gravity="center_vertical"
+                    android:gravity="center"
                     android:fontFamily="sans-serif-smallcaps"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"/>

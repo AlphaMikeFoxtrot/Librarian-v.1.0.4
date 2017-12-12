@@ -13,8 +13,20 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
-        app:title="Select Subscriber"
-        android:id="@+id/issue_toy_two_toolbar"/>
+        android:gravity="center"
+        android:id="@+id/issue_toy_two_toolbar">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Select Subscriber"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textStyle="bold"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="@android:color/white"
+            android:gravity="center"/>
+
+    </android.support.v7.widget.Toolbar>
 
     <!--<TextView-->
         <!--android:layout_width="match_parent"-->

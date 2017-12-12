@@ -19,12 +19,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Select Issued Book"
+            android:text="Select Book"
             android:fontFamily="sans-serif-smallcaps"
             android:textStyle="bold"
             style="@style/TextAppearance.AppCompat.Headline"
             android:textColor="@android:color/white"
-            android:gravity="center_vertical"/>
+            android:gravity="center"/>
 
     </android.support.v7.widget.Toolbar>
 

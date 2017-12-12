@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:id="@+id/add_subscriber_toolbar"
+            android:gravity="center"
             android:background="@color/colorPrimary"
             android:theme="@style/Base.ThemeOverlay.AppCompat.Dark">
 
@@ -26,7 +27,7 @@
                 android:text="New Subscriber"
                 android:textStyle="bold"
                 style="@style/TextAppearance.AppCompat.Headline"
-                android:gravity="center_vertical"/>
+                android:gravity="center"/>
 
         </android.support.v7.widget.Toolbar>
 

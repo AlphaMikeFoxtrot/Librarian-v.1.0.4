@@ -284,7 +284,8 @@ public class AddSubscriber extends AppCompatActivity {
                     JSONObject lastObject = root.getJSONObject(root.length() - 1);
                     String subscriber_id = lastObject.getString("subscriber_id");
                     String[] ids = subscriber_id.split("/");
-                    String generated_id = "SB/Lib/" + Integer.parseInt(ids[ids.length - 1]) + 1;
+                    int incrementId = Integer.parseInt(ids[ids.length - 1]) + 1;
+                    String generated_id = "SB/Lib/" + String.valueOf(incrementId);
                     newId.setText(generated_id);
 
                 } catch (JSONException e) {

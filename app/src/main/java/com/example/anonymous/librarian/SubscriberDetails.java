@@ -128,6 +128,7 @@ public class SubscriberDetails extends AppCompatActivity {
             }
         });
 
+        // Toast.makeText(this, "" + getIntent().getStringExtra("subscriberId"), Toast.LENGTH_SHORT).show();
         GetSubscriberDetailsAsyncTask getSubscriberDetailsAsyncTask = new GetSubscriberDetailsAsyncTask();
         getSubscriberDetailsAsyncTask.execute(getIntent().getStringExtra("subscriberId"));
 
@@ -327,6 +328,7 @@ public class SubscriberDetails extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    // Toast.makeText(SubscriberDetails.this, "" + e.toString(), Toast.LENGTH_SHORT).show();
                     Toast.makeText(SubscriberDetails.this, "Sorry! The server seems to be down at the moment\nPlease try again after some time.", Toast.LENGTH_SHORT).show();
                 }
             }

@@ -43,6 +43,7 @@ public class IssueToyPhaseTwo extends AppCompatActivity {
         Intent toPreviousActivity = new Intent(this, IssueToyPhaseOne.class);
         toPreviousActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(toPreviousActivity);
+        
     }
 
     @Override

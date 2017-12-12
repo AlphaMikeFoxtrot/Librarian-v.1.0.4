@@ -28,7 +28,7 @@
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 style="@style/TextAppearance.AppCompat.Headline"
-                android:gravity="center_vertical"
+                android:gravity="center"
                 android:fontFamily="sans-serif-smallcaps"/>
 
         </LinearLayout>
