@@ -30,10 +30,9 @@ import java.util.Date;
 
 public class AddBook extends AppCompatActivity {
 
-    EditText mNewBookName, mNewBookAuthor, mNewBookIdTwo;
+    EditText mNewBookName, mNewBookAuthor;
     ProgressDialog progressDialog, generateIdProgressDialog;
     Button mSubmit, mReset, mCancel;
-    boolean isGenerated;
     TextView mNewBookId;
 
     @Override
@@ -44,7 +43,6 @@ public class AddBook extends AppCompatActivity {
         mNewBookName = findViewById(R.id.add_book_new_book_name);
         mNewBookAuthor = findViewById(R.id.add_book_new_book_author);
         mNewBookId = findViewById(R.id.add_book_new_book_id);
-        mNewBookIdTwo = findViewById(R.id.add_book_new_book_id_edit_text);
 
         mSubmit = findViewById(R.id.add_book_submit_button);
         mReset = findViewById(R.id.add_book_reset_button);
@@ -55,16 +53,9 @@ public class AddBook extends AppCompatActivity {
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isGenerated){
 
-                    // if the id is computer generated
-                    new AddBookAsyncTask().execute(mNewBookName.getText().toString(), mNewBookId.getText().toString(), mNewBookAuthor.getText().toString());
+                new AddBookAsyncTask().execute(mNewBookName.getText().toString(), mNewBookId.getText().toString(), mNewBookAuthor.getText().toString());
 
-                } else {
-
-                    new AddBookAsyncTask().execute(mNewBookName.getText().toString(), mNewBookIdTwo.getText().toString(), mNewBookAuthor.getText().toString());
-
-                }
             }
         });
 
@@ -256,13 +247,9 @@ public class AddBook extends AppCompatActivity {
                     int intActualId = Integer.parseInt(actualId);
                     String newId = "SB-" + String.valueOf(intActualId + 1);
                     mNewBookId.setText(newId);
-                    isGenerated = true;
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    mNewBookIdTwo.setVisibility(View.VISIBLE);
-                    mNewBookId.setVisibility(View.GONE);
-                    isGenerated = false;
                 }
 
             } else {
