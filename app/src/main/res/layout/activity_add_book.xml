@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal"
+    tools:context="com.example.anonymous.librarian.AddBook">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:id="@+id/add_book_toolbar"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Add Book"
+            android:fontFamily="sans-serif-smallcaps"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:gravity="center"/>
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_marginTop="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_margin="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="New Book Name"
+                android:fontFamily="sans-serif-smallcaps"
+                android:textStyle="bold"
+                android:gravity="center_vertical|end"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_weight="0.2"
+                android:background="@android:color/transparent"/>
+
+            <EditText
+                android:id="@+id/add_book_new_book_name"
+                style="@style/Base.V12.Widget.AppCompat.EditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="The Secret"
+                android:fontFamily="sans-serif-smallcaps"
+                android:gravity="center_vertical|start"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_margin="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="New Book Id"
+                android:fontFamily="sans-serif-smallcaps"
+                android:textStyle="bold"
+                android:id="@+id/add_book_text_view"
+                android:gravity="center_vertical|end"/>
+
+            <View
+                android:layout_width="32dp"
+                android:layout_height="2dp"
+                android:layout_toRightOf="@id/add_book_text_view"
+                android:id="@+id/view"
+                android:background="@android:color/transparent"/>
+
+            <TextView
+                android:id="@+id/add_book_new_book_id"
+                android:textSize="23sp"
+                tools:text="SB-923"
+                android:layout_toRightOf="@id/view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="sans-serif-smallcaps"
+                android:gravity="center_vertical|start"/>
+
+            <EditText
+                android:id="@+id/add_book_new_book_id_edit_text"
+                style="@style/Base.V12.Widget.AppCompat.EditText"
+                android:layout_width="wrap_content"
+                android:layout_toRightOf="@id/view"
+                android:layout_height="wrap_content"
+                android:hint="New Book ID"
+                android:visibility="invisible"
+                android:fontFamily="sans-serif-smallcaps"
+                android:gravity="center_vertical|start"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_margin="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Author"
+                android:fontFamily="sans-serif-smallcaps"
+                android:textStyle="bold"
+                android:gravity="center_vertical|end"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_weight="0.2"
+                android:background="@android:color/transparent"/>
+
+            <EditText
+                android:id="@+id/add_book_new_book_author"
+                style="@style/Base.V12.Widget.AppCompat.EditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="*optional"
+                android:fontFamily="sans-serif-smallcaps"
+                android:gravity="center_vertical|start"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/add_book_submit_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="Submit" />
+
+            <Button
+                android:id="@+id/add_book_reset_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="Reset" />
+
+            <Button
+                android:id="@+id/add_book_cancel_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:fontFamily="sans-serif-smallcaps"
+                android:text="Cancel" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -93,7 +93,8 @@
         <activity android:name=".SubscriberAnalysisGraphView" />
         <activity android:name=".IssuedBookDetail" />
         <activity android:name=".ViewBooks" />
-        <activity android:name=".BookDetail"></activity>
+        <activity android:name=".BookDetail" />
+        <activity android:name=".AddBook"></activity>
     </application>
 
 </manifest>

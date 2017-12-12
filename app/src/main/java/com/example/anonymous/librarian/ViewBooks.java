@@ -97,7 +97,9 @@ public class ViewBooks extends AppCompatActivity {
         switch (itemId){
 
             case R.id.action_add:
-                // TODO;
+                Intent toAddBook = new Intent(ViewBooks.this, AddBook.class);
+                toAddBook.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(toAddBook);
 
         }
 
