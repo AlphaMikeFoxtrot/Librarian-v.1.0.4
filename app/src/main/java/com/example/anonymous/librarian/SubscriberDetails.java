@@ -25,6 +25,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -49,9 +57,10 @@ public class SubscriberDetails extends AppCompatActivity {
 
     FloatingActionButton mAddProfilePhoto;
     Bitmap bitmap;
+    BarChart barChart;
     Boolean isImageAvailable;
     String mProfilePhotoEncodedString, mProfilePhotoName;
-    ProgressDialog progressDialog, progressDialogGetAnalysis, uploadImage, checkImage;
+    ProgressDialog progressDialog, progressDialogGetAnalysis, uploadImage, checkImage, getBarGraph;
     TextView mSubscriberName,
             mSubscriberId,
             mSubscriberJkCenter,
@@ -97,6 +106,8 @@ public class SubscriberDetails extends AppCompatActivity {
         StrictMode.setVmPolicy(builder.build());
 
         mAddProfilePhoto = findViewById(R.id.fab);
+
+        barChart = findViewById(R.id.daily_analysis_bar_graph);
 
         mSubscriberName = findViewById(R.id.subscriber_detail_name);
         mSubscriberId = findViewById(R.id.subscriber_detail_id);
@@ -160,6 +171,8 @@ public class SubscriberDetails extends AppCompatActivity {
 
             }
         });
+
+        new GetDailyAnalysisAsyncTask().execute();
 
     }
 
@@ -527,7 +540,7 @@ public class SubscriberDetails extends AppCompatActivity {
         protected void onPostExecute(String s) {
             uploadImage.dismiss();
             if(s.contains("success")){
-                Toast.makeText(SubscriberDetails.this, "Profile photo successfully updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SubscriberDetails.this, "Profile photo successfully updated\nChanges will be applies once the app is restarted.", Toast.LENGTH_LONG).show();
             } else {
                 // Toast.makeText(SubscriberDetails.this, "An error occurred when updating profile photo\n" + s, Toast.LENGTH_LONG).show();
                 Toast.makeText(SubscriberDetails.this, "Profile photo cannot be changed more than once", Toast.LENGTH_LONG).show();
@@ -625,6 +638,153 @@ public class SubscriberDetails extends AppCompatActivity {
                 Picasso.with(SubscriberDetails.this).load(stringUrl).into(mSubscriberPhoto);
 
             }
+        }
+    }
+
+    public class GetDailyAnalysisAsyncTask extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected void onPreExecute() {
+            getBarGraph = new ProgressDialog(SubscriberDetails.this);
+            getBarGraph.setMessage("Getting analysis...");
+            getBarGraph.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+//            String subscriberId = getIntent().getStringExtra("subscriberId");
+//            String month = getIntent().getStringExtra("month");
+//
+//            final String GET_ANALYSIS_URL = "http://fardeenpanjwani.com/librarian/get_individual_analysis.php";
+//
+//            HttpURLConnection httpURLConnection = null;
+//            BufferedReader bufferedReader = null;
+//            BufferedWriter bufferedWriter = null;
+//
+//            try {
+//
+//                URL url = new URL(GET_ANALYSIS_URL);
+//                httpURLConnection = (HttpURLConnection) url.openConnection();
+//                httpURLConnection.setDoInput(true);
+//                httpURLConnection.setDoOutput(true);
+//                httpURLConnection.connect();
+//
+//                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(httpURLConnection.getOutputStream(), "UTF-8");
+//                bufferedWriter = new BufferedWriter(outputStreamWriter);
+//
+//                String dataToWrite = URLEncoder.encode("month", "UTF-8") +"="+ URLEncoder.encode(month, "UTF-8") +"&"+
+//                        URLEncoder.encode("subscriber_id", "UTF-8") +"="+ URLEncoder.encode(subscriberId, "UTF-8");
+//
+//                bufferedWriter.write(dataToWrite);
+//                bufferedWriter.flush();
+//                bufferedWriter.close();
+//
+//                InputStreamReader inputStreamReader = new InputStreamReader(httpURLConnection.getInputStream());
+//                bufferedReader = new BufferedReader(inputStreamReader);
+//
+//                String line;
+//                StringBuilder response = new StringBuilder();
+//
+//                while((line = bufferedReader.readLine()) != null){
+//
+//                    response.append(line);
+//
+//                }
+//
+//                return response.toString();
+//
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//                return "";
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                return "";
+//            } finally {
+//                if(httpURLConnection != null){
+//                    httpURLConnection.disconnect();
+//                }
+//                if(bufferedReader != null){
+//                    try {
+//                        bufferedReader.close();
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+            return "";
+        }
+
+        public class LabelFormatter implements IAxisValueFormatter {
+            private final String[] mLabels;
+
+            public LabelFormatter(String[] labels) {
+                mLabels = labels;
+            }
+
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return mLabels[(int) value];
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            getBarGraph.dismiss();
+            ArrayList<BarEntry> entries = new ArrayList<>();
+            entries.add(new BarEntry(0, Float.parseFloat(mSubscriberDailyBookActivity.getText().toString())));
+            entries.add(new BarEntry(1, Float.parseFloat(mSubscriberDailyToysActivity.getText().toString())));
+
+            BarDataSet dataSet = new BarDataSet(entries, "");
+
+//            final ArrayList<String> labels = new ArrayList<String>();
+//            labels.add("Books");
+//            labels.add("Toys");
+
+            // String[] labels = {"Books", "Toys"};
+
+            // barChart.getXAxis().setValueFormatter(new LabelFormatter(labels));
+
+            BarData data = new BarData(dataSet);
+            Description description = new Description();
+            description.setText(" ");
+            barChart.setDescription(description);
+            int bookColor = android.R.color.holo_red_dark;
+            int toyColor = android.R.color.black;
+            int[] colors = new int[]{bookColor, toyColor};
+            dataSet.setColors(colors, SubscriberDetails.this);
+            barChart.setData(data);
+            barChart.animateY(1000);
+//            if(s.length() > 0){
+//
+//                try {
+//
+//                    JSONArray root = new JSONArray(s);
+//                    JSONObject object = root.getJSONObject(0);
+//                    ArrayList<BarEntry> entries = new ArrayList<>();
+//                    entries.add(new BarEntry(0, Float.parseFloat(object.getString("book_activity"))));
+//                    entries.add(new BarEntry(1, Float.parseFloat(object.getString("toy_activity"))));
+//
+//                    BarDataSet dataSet = new BarDataSet(entries, "Books Toys");
+//
+//                    final ArrayList<String> labels = new ArrayList<String>();
+//                    labels.add("Books");
+//                    labels.add("Toys");
+//
+//                    BarData data = new BarData(dataSet);
+//                    dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+//                    barChart.setData(data);
+//                    barChart.animateY(1000);
+//
+//                    // monthlyBook.setText(MONTHLY_BOOK_ACTIVITY + object.getString("book_activity"));
+//                    // monthlyToy.setText(MONTHLY_TOY_ACTIVITY + object.getString("toy_activity"));
+//
+//                    // new TotalAnalysisAsyncTask().execute();
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
         }
     }
 }
