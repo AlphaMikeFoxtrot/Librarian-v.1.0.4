@@ -342,7 +342,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
         protected void onPostExecute(String s) {
             if(s.contains("success")){
                 deleteProgressDialog.dismiss();
-                Toast.makeText(EditSubscriberDetails.this, "Subscriber successfully delted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditSubscriberDetails.this, "Subscriber successfully deleted", Toast.LENGTH_SHORT).show();
                 Intent toMainActivity = new Intent(EditSubscriberDetails.this, MainActivity.class);
                 toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toMainActivity);
