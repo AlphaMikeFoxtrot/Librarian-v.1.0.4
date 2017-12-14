@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,6 +36,27 @@ public class EditSubscriberDetails extends AppCompatActivity {
     EditText mNewSubscriberEnrolledOn, mNewSubscriberEnrolledFor, mNewSubscriberEnrollmentType, mNewSubscriberDOB, mNewSubscriberPhone;
     Button mSubmit, mCancel, mReset;
     public ProgressDialog progressDialog, deleteProgressDialog;
+    NetworkChangeReceiver receiver;
+    Boolean flag = false;
+    IntentFilter filter;
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(flag) {
+            unregisterReceiver(receiver);
+            flag = false;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(flag) {
+            unregisterReceiver(receiver);
+            flag = false;
+        }
+    }
 
 //    @Override
 //    public void onBackPressed() {
@@ -49,6 +72,11 @@ public class EditSubscriberDetails extends AppCompatActivity {
 
         mToolbar = findViewById(R.id.edit_subscriber_detail_toolbar);
         setSupportActionBar(mToolbar);
+
+        filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        receiver = new NetworkChangeReceiver();
+        registerReceiver(receiver, filter);
+        flag = true;
 
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.show();

@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,6 +37,27 @@ public class BookDetail extends AppCompatActivity {
     Button mBack, mDelete;
     Toolbar mToolbar;
     ProgressDialog progressDialog;
+    NetworkChangeReceiver receiver;
+    Boolean flag = false;
+    IntentFilter filter;
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(flag) {
+            unregisterReceiver(receiver);
+            flag = false;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(flag) {
+            unregisterReceiver(receiver);
+            flag = false;
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -47,6 +70,11 @@ public class BookDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_detail);
+
+        filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        receiver = new NetworkChangeReceiver();
+        registerReceiver(receiver, filter);
+        flag = true;
 
         mToolbar = findViewById(R.id.book_detail_toolbar);
         setSupportActionBar(mToolbar);

@@ -1,6 +1,8 @@
 package com.example.anonymous.librarian;
 
 import android.app.ProgressDialog;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,11 +33,37 @@ public class ReturnBook extends AppCompatActivity {
     public ReturnBookAdapter adapter;
     ProgressDialog progressDialog;
     public static ArrayList<Books> books = new ArrayList<>();
+    NetworkChangeReceiver receiver;
+    Boolean flag = false;
+    IntentFilter filter;
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(flag) {
+            unregisterReceiver(receiver);
+            flag = false;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(flag) {
+            unregisterReceiver(receiver);
+            flag = false;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_return_book);
+
+        filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        receiver = new NetworkChangeReceiver();
+        registerReceiver(receiver, filter);
+        flag = true;
 
         mRecyclerView = findViewById(R.id.return_book_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(ReturnBook.this));

@@ -2,6 +2,8 @@ package com.example.anonymous.librarian;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,6 +36,27 @@ public class IssueToyFinalPhase extends AppCompatActivity {
     TextView toyName, toyId, subscriberName, subscriberId;
     Button submit, cancel, reset;
     ProgressDialog progressDialog, issueToyProgressDialog, cancelResetProgressDialog, p;
+    NetworkChangeReceiver receiver;
+    Boolean flag = false;
+    IntentFilter filter;
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(flag) {
+            unregisterReceiver(receiver);
+            flag = false;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(flag) {
+            unregisterReceiver(receiver);
+            flag = false;
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -46,6 +69,11 @@ public class IssueToyFinalPhase extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_issue_toy_final_phase);
+
+        filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        receiver = new NetworkChangeReceiver();
+        registerReceiver(receiver, filter);
+        flag = true;
 
         Toolbar mToolbar = findViewById(R.id.issue_toy_final_toolbar);
         setSupportActionBar(mToolbar);

@@ -1,6 +1,8 @@
 package com.example.anonymous.librarian;
 
 import android.app.ProgressDialog;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,11 +40,36 @@ public class SubscriberAnalysisGraphView extends AppCompatActivity {
     BarChart barChart;
     TextView monthlyToy, monthlyBook, totalToy, totalBook;
     public String MONTHLY_BOOK_ACTIVITY, MONTHLY_TOY_ACTIVITY, TOTAL_TOY_ACTIVITY, TOTAL_BOOK_ACTIVITY;
+    NetworkChangeReceiver receiver;
+    Boolean flag = false;
+    IntentFilter filter;
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(flag) {
+            unregisterReceiver(receiver);
+            flag = false;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(flag) {
+            unregisterReceiver(receiver);
+            flag = false;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subscriber_analysis_graph_view);
+        filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        receiver = new NetworkChangeReceiver();
+        registerReceiver(receiver, filter);
+        flag = true;
 
         TextView toolbarTextView = findViewById(R.id.toolbar_text_view);
         toolbarTextView.setText("MONTHLY ANALYSIS : " + getIntent().getStringExtra("month").toUpperCase());

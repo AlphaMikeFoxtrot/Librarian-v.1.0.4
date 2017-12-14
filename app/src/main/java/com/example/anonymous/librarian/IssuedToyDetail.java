@@ -2,6 +2,8 @@ package com.example.anonymous.librarian;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,6 +36,27 @@ public class IssuedToyDetail extends AppCompatActivity {
     TextView mIssuedToyId, mIssuedToyName, mIssuedToyToId, mIssuedToyToName, mIssuedToyOn, mIssuedToyDueDate;
     Button mBack, mReturnToy;
     ProgressDialog progressDialog;
+    NetworkChangeReceiver receiver;
+    Boolean flag = false;
+    IntentFilter filter;
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(flag) {
+            unregisterReceiver(receiver);
+            flag = false;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(flag) {
+            unregisterReceiver(receiver);
+            flag = false;
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -46,6 +69,11 @@ public class IssuedToyDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_issued_toy_detail);
+
+        filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        receiver = new NetworkChangeReceiver();
+        registerReceiver(receiver, filter);
+        flag = true;
 
         mIssuedToyName = findViewById(R.id.issued_toy_details_toy_name);
         mIssuedToyId = findViewById(R.id.issued_toy_details_toy_id);

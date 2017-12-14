@@ -1,11 +1,15 @@
 package com.example.anonymous.librarian;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.AsyncTaskLoader;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.StrictMode;
@@ -15,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -22,6 +27,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -80,7 +86,7 @@ public class SubscriberDetails extends AppCompatActivity {
             mSubscriberToysActivity,
             mSubscriberDailyBookActivity,
             mSubscriberDailyToysActivity;
-    ImageView mSubscriberPhoto;
+    ImageButton mSubscriberPhoto;
     Button mEditButton;
     SubscriberAnalysisAdapter adapter;
     ListView mListView;
@@ -89,6 +95,27 @@ public class SubscriberDetails extends AppCompatActivity {
     private final int IMAGE_REQUEST = 1;
     public ArrayList<SubscriberAnalysis> analysis = new ArrayList<>();
     JSONArray root;
+    NetworkChangeReceiver receiver;
+    Boolean flag = false;
+    IntentFilter filter;
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(flag) {
+            unregisterReceiver(receiver);
+            flag = false;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(flag) {
+            unregisterReceiver(receiver);
+            flag = false;
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -101,6 +128,10 @@ public class SubscriberDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subscriber_details);
+        filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        receiver = new NetworkChangeReceiver();
+        registerReceiver(receiver, filter);
+        flag = true;
 
         mToolbar = findViewById(R.id.subscriber_detail_toolbar);
         setSupportActionBar(mToolbar);
@@ -176,6 +207,27 @@ public class SubscriberDetails extends AppCompatActivity {
         });
 
         new GetDailyAnalysisAsyncTask().execute();
+
+        mSubscriberPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AlertDialog.Builder alertadd = new AlertDialog.Builder(SubscriberDetails.this);
+                LayoutInflater factory = LayoutInflater.from(SubscriberDetails.this);
+                final View view_two = factory.inflate(R.layout.profile_photo_alert_dialog, null);
+                ImageView imageView = view_two.findViewById(R.id.dialog_imageview);
+                imageView.setImageResource(mSubscriberPhoto.getImageAlpha());
+                alertadd.setView(view);
+                alertadd.setNeutralButton("Here!", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dlg, int sumthin) {
+
+                    }
+                });
+
+                alertadd.show();
+
+            }
+        });
 
     }
 
@@ -719,19 +771,6 @@ public class SubscriberDetails extends AppCompatActivity {
             return "";
         }
 
-        public class LabelFormatter implements IAxisValueFormatter {
-            private final String[] mLabels;
-
-            public LabelFormatter(String[] labels) {
-                mLabels = labels;
-            }
-
-            @Override
-            public String getFormattedValue(float value, AxisBase axis) {
-                return mLabels[(int) value];
-            }
-        }
-
         @Override
         protected void onPostExecute(String s) {
             getBarGraph.dismiss();
@@ -822,7 +861,7 @@ public class SubscriberDetails extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(Bitmap bitmap) {
+        protected void onPostExecute(Bitmap bitmap) {    //When you change the drawable
             mSubscriberPhoto.setImageBitmap(bitmap);
         }
     }

@@ -2,6 +2,8 @@ package com.example.anonymous.librarian;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,6 +33,27 @@ public class ViewCurrentlyIssuedBooks extends AppCompatActivity {
     ArrayList<Books> mIssuedBooks = new ArrayList<>();
     ViewCurrentlyIssuedBookAdapter adapter;
     ProgressDialog progressDialog;
+    NetworkChangeReceiver receiver;
+    Boolean flag = false;
+    IntentFilter filter;
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(flag) {
+            unregisterReceiver(receiver);
+            flag = false;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(flag) {
+            unregisterReceiver(receiver);
+            flag = false;
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -43,6 +66,11 @@ public class ViewCurrentlyIssuedBooks extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_currently_issued_books);
+
+        filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        receiver = new NetworkChangeReceiver();
+        registerReceiver(receiver, filter);
+        flag = true;
 
         mRecyclerView = findViewById(R.id.view_currently_issued_book_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(ViewCurrentlyIssuedBooks.this));

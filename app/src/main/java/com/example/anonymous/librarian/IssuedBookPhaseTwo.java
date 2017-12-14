@@ -2,6 +2,8 @@ package com.example.anonymous.librarian;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,6 +38,27 @@ public class IssuedBookPhaseTwo extends AppCompatActivity {
     public IssueBookPhaseTwoAdapter adapter;
     public ArrayList<Subscribers> subscribers = new ArrayList<>();
     public ProgressDialog progressDialog, p;
+    NetworkChangeReceiver receiver;
+    Boolean flag = false;
+    IntentFilter filter;
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(flag) {
+            unregisterReceiver(receiver);
+            flag = false;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(flag) {
+            unregisterReceiver(receiver);
+            flag = false;
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -53,6 +76,11 @@ public class IssuedBookPhaseTwo extends AppCompatActivity {
 
         Toolbar mToolbar = findViewById(R.id.issue_book_two_toolbar);
         setSupportActionBar(mToolbar);
+
+        filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        receiver = new NetworkChangeReceiver();
+        registerReceiver(receiver, filter);
+        flag = true;
 
         mRecyclerView = findViewById(R.id.issue_book_two_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
