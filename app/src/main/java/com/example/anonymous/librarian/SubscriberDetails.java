@@ -1,8 +1,11 @@
 package com.example.anonymous.librarian;
 
 import android.app.ProgressDialog;
+import android.content.AsyncTaskLoader;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.StrictMode;
@@ -625,17 +628,19 @@ public class SubscriberDetails extends AppCompatActivity {
         protected void onPostExecute(String s) {
             checkImage.dismiss();
             // Toast.makeText(SubscriberDetails.this, "" + imageName, Toast.LENGTH_SHORT).show();
-            if(s.contains("false")){
+            if(s.contains("true")){
+
+                String stringUrl = "http://www.fardeenpanjwani.com/librarian/subscriber_profile_photo/" + getIntent().getStringExtra("subscriberName").toLowerCase().replace(" ", "_") + ".jpg";
+                // Toast.makeText(SubscriberDetails.this, "" + stringUrl, Toast.LENGTH_SHORT).show();
+                // new SetProfileImage(SubscriberDetails.this, stringUrl);
+                new GetProfilePhoto().execute(stringUrl);
+                // Picasso.with(SubscriberDetails.this).load(stringUrl).into(mSubscriberPhoto);
+
+            } else {
 
                 mSubscriberPhoto.setImageResource(R.drawable.no_image);
                 // String stringUrl = "http://fardeenpanjwani.com/librarian/subscriber_profile_photo/" + getIntent().getStringExtra("subscriberName").toLowerCase().replace(" ", "_") + ".jpg";
                 // Toast.makeText(SubscriberDetails.this, "" + stringUrl, Toast.LENGTH_SHORT).show();
-
-            } else {
-
-                String stringUrl = "http://www.fardeenpanjwani.com/librarian/subscriber_profile_photo/" + getIntent().getStringExtra("subscriberName").toLowerCase().replace(" ", "_") + ".jpg";
-                // Toast.makeText(SubscriberDetails.this, "" + stringUrl, Toast.LENGTH_SHORT).show();
-                Picasso.with(SubscriberDetails.this).load(stringUrl).into(mSubscriberPhoto);
 
             }
         }
@@ -787,4 +792,46 @@ public class SubscriberDetails extends AppCompatActivity {
 //            }
         }
     }
+
+    public class GetProfilePhoto extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            String imageUrl = strings[0];
+
+            try {
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) new URL(imageUrl).openConnection();
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.connect();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+
+                mSubscriberPhoto.setImageBitmap(bitmap);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+    }
+
+//    try {
+//
+//        HttpURLConnection httpURLConnection = (HttpURLConnection) new URL(imageUrl).openConnection();
+//        httpURLConnection.setDoInput(true);
+//        httpURLConnection.connect();
+//
+//        InputStream inputStream = httpURLConnection.getInputStream();
+//        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+//
+//        mSubscriberPhoto.setImageBitmap(bitmap);
+//
+//    } catch (IOException e) {
+//        e.printStackTrace();
+//    }
 }

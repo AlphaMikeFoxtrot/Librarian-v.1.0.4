@@ -3,6 +3,8 @@ package com.example.anonymous.librarian;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -168,10 +170,10 @@ public class ViewSubscribers extends AppCompatActivity {
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-                return null;
+                return "";
             } catch (IOException e) {
                 e.printStackTrace();
-                return null;
+                return "";
             } finally {
                 if(httpURLConnection != null){
                     httpURLConnection.disconnect();
@@ -189,6 +191,10 @@ public class ViewSubscribers extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+
+            // Toast.makeText(ViewSubscribers.this, "" + s, Toast.LENGTH_LONG).show();
+            // Snackbar.make(new CoordinatorLayout(ViewSubscribers.this), s, Snackbar.LENGTH_LONG).show();
+
             if(s.isEmpty()){
                 progressDialog.dismiss();
                 Toast.makeText(ViewSubscribers.this, "The list seems to be empty", Toast.LENGTH_SHORT).show();

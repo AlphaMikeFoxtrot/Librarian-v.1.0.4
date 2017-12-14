@@ -57,9 +57,7 @@
                     android:layout_height="200dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_margin="12dp"
-                    android:alpha="0.5"
                     android:id="@+id/subscriber_detail_image_view"
-                    android:background="@drawable/image_view_border"
                     tools:src="@drawable/subscribers"
                     android:scaleType="fitCenter"/>
 

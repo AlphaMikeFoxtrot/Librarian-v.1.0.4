@@ -173,7 +173,8 @@ public class SubscriberAnalysisGraphView extends AppCompatActivity {
                     labels.add("Toys");
 
                     BarData data = new BarData(dataSet);
-                    dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+                    int[] colors = new int[]{android.R.color.holo_red_dark, android.R.color.black};
+                    dataSet.setColors(colors, SubscriberAnalysisGraphView.this);
                     barChart.setData(data);
                     barChart.animateY(1000);
 
