@@ -793,12 +793,14 @@ public class SubscriberDetails extends AppCompatActivity {
         }
     }
 
-    public class GetProfilePhoto extends AsyncTask<String, Void, String>{
+    public class GetProfilePhoto extends AsyncTask<String, Void, Bitmap>{
 
         @Override
-        protected String doInBackground(String... strings) {
+        protected Bitmap doInBackground(String... strings) {
 
             String imageUrl = strings[0];
+
+            Bitmap bitmap;
 
             try {
 
@@ -807,17 +809,21 @@ public class SubscriberDetails extends AppCompatActivity {
                 httpURLConnection.connect();
 
                 InputStream inputStream = httpURLConnection.getInputStream();
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                bitmap = BitmapFactory.decodeStream(inputStream);
 
-                mSubscriberPhoto.setImageBitmap(bitmap);
+                // mSubscriberPhoto.setImageBitmap(bitmap);
+                return bitmap;
 
             } catch (IOException e) {
                 e.printStackTrace();
+                return null;
             }
-
-            return null;
         }
 
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            mSubscriberPhoto.setImageBitmap(bitmap);
+        }
     }
 
 //    try {
