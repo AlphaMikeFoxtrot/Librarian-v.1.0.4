@@ -758,7 +758,8 @@ public class SubscriberDetails extends AppCompatActivity {
             int[] colors = new int[]{bookColor, toyColor};
             dataSet.setColors(colors, SubscriberDetails.this);
             barChart.setData(data);
-            barChart.animateY(1000);
+            barChart.setDrawGridBackground(false);
+            barChart.animateY(2000);
 //            if(s.length() > 0){
 //
 //                try {

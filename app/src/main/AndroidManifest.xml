@@ -96,7 +96,8 @@
         <activity android:name=".BookDetail" />
         <activity android:name=".AddBook" />
         <activity android:name=".ViewToys" />
-        <activity android:name=".ToyDetail"></activity>
+        <activity android:name=".ToyDetail" />
+        <activity android:name=".AddToy"></activity>
     </application>
 
 </manifest>

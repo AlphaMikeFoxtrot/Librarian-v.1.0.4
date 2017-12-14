@@ -89,7 +89,7 @@ public class ViewToys extends AppCompatActivity {
         switch (itemId){
 
             case R.id.action_add:
-                Intent toAddToy = new Intent(ViewToys.this, AddBook.class);
+                Intent toAddToy = new Intent(ViewToys.this, AddToy.class);
                 toAddToy.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toAddToy);
 
@@ -180,6 +180,7 @@ public class ViewToys extends AppCompatActivity {
                         // list.add(nthObject.getString("toy_name"));
                         toy.setmToyName(nthObject.getString("toy_name"));
                         toy.setmToyId(nthObject.getString("toy_id"));
+                        toy.setAddedOn(nthObject.getString("added_on"));
 
                         toys.add(toy);
 

@@ -166,17 +166,17 @@ public class SubscriberAnalysisGraphView extends AppCompatActivity {
                     entries.add(new BarEntry(0, Float.parseFloat(object.getString("book_activity"))));
                     entries.add(new BarEntry(1, Float.parseFloat(object.getString("toy_activity"))));
 
-                    BarDataSet dataSet = new BarDataSet(entries, "Books Toys");
-
-                    final ArrayList<String> labels = new ArrayList<String>();
-                    labels.add("Books");
-                    labels.add("Toys");
+                    BarDataSet dataSet = new BarDataSet(entries, "");
 
                     BarData data = new BarData(dataSet);
-                    int[] colors = new int[]{android.R.color.holo_red_dark, android.R.color.black};
+                    // int[] colors = new int[]{android.R.color.holo_red_dark, android.R.color.black};
+                    int bookColor = android.R.color.holo_red_dark;
+                    int toyColor = android.R.color.black;
+                    int[] colors = new int[]{bookColor, toyColor};
                     dataSet.setColors(colors, SubscriberAnalysisGraphView.this);
                     barChart.setData(data);
-                    barChart.animateY(1000);
+                    barChart.setDrawGridBackground(false);
+                    barChart.animateY(2000);
 
                     monthlyBook.setText(MONTHLY_BOOK_ACTIVITY + object.getString("book_activity"));
                     monthlyToy.setText(MONTHLY_TOY_ACTIVITY + object.getString("toy_activity"));

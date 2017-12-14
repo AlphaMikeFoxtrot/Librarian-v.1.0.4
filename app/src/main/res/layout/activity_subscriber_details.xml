@@ -532,6 +532,7 @@
             <com.github.mikephil.charting.charts.BarChart
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
+                android:layout_margin="12dp"
                 android:id="@+id/daily_analysis_bar_graph" />
 
             <LinearLayout

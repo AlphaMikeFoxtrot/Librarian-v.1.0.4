@@ -109,6 +109,7 @@ public class ViewToysAdapter extends RecyclerView.Adapter<ViewToysViewHolder> im
                 Intent toToyDetail = new Intent(context, ToyDetail.class);
                 toToyDetail.putExtra("toyName", clickedToy.getmToyName());
                 toToyDetail.putExtra("toyId", clickedToy.getmToyId());
+                toToyDetail.putExtra("addedOn", clickedToy.getAddedOn());
                 toToyDetail.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(toToyDetail);
 

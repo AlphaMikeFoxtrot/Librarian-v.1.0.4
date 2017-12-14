@@ -74,7 +74,10 @@ public class MainActivity extends AppCompatActivity {
                     case DialogInterface.BUTTON_POSITIVE:
                         //Yes button clicked
                         // new ToyDetail.DeleteToyProtocol().execute(mToyId.getText().toString());
-                        finish();
+                        // finish();
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        startActivity(intent);
                         break;
 
                     case DialogInterface.BUTTON_NEGATIVE:

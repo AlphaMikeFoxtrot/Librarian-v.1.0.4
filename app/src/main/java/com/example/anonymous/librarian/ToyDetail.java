@@ -23,10 +23,15 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class ToyDetail extends AppCompatActivity {
 
-    TextView mToyName, mToyId;
+    TextView mToyName, mToyId, mToyAddeOn;
     Button mBack, mDelete;
     Toolbar mToolbar;
     ProgressDialog progressDialog;
@@ -51,9 +56,25 @@ public class ToyDetail extends AppCompatActivity {
 
         mToyName = findViewById(R.id.toy_detail_toy_name);
         mToyId = findViewById(R.id.toy_detail_toy_id);
+        mToyAddeOn = findViewById(R.id.toy_detail_toy_added_on);
 
         mToyName.setText(getIntent().getStringExtra("toyName"));
         mToyId.setText(getIntent().getStringExtra("toyId"));
+        // mToyAddeOn.setText(getIntent().getStringExtra("addedOn"));
+
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date;
+        try {
+            date = dateFormat.parse(getIntent().getStringExtra("addedOn"));
+            GregorianCalendar calendar = new GregorianCalendar();
+            calendar.setTime(date);
+            String dateTwo = calendar.getTime().toString();
+            String[] dates = dateTwo.split(" ");
+            mToyAddeOn.setText(dates[0] + " " + dates[1] + " " + dates[2] + " " + dates[dates.length - 1]);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            mToyAddeOn.setText(getIntent().getStringExtra("addedOn"));
+        }
 
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override

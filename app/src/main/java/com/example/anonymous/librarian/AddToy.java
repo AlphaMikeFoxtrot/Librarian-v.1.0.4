@@ -28,16 +28,16 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class AddBook extends AppCompatActivity {
+public class AddToy extends AppCompatActivity {
 
-    EditText mNewBookName, mNewBookAuthor;
+    EditText mNewToyName;
     ProgressDialog progressDialog, generateIdProgressDialog;
     Button mSubmit, mReset, mCancel;
-    TextView mNewBookId;
+    TextView mNewToyId;
 
     @Override
     public void onBackPressed() {
-        Intent toPrevious = new Intent(AddBook.this, ViewBooks.class);
+        Intent toPrevious = new Intent(AddToy.this, ViewToys.class);
         toPrevious.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(toPrevious);
     }
@@ -45,23 +45,22 @@ public class AddBook extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_book);
+        setContentView(R.layout.activity_add_toy);
 
-        mNewBookName = findViewById(R.id.add_book_new_book_name);
-        mNewBookAuthor = findViewById(R.id.add_book_new_book_author);
-        mNewBookId = findViewById(R.id.add_book_new_book_id);
+        mNewToyName = findViewById(R.id.add_toy_new_toy_name);
+        mNewToyId = findViewById(R.id.add_toy_new_toy_id);
 
-        mSubmit = findViewById(R.id.add_book_submit_button);
-        mReset = findViewById(R.id.add_book_reset_button);
-        mCancel = findViewById(R.id.add_book_cancel_button);
+        mSubmit = findViewById(R.id.add_toy_submit_button);
+        mReset = findViewById(R.id.add_toy_reset_button);
+        mCancel = findViewById(R.id.add_toy_cancel_button);
 
-        new GenerateIdProtocol().execute();
+        new GenerateToyIdProtocol().execute();
 
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                new AddBookAsyncTask().execute(mNewBookName.getText().toString(), mNewBookId.getText().toString(), mNewBookAuthor.getText().toString());
+                new AddToyAsyncTask().execute(mNewToyName.getText().toString(), mNewToyId.getText().toString());
 
             }
         });
@@ -69,40 +68,38 @@ public class AddBook extends AppCompatActivity {
         mReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mNewBookName.setText("");
-                mNewBookName.setHint("The Secret");
-                mNewBookAuthor.setText("");
-                mNewBookAuthor.setHint("*optional");
+                mNewToyName.setText("");
+                mNewToyName.setHint("Rubik\'s Cube");
             }
         });
 
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent toList = new Intent(AddBook.this, ViewBooks.class);
+                Intent toList = new Intent(AddToy.this, ViewToys.class);
                 toList.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toList);
             }
         });
     }
 
-    public class AddBookAsyncTask extends AsyncTask<String, Void, String>{
+    public class AddToyAsyncTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected void onPreExecute() {
-            progressDialog = new ProgressDialog(AddBook.this);
-            progressDialog.setMessage("Adding book to library");
+            progressDialog = new ProgressDialog(AddToy.this);
+            progressDialog.setMessage("Adding Toy to library");
             progressDialog.show();
         }
 
         @Override
         protected String doInBackground(String... strings) {
-            final String ADD_BOOK_URL = "http://www.fardeenpanjwani.com/librarian/add_book.php";
+            final String ADD_TOY_URL = "http://www.fardeenpanjwani.com/librarian/add_toy.php";
 
-            String newBookName = strings[0];
-            String newBookId = strings[1];
-            String newBookAuthor = strings[2];
-            String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+            String newToyName = strings[0];
+            String newToyId = strings[1];
+            // String newToyAuthor = strings[2];
+            // String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
             DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
             String addedOn = format.format(new Date());
 
@@ -112,7 +109,7 @@ public class AddBook extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(ADD_BOOK_URL);
+                URL url = new URL(ADD_TOY_URL);
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
@@ -121,10 +118,9 @@ public class AddBook extends AppCompatActivity {
                 OutputStreamWriter outputStreamWriter = new OutputStreamWriter(httpURLConnection.getOutputStream(), "UTF-8");
                 bufferedWriter = new BufferedWriter(outputStreamWriter);
 
-                String dataToWrite = URLEncoder.encode("newBookId", "UTF-8") +"="+ URLEncoder.encode(newBookId, "UTF-8") +"&"+
-                        URLEncoder.encode("newBookName", "UTF-8") +"="+ URLEncoder.encode(newBookName, "UTF-8") +"&"+
-                        URLEncoder.encode("newBookAuthor", "UTF-8") +"="+ URLEncoder.encode(newBookAuthor, "UTF-8") +"&"+
-                        URLEncoder.encode("newBookAddedOn", "UTF-8") +"="+ URLEncoder.encode(addedOn, "UTF-8");
+                String dataToWrite = URLEncoder.encode("toyId", "UTF-8") +"="+ URLEncoder.encode(newToyId, "UTF-8") +"&"+
+                        URLEncoder.encode("toyName", "UTF-8") +"="+ URLEncoder.encode(newToyName, "UTF-8") +"&"+
+                        URLEncoder.encode("addedOn", "UTF-8") +"="+ URLEncoder.encode(addedOn, "UTF-8");
 
                 bufferedWriter.write(dataToWrite);
                 bufferedWriter.flush();
@@ -169,12 +165,12 @@ public class AddBook extends AppCompatActivity {
             progressDialog.dismiss();
             if(s == null || s.contains("fail")){
 
-                Toast.makeText(AddBook.this, "Something went wrong when adding new book to database!\nPlease try again after some time.", Toast.LENGTH_LONG).show();
+                Toast.makeText(AddToy.this, "Something went wrong when adding new toy to database!\nPlease try again after some time.", Toast.LENGTH_LONG).show();
 
             } else if(s.contains("success")){
 
-                Toast.makeText(AddBook.this, "Book successfully added to database", Toast.LENGTH_SHORT).show();
-                Intent toList = new Intent(AddBook.this, ViewBooks.class);
+                Toast.makeText(AddToy.this, "Toy successfully added to database", Toast.LENGTH_SHORT).show();
+                Intent toList = new Intent(AddToy.this, ViewToys.class);
                 toList.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toList);
 
@@ -182,25 +178,25 @@ public class AddBook extends AppCompatActivity {
         }
     }
 
-    public class GenerateIdProtocol extends AsyncTask<String, Void, String>{
+    public class GenerateToyIdProtocol extends AsyncTask<String, Void, String>{
 
         @Override
         protected void onPreExecute() {
-            generateIdProgressDialog = new ProgressDialog(AddBook.this);
+            generateIdProgressDialog = new ProgressDialog(AddToy.this);
             generateIdProgressDialog.setMessage("Generating new ID");
             generateIdProgressDialog.show();
         }
 
         @Override
         protected String doInBackground(String... strings) {
-            final String GET_BOOKS_URL = "http://www.fardeenpanjwani.com/librarian/get_book_details.php";
+            final String GET_TOYS_URL = "http://www.fardeenpanjwani.com/librarian/get_toy_details.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedReader bufferedReader = null;
 
             try {
 
-                URL url = new URL(GET_BOOKS_URL);
+                URL url = new URL(GET_TOYS_URL);
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.connect();
@@ -248,12 +244,12 @@ public class AddBook extends AppCompatActivity {
 
                     JSONArray root = new JSONArray(s);
                     JSONObject lastObject = root.getJSONObject(root.length() - 1);
-                    String lastBookId = lastObject.getString("book_id");
-                    String[] ids = lastBookId.split("-");
-                    String actualId = ids[1];
+                    String lastToyId = lastObject.getString("toy_id");
+                    String[] ids = lastToyId.split("/");
+                    String actualId = ids[2];
                     int intActualId = Integer.parseInt(actualId);
-                    String newId = "SB-" + String.valueOf(intActualId + 1);
-                    mNewBookId.setText(newId);
+                    String newId = "TL/SB/" + String.valueOf(intActualId + 1);
+                    mNewToyId.setText(newId);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -261,7 +257,7 @@ public class AddBook extends AppCompatActivity {
 
             } else {
 
-                Toast.makeText(AddBook.this, "Something went wrong when generating new id", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddToy.this, "Something went wrong when generating new id", Toast.LENGTH_SHORT).show();
 
             }
         }
