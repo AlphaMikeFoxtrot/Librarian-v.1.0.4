@@ -35,6 +35,13 @@ public class ViewToys extends AppCompatActivity {
     ViewToysAdapter adapter;
 
     @Override
+    public void onBackPressed() {
+        Intent toMainActivity = new Intent(ViewToys.this, MainActivity.class);
+        toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(toMainActivity);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_toys);

@@ -42,9 +42,9 @@ public class ViewBooks extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent toMainAcitivity = new Intent(ViewBooks.this, MainActivity.class);
-        toMainAcitivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(toMainAcitivity);
+        Intent toMainActivity = new Intent(ViewBooks.this, MainActivity.class);
+        toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(toMainActivity);
     }
 
     @Override

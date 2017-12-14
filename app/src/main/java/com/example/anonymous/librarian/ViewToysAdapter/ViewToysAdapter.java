@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 
+import com.example.anonymous.librarian.ToyDetail;
+import com.example.anonymous.librarian.Toys;
 import com.example.anonymous.librarian.Toys;
 import com.example.anonymous.librarian.IssueToyOnClickListeners.IssueToyPhaseOneOnItemClickListener;
 import com.example.anonymous.librarian.R;
@@ -103,6 +105,12 @@ public class ViewToysAdapter extends RecyclerView.Adapter<ViewToysViewHolder> im
             public void onItemClick(View view, int position) {
 
                 // TODO :
+                Toys clickedToy = oldList.get(position);
+                Intent toToyDetail = new Intent(context, ToyDetail.class);
+                toToyDetail.putExtra("toyName", clickedToy.getmToyName());
+                toToyDetail.putExtra("toyId", clickedToy.getmToyId());
+                toToyDetail.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(toToyDetail);
 
             }
         });
