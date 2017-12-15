@@ -124,7 +124,7 @@ public class ReturnBookFinalPhase extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(GET_ISSUED_BOOK_DETAILS_URL);
+                URL url = new URL(new ServerScriptsURL().GET_SINGLE_ISSUED_BOOK_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);
@@ -219,7 +219,7 @@ public class ReturnBookFinalPhase extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(RETURN_BOOK_URL);
+                URL url = new URL(new ServerScriptsURL().RETURN_BOOK());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);

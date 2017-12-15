@@ -101,7 +101,7 @@ public class ViewCurrentlyIssuedBooks extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(GET_BOOKS_URL);
+                URL url = new URL(new ServerScriptsURL().GET_ISSUED_BOOKS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setRequestMethod("GET");

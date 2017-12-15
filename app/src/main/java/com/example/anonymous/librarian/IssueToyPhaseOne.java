@@ -128,7 +128,7 @@ public class IssueToyPhaseOne extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(GET_TOYS_URL);
+                URL url = new URL(new ServerScriptsURL().GET_TOY_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.connect();

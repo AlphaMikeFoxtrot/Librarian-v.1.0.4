@@ -163,7 +163,7 @@ public class ToyDetail extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(DELETE_BOOK_URL);
+                URL url = new URL(new ServerScriptsURL().DELETE_TOY());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);

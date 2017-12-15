@@ -21,6 +21,7 @@ import com.example.anonymous.librarian.IssueBookOnClickListeners.IssueBookPhaseO
 import com.example.anonymous.librarian.IssueBookPhaseOne;
 import com.example.anonymous.librarian.IssuedBookPhaseTwo;
 import com.example.anonymous.librarian.R;
+import com.example.anonymous.librarian.ServerScriptsURL;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -111,14 +112,15 @@ public class IssueBookPhaseOneAdapter extends RecyclerView.Adapter<IssueBookPhas
             String bookName = strings[0];
             String bookId = strings[1];
 
-            final String INSERT_TEMP_DATA_URL = "http://fardeenpanjwani.com/librarian/insert_temp_book_details.php";
+            // final String INSERT_TEMP_DATA_URL = "http://fardeenpanjwani.com/librarian/insert_temp_book_details.php";
+
 
             HttpURLConnection httpURLConnection = null;
             BufferedWriter bufferedWriter = null;
 
             try {
 
-                URL url = new URL(INSERT_TEMP_DATA_URL);
+                URL url = new URL(new ServerScriptsURL().INSERT_TEMP_BOOK_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);

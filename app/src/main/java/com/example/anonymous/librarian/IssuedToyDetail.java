@@ -154,7 +154,7 @@ public class IssuedToyDetail extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(RETURN_TOY_URL);
+                URL url = new URL(new ServerScriptsURL().RETURN_TOY());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);

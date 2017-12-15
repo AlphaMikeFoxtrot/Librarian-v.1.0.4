@@ -130,7 +130,7 @@ public class SubscriberAnalysisGraphView extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(GET_ANALYSIS_URL);
+                URL url = new URL(new ServerScriptsURL().GET_INDIVIDUAL_ANALYSIS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);
@@ -240,7 +240,7 @@ public class SubscriberAnalysisGraphView extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(GET_TOTAL_URL);
+                URL url = new URL(new ServerScriptsURL().GET_TOTAL_ANALYSIS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);

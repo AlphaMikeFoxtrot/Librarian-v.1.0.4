@@ -157,7 +157,7 @@ public class AddSubscriber extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(ADD_SUBSCRIBER_URL);
+                URL url = new URL(new ServerScriptsURL().ADD_SUBSCRIBER());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
@@ -252,7 +252,7 @@ public class AddSubscriber extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(GET_SUBSCRIBERS);
+                URL url = new URL(new ServerScriptsURL().GET_SUBSCRIBERS_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.connect();

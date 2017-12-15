@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.anonymous.librarian.IssueToyPhaseTwo;
 import com.example.anonymous.librarian.MainActivity;
+import com.example.anonymous.librarian.ServerScriptsURL;
 import com.example.anonymous.librarian.Toys;
 import com.example.anonymous.librarian.IssueToyFilters.IssueToyPhaseOneFilter;
 import com.example.anonymous.librarian.IssueToyHolders.IssueToyPhaseOneViewHolder;
@@ -104,7 +105,7 @@ public class IssueToyPhaseOneAdapter extends RecyclerView.Adapter<IssueToyPhaseO
             String toyName = strings[0];
             String toyId = strings[1];
 
-            final String INSERT_URL = "http://fardeenpanjwani.com/librarian/insert_temp_toy_details.php";
+            // final String INSERT_URL = "http://fardeenpanjwani.com/librarian/insert_temp_toy_details.php";
 
             HttpURLConnection httpURLConnection = null;
             BufferedReader bufferedReader = null;
@@ -112,7 +113,7 @@ public class IssueToyPhaseOneAdapter extends RecyclerView.Adapter<IssueToyPhaseO
 
             try {
 
-                URL url = new URL(INSERT_URL);
+                URL url = new URL(new ServerScriptsURL().INSERT_TEMP_TOY_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);

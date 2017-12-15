@@ -207,7 +207,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(UPDATE_DATA_URL);
+                URL url = new URL(new ServerScriptsURL().UPDATE_SUBSCRIBER_DETAILS());
 
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
@@ -316,7 +316,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(DELETE_SUBCRIBER_URL);
+                URL url = new URL(new ServerScriptsURL().DELETE_SUBSCRIBER());
 
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);

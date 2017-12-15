@@ -144,7 +144,7 @@ public class ViewToys extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(GET_TOY_URL);
+                URL url = new URL(new ServerScriptsURL().GET_TOY_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.connect();

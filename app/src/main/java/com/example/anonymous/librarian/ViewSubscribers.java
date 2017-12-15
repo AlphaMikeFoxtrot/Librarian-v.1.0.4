@@ -177,7 +177,7 @@ public class ViewSubscribers extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(GET_SUBSCRIBERS_URL);
+                URL url = new URL(new ServerScriptsURL().GET_SUBSCRIBERS_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setRequestMethod("GET");

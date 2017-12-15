@@ -105,7 +105,7 @@ public class ViewCurrentlyIssuedToys extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(GET_TOYS_URL);
+                URL url = new URL(new ServerScriptsURL().VIEW_CURRENTLY_ISSUED_TOYS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.connect();

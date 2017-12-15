@@ -148,7 +148,7 @@ public class IssueToyFinalPhase extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(GET_TEMP_DATA_URL);
+                URL url = new URL(new ServerScriptsURL().GET_TEMP_TOY_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setRequestMethod("GET");
@@ -237,7 +237,7 @@ public class IssueToyFinalPhase extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(ISSUE_BOOK_URL);
+                URL url = new URL(new ServerScriptsURL().ISSUE_TOY());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);
@@ -328,7 +328,7 @@ public class IssueToyFinalPhase extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(CANCEL_PROTOCOL_URL);
+                URL url = new URL(new ServerScriptsURL().CANCEL_ISSUE_TOY_PROTOCOL());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.connect();

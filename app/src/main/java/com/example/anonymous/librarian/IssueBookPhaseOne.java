@@ -109,7 +109,7 @@ public class IssueBookPhaseOne extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(GET_BOOK_URL);
+                URL url = new URL(new ServerScriptsURL().GET_BOOK_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setRequestMethod("GET");

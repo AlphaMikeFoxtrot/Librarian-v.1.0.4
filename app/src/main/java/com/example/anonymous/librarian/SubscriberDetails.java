@@ -286,7 +286,7 @@ public class SubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(GET_SUBSCRIBER_URL);
+                URL url = new URL(new ServerScriptsURL().GET_INDIVIDUAL_SUBSCRIBER_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);
@@ -404,7 +404,7 @@ public class SubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(GET_ANALYSIS_URL);
+                URL url = new URL(new ServerScriptsURL().GET_SUBSCRIBER_ANALYSIS());
 
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
@@ -520,7 +520,7 @@ public class SubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(UPLOAD_IMAGE_URL);
+                URL url = new URL(new ServerScriptsURL().UPLOAD_SUBSCRIBER_PROFILE_IMAGE_ENHANCED());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
@@ -607,7 +607,7 @@ public class SubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(CHECK_URL);
+                URL url = new URL(new ServerScriptsURL().CHECK_PROFILE_PHOTO());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);

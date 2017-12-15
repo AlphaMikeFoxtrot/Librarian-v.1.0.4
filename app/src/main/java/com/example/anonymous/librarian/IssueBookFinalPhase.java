@@ -153,7 +153,7 @@ public class IssueBookFinalPhase extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(GET_TEMP_DATA_URL);
+                URL url = new URL(new ServerScriptsURL().GET_TEMP_BOOK_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setRequestMethod("GET");
@@ -242,7 +242,7 @@ public class IssueBookFinalPhase extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(ISSUE_BOOK_URL);
+                URL url = new URL(new ServerScriptsURL().ISSUE_BOOK());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);
@@ -333,7 +333,7 @@ public class IssueBookFinalPhase extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(CANCEL_PROTOCOL_URL);
+                URL url = new URL(new ServerScriptsURL().CANCEL_ISSUE_BOOK_PROTOCOL());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.connect();

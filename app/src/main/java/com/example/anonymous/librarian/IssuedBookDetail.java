@@ -157,7 +157,7 @@ public class IssuedBookDetail extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(RETURN_BOOK_URL);
+                URL url = new URL(new ServerScriptsURL().RETURN_BOOK());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);

@@ -137,7 +137,7 @@ public class AddToy extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(ADD_TOY_URL);
+                URL url = new URL(new ServerScriptsURL().ADD_TOY());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
@@ -224,7 +224,7 @@ public class AddToy extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(GET_TOYS_URL);
+                URL url = new URL(new ServerScriptsURL().GET_TOY_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.connect();
