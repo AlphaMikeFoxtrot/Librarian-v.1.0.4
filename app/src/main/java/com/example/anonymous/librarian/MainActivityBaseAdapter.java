@@ -115,6 +115,12 @@ public class MainActivityBaseAdapter extends BaseAdapter {
                     toToys.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(toToys);
 
+                } else if(itemClicked.toLowerCase().contains("barcode")){
+
+                    Intent toBarcode = new Intent(context, BarcodeCaptureActivity.class);
+                    toBarcode.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(toBarcode);
+
                 }
 
             }

@@ -153,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
         listItems.add(new MainActivityListViewItems("View subscribers Details", R.drawable.subscribers));
         listItems.add(new MainActivityListViewItems("View Books", R.drawable.books));
         listItems.add(new MainActivityListViewItems("View Toys", R.drawable.toys));
+        listItems.add(new MainActivityListViewItems("Scan Barcode", R.drawable.toys));
         // listItems.add(new MainActivityListViewItems("View Source Code", R.drawable.view_source_code));
         // listItems.add(new MainActivityListViewItems("About Us", R.drawable.about_us));
 

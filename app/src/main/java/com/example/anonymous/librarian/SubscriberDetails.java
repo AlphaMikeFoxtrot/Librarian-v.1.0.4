@@ -86,7 +86,7 @@ public class SubscriberDetails extends AppCompatActivity {
             mSubscriberToysActivity,
             mSubscriberDailyBookActivity,
             mSubscriberDailyToysActivity;
-    ImageButton mSubscriberPhoto;
+    ImageView mSubscriberPhoto;
     Button mEditButton;
     SubscriberAnalysisAdapter adapter;
     ListView mListView;
@@ -97,6 +97,7 @@ public class SubscriberDetails extends AppCompatActivity {
     JSONArray root;
     NetworkChangeReceiver receiver;
     Boolean flag = false;
+    public View view_two;
     IntentFilter filter;
 
     @Override
@@ -207,27 +208,6 @@ public class SubscriberDetails extends AppCompatActivity {
         });
 
         new GetDailyAnalysisAsyncTask().execute();
-
-        mSubscriberPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                AlertDialog.Builder alertadd = new AlertDialog.Builder(SubscriberDetails.this);
-                LayoutInflater factory = LayoutInflater.from(SubscriberDetails.this);
-                final View view_two = factory.inflate(R.layout.profile_photo_alert_dialog, null);
-                ImageView imageView = view_two.findViewById(R.id.dialog_imageview);
-                imageView.setImageResource(mSubscriberPhoto.getImageAlpha());
-                alertadd.setView(view);
-                alertadd.setNeutralButton("Here!", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dlg, int sumthin) {
-
-                    }
-                });
-
-                alertadd.show();
-
-            }
-        });
 
     }
 
@@ -863,6 +843,41 @@ public class SubscriberDetails extends AppCompatActivity {
         @Override
         protected void onPostExecute(Bitmap bitmap) {    //When you change the drawable
             mSubscriberPhoto.setImageBitmap(bitmap);
+        }
+    }
+
+    public class SetAlertDialogProfilePhoto extends AsyncTask<String, Void, Bitmap>{
+
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+
+            String imageUrl = strings[0];
+
+            Bitmap bitmap;
+
+            try {
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) new URL(imageUrl).openConnection();
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.connect();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                bitmap = BitmapFactory.decodeStream(inputStream);
+
+                // mSubscriberPhoto.setImageBitmap(bitmap);
+                return bitmap;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {    //When you change the drawable
+            ImageView imageView = view_two.findViewById(R.id.dialog_imageview);
+            imageView.setImageBitmap(bitmap);
+
         }
     }
 
