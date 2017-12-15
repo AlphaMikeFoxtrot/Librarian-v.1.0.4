@@ -1,5 +1,6 @@
 package com.example.anonymous.librarian;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -10,9 +11,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -124,9 +128,42 @@ public class ViewBooks extends AppCompatActivity {
         switch (itemId){
 
             case R.id.action_add:
-                Intent toAddBook = new Intent(ViewBooks.this, AddBook.class);
-                toAddBook.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(toAddBook);
+                LayoutInflater layoutInflater = LayoutInflater.from(this);
+                View promptView = layoutInflater.inflate(R.layout.barcode_prompt, null);
+
+                final AlertDialog alertD = new AlertDialog.Builder(this).create();
+
+                // EditText userInput = (EditText) promptView.findViewById(R.id.userInput);
+
+                Button btnAdd1 = (Button) promptView.findViewById(R.id.scan_barcode);
+
+                Button btnAdd2 = (Button) promptView.findViewById(R.id.add_manually);
+
+                btnAdd1.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+
+                        // btnAdd1 has been clicked
+                        Intent toBarcode = new Intent(ViewBooks.this, BarcodeCaptureActivity.class);
+                        toBarcode.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        ViewBooks.this.startActivity(toBarcode);
+
+                    }
+                });
+
+                btnAdd2.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+
+                        // btnAdd2 has been clicked
+                        Intent toAddBook = new Intent(ViewBooks.this, AddBook.class);
+                        toAddBook.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(toAddBook);
+
+                    }
+                });
+
+                alertD.setView(promptView);
+
+                alertD.show();
 
         }
 
