@@ -30,6 +30,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class IssueToyPhaseOne extends AppCompatActivity {
 
@@ -194,6 +197,15 @@ public class IssueToyPhaseOne extends AppCompatActivity {
 
                     adapter = new IssueToyPhaseOneAdapter(IssueToyPhaseOne.this, toys);
                     mRecyclerView.setAdapter(adapter);
+
+                    Collections.sort(toys, new Comparator<Toys>() {
+                        @Override
+                        public int compare(Toys toys, Toys t1) {
+                            return toys.getmToyName().compareToIgnoreCase(t1.getmToyName());
+                        }
+                    });
+
+                    adapter.notifyDataSetChanged();
 
                 } catch (JSONException e) {
                     e.printStackTrace();

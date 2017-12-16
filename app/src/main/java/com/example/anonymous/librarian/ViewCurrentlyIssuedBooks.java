@@ -26,6 +26,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ViewCurrentlyIssuedBooks extends AppCompatActivity {
 
@@ -184,6 +187,16 @@ public class ViewCurrentlyIssuedBooks extends AppCompatActivity {
 
                     adapter = new ViewCurrentlyIssuedBookAdapter(mIssuedBooks, ViewCurrentlyIssuedBooks.this);
                     mRecyclerView.setAdapter(adapter);
+
+                    Collections.sort(mIssuedBooks, new Comparator<Books>() {
+                        @Override
+                        public int compare(Books books, Books t1) {
+                            return books.getmBookName().compareToIgnoreCase(t1.getmBookName());
+                        }
+                    });
+
+                    adapter.notifyDataSetChanged();
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

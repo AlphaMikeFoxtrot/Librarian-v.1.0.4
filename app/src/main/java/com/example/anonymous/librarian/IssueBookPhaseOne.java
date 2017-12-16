@@ -30,6 +30,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.Buffer;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class IssueBookPhaseOne extends AppCompatActivity {
 
@@ -175,6 +177,15 @@ public class IssueBookPhaseOne extends AppCompatActivity {
 
                     adapter = new IssueBookPhaseOneAdapter(getApplicationContext(), mBooks);
                     mRecyclerView.setAdapter(adapter);
+
+                    Collections.sort(mBooks, new Comparator<Books>() {
+                        @Override
+                        public int compare(Books books, Books t1) {
+                            return books.getmBookName().compareToIgnoreCase(t1.getmBookName());
+                        }
+                    });
+
+                    adapter.notifyDataSetChanged();
 
                 } catch (JSONException e) {
                     e.printStackTrace();

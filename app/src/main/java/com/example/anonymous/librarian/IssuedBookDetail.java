@@ -1,6 +1,7 @@
 package com.example.anonymous.librarian;
 
 import android.app.ProgressDialog;
+import android.content.AsyncTaskLoader;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -81,7 +82,8 @@ public class IssuedBookDetail extends AppCompatActivity {
         mIssuedBookId.setText(getIntent().getStringExtra("bookId"));
         mIssuedBookToName.setText(getIntent().getStringExtra("issuedToName"));
         // TODO : get issuedToId;
-        mIssuedBookToId.setText("TEST");
+        // mIssuedBookToId.setText();
+        new GetIssuedToId().execute(getIntent().getStringExtra("bookId"));
 
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         final Date startDate;
@@ -168,7 +170,8 @@ public class IssuedBookDetail extends AppCompatActivity {
                 bufferedWriter = new BufferedWriter(outputStreamWriter);
 
                 String dataToWrite = URLEncoder.encode("returnedBookId", "UTF-8") +"="+ URLEncoder.encode(bookId, "UTF-8") +"&"+
-                        URLEncoder.encode("returned_on", "UTF-8") +"="+ URLEncoder.encode(returnedOn, "UTF-8");
+                        URLEncoder.encode("returned_on", "UTF-8") +"="+ URLEncoder.encode(returnedOn, "UTF-8") +"&"+
+                        URLEncoder.encode("returnedFrom", "UTF-8") +"="+ URLEncoder.encode(mIssuedBookToId.getText().toString(), "UTF-8");
 
                 bufferedWriter.write(dataToWrite);
                 bufferedWriter.flush();
@@ -219,6 +222,85 @@ public class IssuedBookDetail extends AppCompatActivity {
             } else {
                 progressDialog.dismiss();
                 Toast.makeText(IssuedBookDetail.this, "Sorry! Something went wrong\n" + s, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public class GetIssuedToId extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(IssuedBookDetail.this);
+            progressDialog.setMessage("Getting Subscriber ID....");
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String book_id = strings[0];
+
+            HttpURLConnection httpURLConnection = null;
+            BufferedWriter bufferedWriter = null;
+            BufferedReader bufferedReader = null;
+
+            try {
+
+                URL url = new URL(new ServerScriptsURL().GET_ISSUED_BOOK_TO_ID());
+                httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.connect();
+
+                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(httpURLConnection.getOutputStream(), "UTF-8");
+                bufferedWriter = new BufferedWriter(outputStreamWriter);
+
+                String dataToWrite = URLEncoder.encode("bookId", "UTF-8") +"="+ URLEncoder.encode(book_id, "UTF-8");
+
+                bufferedWriter.write(dataToWrite);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+
+                InputStreamReader inputStreamReader = new InputStreamReader(httpURLConnection.getInputStream());
+                bufferedReader = new BufferedReader(inputStreamReader);
+
+                String line;
+                StringBuilder response = new StringBuilder();
+
+                while((line = bufferedReader.readLine()) != null){
+
+                    response.append(line);
+
+                }
+
+                return response.toString();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return "";
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "";
+            } finally {
+                if(httpURLConnection != null){
+                    httpURLConnection.disconnect();
+                }
+                if(bufferedReader != null){
+                    try {
+                        bufferedReader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            progressDialog.dismiss();
+            if (s.isEmpty() || s.length() < 0) {
+                Toast.makeText(IssuedBookDetail.this, "Error when getting subscriber id", Toast.LENGTH_SHORT).show();
+            } else {
+                mIssuedBookToId.setText(s);
             }
         }
     }

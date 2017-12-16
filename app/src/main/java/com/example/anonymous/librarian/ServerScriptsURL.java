@@ -36,8 +36,9 @@ public class ServerScriptsURL {
     private final String UPLOAD_SUBSCRIBER_PROFILE_IMAGE_ENHANCED = "http://www.fardeenpanjwani.com/librarian/upload_subscriber_profile_image_enhanced.php";
     private final String UPLOAD_SUBSCRIBER_PROFILE_PHOTO = "http://www.fardeenpanjwani.com/librarian/upload_subscriber_profile_photo.php";
     private final String VIEW_CURRENTLY_ISSUED_TOYS = "http://www.fardeenpanjwani.com/librarian/view_currently_issued_toys.php";
-    private final String CANCEL_ISSUE_BOOK_PROTOCOL = "http://www.fardeenpanjwani.com/librarian/cancel_issue_book_protocol.php";
-    private final String CANCEL_ISSUE_TOY_PROTOCOL = "http://www.fardeenpanjwani.com/librarian/cancel_issue_toy_protocol.php";
+    private final String CANCEL_ISSUE_BOOK_PROTOCOL = "http://www.fardeenpanjwani.com/librarian/cancel_issue_protocol/cancel_issue_book_protocol.php";
+    private final String CANCEL_ISSUE_TOY_PROTOCOL = "http://www.fardeenpanjwani.com/librarian/cancel_issue_protocol/cancel_issue_toy_protocol.php";
+    private final String GET_ISSUED_BOOK_TO_ID = "http://www.fardeenpanjwani.com/librarian/get_issued_book_to_id.php";
 
 
 
@@ -174,4 +175,7 @@ public class ServerScriptsURL {
         return CANCEL_ISSUE_TOY_PROTOCOL;
     }
 
+    public String GET_ISSUED_BOOK_TO_ID() {
+        return GET_ISSUED_BOOK_TO_ID;
+    }
 }
