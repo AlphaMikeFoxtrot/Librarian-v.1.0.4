@@ -1,6 +1,8 @@
 package com.example.anonymous.librarian;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -30,9 +32,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 
 public class AddSubscriber extends AppCompatActivity {
@@ -127,12 +131,69 @@ public class AddSubscriber extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                AddSubscriberAsyncTask addSubscriberAsyncTask = new AddSubscriberAsyncTask();
-                addSubscriberAsyncTask.execute();
+                try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                    Calendar dob = Calendar.getInstance();
+                    dob.setTime(sdf.parse(newDOB.getText().toString()));
+                    if(getAge(dob) > 8 && (newEnrolledFor.getText().toString().toUpperCase().contains("TOYLIB") || newEnrolledFor.getText().toString().toUpperCase().contains("TL"))){
+
+                        // no eligible for Toy Library
+                        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which){
+                                    case DialogInterface.BUTTON_POSITIVE:
+                                        newEnrolledFor.setBackgroundResource(R.drawable.round_et_error);
+                                        break;
+                                }
+                            }
+                        };
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(AddSubscriber.this);
+                        builder.setMessage("New subscriber is not eligible for Toy Library. Please change the enrollment type.").setPositiveButton("Okay", dialogClickListener)
+                                .show();
+
+                    } else {
+
+                        AddSubscriberAsyncTask addSubscriberAsyncTask = new AddSubscriberAsyncTask();
+                        addSubscriberAsyncTask.execute();
+
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
             }
         });
     }
+
+    public static int getAge(Calendar dob) throws Exception {
+        Calendar today = Calendar.getInstance();
+
+        int curYear = today.get(Calendar.YEAR);
+        int dobYear = dob.get(Calendar.YEAR);
+
+        int age = curYear - dobYear;
+
+        // if dob is month or day is behind today's month or day
+        // reduce age by 1
+        int curMonth = today.get(Calendar.MONTH);
+        int dobMonth = dob.get(Calendar.MONTH);
+        if (dobMonth > curMonth) { // this year can't be counted!
+            age--;
+        } else if (dobMonth == curMonth) { // same month? check for day
+            int curDay = today.get(Calendar.DAY_OF_MONTH);
+            int dobDay = dob.get(Calendar.DAY_OF_MONTH);
+            if (dobDay > curDay) { // this year can't be counted!
+                age--;
+            }
+        }
+
+        return age;
+    }
+
 
     public class AddSubscriberAsyncTask extends AsyncTask<String, Void, String>{
 
