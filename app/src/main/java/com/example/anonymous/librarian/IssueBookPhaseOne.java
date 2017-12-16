@@ -178,15 +178,6 @@ public class IssueBookPhaseOne extends AppCompatActivity {
                     adapter = new IssueBookPhaseOneAdapter(getApplicationContext(), mBooks);
                     mRecyclerView.setAdapter(adapter);
 
-                    Collections.sort(mBooks, new Comparator<Books>() {
-                        @Override
-                        public int compare(Books books, Books t1) {
-                            return books.getmBookName().compareToIgnoreCase(t1.getmBookName());
-                        }
-                    });
-
-                    adapter.notifyDataSetChanged();
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -225,15 +225,6 @@ public class ViewToys extends AppCompatActivity {
                     adapter = new ViewToysAdapter(ViewToys.this, toys);
                     mRecyclerView.setAdapter(adapter);
 
-                    Collections.sort(toys, new Comparator<Toys>() {
-                        @Override
-                        public int compare(Toys toys, Toys t1) {
-                            return toys.getmToyName().compareToIgnoreCase(t1.getmToyName());
-                        }
-                    });
-
-                    adapter.notifyDataSetChanged();
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(ViewToys.this, "The list seems to be empty!", Toast.LENGTH_SHORT).show();

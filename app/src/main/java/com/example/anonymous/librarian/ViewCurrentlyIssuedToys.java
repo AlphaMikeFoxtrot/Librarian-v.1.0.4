@@ -186,15 +186,6 @@ public class ViewCurrentlyIssuedToys extends AppCompatActivity {
                     adapter = new CurrentlyIssuedToysAdapter(toys, ViewCurrentlyIssuedToys.this);
                     mRecyclerView.setAdapter(adapter);
 
-                    Collections.sort(toys, new Comparator<Toys>() {
-                        @Override
-                        public int compare(Toys toys, Toys t1) {
-                            return toys.getmToyName().compareToIgnoreCase(t1.getmToyName());
-                        }
-                    });
-
-                    adapter.notifyDataSetChanged();
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

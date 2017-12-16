@@ -272,15 +272,6 @@ public class ViewBooks extends AppCompatActivity {
                     adapter = new ViewBooksAdapter(ViewBooks.this, books);
                     mRecyclerView.setAdapter(adapter);
 
-                    Collections.sort(books, new Comparator<Books>() {
-                        @Override
-                        public int compare(Books books, Books t1) {
-                            return books.getmBookName().compareToIgnoreCase(t1.getmBookName());
-                        }
-                    });
-
-                    adapter.notifyDataSetChanged();
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(ViewBooks.this, "The list seems to be empty!", Toast.LENGTH_SHORT).show();

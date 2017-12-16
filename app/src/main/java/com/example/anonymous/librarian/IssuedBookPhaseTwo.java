@@ -184,15 +184,6 @@ public class IssuedBookPhaseTwo extends AppCompatActivity {
                     adapter = new IssueBookPhaseTwoAdapter(getApplicationContext(), subscribers);
                     mRecyclerView.setAdapter(adapter);
 
-                    Collections.sort(subscribers, new Comparator<Subscribers>() {
-                        @Override
-                        public int compare(Subscribers subscribers, Subscribers t1) {
-                            return subscribers.getmSubscriberName().compareToIgnoreCase(t1.getmSubscriberName());
-                        }
-                    });
-
-                    adapter.notifyDataSetChanged();
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

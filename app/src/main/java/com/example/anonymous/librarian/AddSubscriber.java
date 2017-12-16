@@ -37,8 +37,8 @@ import java.util.Date;
 
 public class AddSubscriber extends AppCompatActivity {
 
-    public EditText newName, newDOB, newPhone, newGender, newREB, newLEB, newCenter, newEnrolledFor, newEnrollmentType;
-    TextView newId;
+    public EditText newName, newDOB, newPhone, newGender, newEnrolledFor, newEnrollmentType;
+    TextView newId, newREB, newLEB, newCenter;
     Button mSubmit, mCancel, mReset;
     ProgressDialog progressDialog, generateIdProgressDialog;
     NetworkChangeReceiver receiver;
@@ -117,9 +117,6 @@ public class AddSubscriber extends AppCompatActivity {
                 newPhone.setText("");
                 newDOB.setText("");
                 newGender.setText("");
-                newREB.setText("");
-                newLEB.setText("");
-                newCenter.setText("");
                 newEnrolledFor.setText("");
                 newEnrollmentType.setText("");
 

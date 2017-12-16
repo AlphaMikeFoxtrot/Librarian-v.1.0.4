@@ -188,15 +188,6 @@ public class ViewCurrentlyIssuedBooks extends AppCompatActivity {
                     adapter = new ViewCurrentlyIssuedBookAdapter(mIssuedBooks, ViewCurrentlyIssuedBooks.this);
                     mRecyclerView.setAdapter(adapter);
 
-                    Collections.sort(mIssuedBooks, new Comparator<Books>() {
-                        @Override
-                        public int compare(Books books, Books t1) {
-                            return books.getmBookName().compareToIgnoreCase(t1.getmBookName());
-                        }
-                    });
-
-                    adapter.notifyDataSetChanged();
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

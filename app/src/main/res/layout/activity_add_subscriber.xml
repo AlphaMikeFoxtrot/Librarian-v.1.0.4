@@ -257,16 +257,15 @@
                     android:layout_weight="0.1"
                     android:background="@android:color/transparent"/>
 
-                <EditText
-                    android:background="@drawable/round_et"
+                <TextView
                     android:padding="8dp"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/add_subscriber_reb"
-                    android:hint="Secunderabad, Hyderabad"
-                    style="@style/Base.V12.Widget.AppCompat.EditText"
+                    android:text="Secunderabad"
                     android:layout_marginLeft="6dp"
+                    android:textSize="20sp"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center_vertical|left" />
 
@@ -296,15 +295,14 @@
                     android:layout_weight="0.1"
                     android:background="@android:color/transparent"/>
 
-                <EditText
-                    android:background="@drawable/round_et"
+                <TextView
                     android:padding="8dp"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/add_subscriber_leb"
-                    android:hint="Secunderabad, Hyderabad"
-                    style="@style/Base.V12.Widget.AppCompat.EditText"
+                    android:text="Secunderabad"
+                    android:textSize="20sp"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center_vertical|left" />
@@ -333,15 +331,14 @@
                     android:layout_weight="0.1"
                     android:background="@android:color/transparent"/>
 
-                <EditText
-                    android:background="@drawable/round_et"
+                <TextView
                     android:padding="8dp"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/add_subscriber_center"
-                    android:hint="Secunderabad, Hyderabad"
-                    style="@style/Base.V12.Widget.AppCompat.EditText"
+                    android:text="Secunderabad"
+                    android:textSize="20sp"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
                     android:gravity="center_vertical|left" />
