@@ -420,6 +420,99 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Joint Account with\n(leave blank if not)"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textStyle="bold"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical|end" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="@android:color/transparent"/>
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:text="Select subscriber"
+                    android:layout_marginLeft="6dp"
+                    android:id="@+id/show_button"/>
+
+                <!--<Spinner-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:id="@+id/spinner"-->
+                    <!--android:layout_marginLeft="6dp"-->
+                    <!--android:gravity="center_vertical|left"-->
+                    <!--android:minHeight="24dp"-->
+                    <!--style="@style/Base.Widget.AppCompat.DropDownItem.Spinner"-->
+                    <!--android:layout_height="match_parent"/>-->
+
+                <!--<EditText-->
+                    <!--android:background="@drawable/round_et"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:id="@+id/add_subscriber_joint_account_with"-->
+                    <!--android:hint="Other Subscriber Name"-->
+                    <!--style="@style/Base.V12.Widget.AppCompat.EditText"-->
+                    <!--android:layout_marginLeft="6dp"-->
+                    <!--android:fontFamily="sans-serif-smallcaps"-->
+                    <!--android:gravity="center_vertical|left" />-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="invisible"
+                android:id="@+id/joint_account_linear_layout"
+                android:layout_marginTop="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Joint Account with\n(Selected Subscriber)"
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:textStyle="bold"
+                    android:layout_marginRight="6dp"
+                    android:gravity="center_vertical|end" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:background="@android:color/transparent"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/add_subscriber_jac_selected"
+                    android:fontFamily="sans-serif-smallcaps"
+                    tools:text="SB/Lib/124"
+                    android:layout_marginLeft="6dp"
+                    android:gravity="center_vertical|left"
+                    android:textSize="20sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
