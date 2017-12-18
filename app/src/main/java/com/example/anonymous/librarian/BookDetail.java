@@ -39,12 +39,9 @@ public class BookDetail extends AppCompatActivity {
     Button mBack, mDelete;
     Toolbar mToolbar;
     ProgressDialog progressDialog;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
     NetworkChangeReceiver receiver;
     Boolean flag = false;
     IntentFilter filter;
-    String oldId;
 
     @Override
     protected void onStop() {
@@ -75,9 +72,6 @@ public class BookDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_detail);
-
-        sharedPreferences = getSharedPreferences("last_added_book_id", Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
 
         filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         receiver = new NetworkChangeReceiver();
@@ -236,22 +230,20 @@ public class BookDetail extends AppCompatActivity {
             if(s == null || s.contains("fail")){
 
                 Toast.makeText(BookDetail.this, "something went wrong when deleting the book.\nPlease try again after sometime", Toast.LENGTH_LONG).show();
-                editor.putString("book_id", oldId);
-                editor.commit();
 
             } else if(s.contains("success")) {
 
-                Toast.makeText(BookDetail.this, "Book successfully deleted.", Toast.LENGTH_SHORT).show();
-                String lastBookId = sharedPreferences.getString("book_id", ""); // lastObject.getString("book_id");
-                oldId = lastBookId;
-                String[] ids = lastBookId.split("-");
-                // Toast.makeText(BookDetail.this, "" + ids[0], Toast.LENGTH_SHORT).show();
-                String actualId = ids[1];
-                int intActualId = Integer.parseInt(actualId);
-                String newId = "SB-" + String.valueOf(intActualId - 1);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("book_id", newId);
-                editor.commit();
+//                Toast.makeText(BookDetail.this, "Book successfully deleted.", Toast.LENGTH_SHORT).show();
+//                String lastBookId = sharedPreferences.getString("book_id", ""); // lastObject.getString("book_id");
+//                oldId = lastBookId;
+//                String[] ids = lastBookId.split("-");
+//                // Toast.makeText(BookDetail.this, "" + ids[0], Toast.LENGTH_SHORT).show();
+//                String actualId = ids[1];
+//                int intActualId = Integer.parseInt(actualId);
+//                String newId = "SB-" + String.valueOf(intActualId - 1);
+//                SharedPreferences.Editor editor = sharedPreferences.edit();
+//                editor.putString("book_id", newId);
+//                editor.commit();
 
                 Intent toList = new Intent(BookDetail.this, ViewBooks.class);
                 toList.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

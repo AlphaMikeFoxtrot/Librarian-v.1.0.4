@@ -15,5 +15,9 @@
     <string name="barcode_success">Barcode read successfully</string>
     <string name="barcode_failure">No barcode captured</string>
     <string name="barcode_error">"Error reading barcode: %1$s"</string>
+    <string name="PREFERENCE_FILE_NAME">RECENTLY_UPDATED_IDS</string>
+    <string name="BOOK_ID">RECENTLY_UPDATED_BOOK_ID</string>
+    <string name="TOY_ID">RECENTLY_UPDATED_TOY_ID</string>
+    <string name="SUBSCRIBER_ID">RECENTLY_UPDATED_SUBSCRIBER_ID</string>
 </resources>
 

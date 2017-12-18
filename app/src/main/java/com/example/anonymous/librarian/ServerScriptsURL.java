@@ -39,6 +39,8 @@ public class ServerScriptsURL {
     private final String CANCEL_ISSUE_BOOK_PROTOCOL = "http://www.fardeenpanjwani.com/librarian/cancel_issue_protocol/cancel_issue_book_protocol.php";
     private final String CANCEL_ISSUE_TOY_PROTOCOL = "http://www.fardeenpanjwani.com/librarian/cancel_issue_protocol/cancel_issue_toy_protocol.php";
     private final String GET_ISSUED_BOOK_TO_ID = "http://www.fardeenpanjwani.com/librarian/get_issued_book_to_id.php";
+    private final String GET_LAST_UPDATED_IDS = "http://fardeenpanjwani.com/librarian/ids_handler/get_last_updated_ids.php";
+    private final String UPDATE_EXISTING_IDS = "http://fardeenpanjwani.com/librarian/ids_handler/update_existing_ids.php";
 
 
 
@@ -177,5 +179,13 @@ public class ServerScriptsURL {
 
     public String GET_ISSUED_BOOK_TO_ID() {
         return GET_ISSUED_BOOK_TO_ID;
+    }
+
+    public String GET_LAST_UPDATED_IDS() {
+        return GET_LAST_UPDATED_IDS;
+    }
+
+    public String UPDATE_EXISTING_IDS() {
+        return UPDATE_EXISTING_IDS;
     }
 }

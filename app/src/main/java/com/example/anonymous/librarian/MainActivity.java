@@ -38,7 +38,6 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     private ListView mListView;
-    // private MainActivityAdapter adapter;
     public boolean isLastDay;
     ProgressDialog lastDayProgressBar;
     NetworkChangeReceiver receiver;
@@ -65,26 +64,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-//        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                switch (which){
-//                    case DialogInterface.BUTTON_POSITIVE:
-//                        //Yes button clicked
-//                        // new ToyDetail.DeleteToyProtocol().execute(mToyId.getText().toString());
-//                        finish();
-//                        break;
-//
-//                    case DialogInterface.BUTTON_NEGATIVE:
-//                        //No button clicked
-//                        break;
-//                }
-//            }
-//        };
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-//        builder.setMessage("Do you wish to exit the app?").setPositiveButton("Yes", dialogClickListener)
-//                .setNegativeButton("No", dialogClickListener).show();
         exit();
     }
 
@@ -96,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
                 switch (which){
                     case DialogInterface.BUTTON_POSITIVE:
                         //Yes button clicked
-                        // new ToyDetail.DeleteToyProtocol().execute(mToyId.getText().toString());
-                        // finish();
                         Intent intent = new Intent(Intent.ACTION_MAIN);
                         intent.addCategory(Intent.CATEGORY_HOME);
                         startActivity(intent);
@@ -143,97 +120,30 @@ public class MainActivity extends AppCompatActivity {
             lastDayProtocol();
         }
 
-        // mListView = findViewById(R.id.main_activity_list_view);
         ArrayList<MainActivityListViewItems> listItems = new ArrayList<>();
 
         listItems.add(new MainActivityListViewItems("Issue a Book", R.drawable.issue_book));
         listItems.add(new MainActivityListViewItems("Issue a Toy", R.drawable.toys));
         listItems.add(new MainActivityListViewItems("View Currently Issued Toys", R.drawable.issued_toys));
-        // listItems.add(new MainActivityListViewItems("Register Returned Book", R.drawable.return_book));
         listItems.add(new MainActivityListViewItems("View Currently Issued Books", R.drawable.issued_book_shelf));
         listItems.add(new MainActivityListViewItems("View subscribers Details", R.drawable.subscribers));
         listItems.add(new MainActivityListViewItems("View Books", R.drawable.books));
         listItems.add(new MainActivityListViewItems("View Toys", R.drawable.view_toys));
-        // listItems.add(new MainActivityListViewItems("Scan Barcode", R.drawable.toys));
-        // listItems.add(new MainActivityListViewItems("View Source Code", R.drawable.view_source_code));
-        // listItems.add(new MainActivityListViewItems("About Us", R.drawable.about_us));
 
         MainActivityBaseAdapter adapter = new MainActivityBaseAdapter(getApplicationContext(), listItems);
         GridView gridView = findViewById(R.id.main_activity_grid_view);
         gridView.setAdapter(adapter);
     }
 
-        // adapter = new MainActivityAdapter(getApplicationContext(), listItems);
-
-//        mListView.setAdapter(adapter);
-//
-//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//
-//                switch (i){
-//
-//                    case 0:
-//                        // issue a book clicked
-//                        issueBook();
-//                        break;
-//
-//                    case 1:
-//                        // return book clicked
-//                        returnBook();
-//                        break;
-//
-//                    case 2:
-//                        // view subscribers clicked
-//                        viewSubscribers();
-//                        break;
-//
-//                    case 3:
-//                        // view issued books clicked
-//                        viewIssuedBooks();
-//
-//                }
-//
-//            }
-//        });
-//
-//    }
-//
-//    private void viewIssuedBooks() {
-//
-//        Intent toViewIssuedBooks = new Intent(MainActivity.this, ViewCurrentlyIssuedBooks.class);
-//        startActivity(toViewIssuedBooks);
-//
-//    }
-//
-//    private void viewSubscribers() {
-//        // TODO : initiate intent
-//        Intent toViewSubscribers = new Intent(MainActivity.this, ViewSubscribers.class);
-//        startActivity(toViewSubscribers);
-//    }
-
     private void lastDayProtocol() {
 
         SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM");
         String month = monthFormat .format(new Date());
 
-        // TODO : add method to insert activities of all the subscribers into table
         LastDayProtocolAsyncTask lastDayProtocolAsyncTask = new LastDayProtocolAsyncTask();
         lastDayProtocolAsyncTask.execute(month);
 
     }
-
-//    private void returnBook() {
-//        // TODO : create and execute intent
-//        Intent toReturnBook = new Intent(MainActivity.this, ReturnBook.class);
-//        startActivity(toReturnBook);
-//    }
-//
-//    private void issueBook() {
-//        // TODO : create and execute intent
-//        Intent toIssueBookPhaseOne = new Intent(MainActivity.this, IssueBookPhaseOne.class);
-//        startActivity(toIssueBookPhaseOne);
-//    }
 
     public boolean checkLastDay(String date){
 
