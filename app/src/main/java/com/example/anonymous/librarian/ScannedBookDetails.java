@@ -54,7 +54,7 @@ public class ScannedBookDetails extends AppCompatActivity {
         setSupportActionBar(mToolbar);
 
         new GetScannedBookDetails().execute();
-        new GenerateIdProtocol().execute();
+        // new GenerateIdProtocol().execute();
 
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,90 +173,90 @@ public class ScannedBookDetails extends AppCompatActivity {
         }
     }
 
-    public class GenerateIdProtocol extends AsyncTask<String, Void, String>{
-
-        @Override
-        protected void onPreExecute() {
-            generateIdProgressDialog = new ProgressDialog(ScannedBookDetails.this);
-            generateIdProgressDialog.setMessage("Generating new ID");
-            generateIdProgressDialog.show();
-        }
-
-        @Override
-        protected String doInBackground(String... strings) {
-            final String GET_BOOKS_URL = "http://www.fardeenpanjwani.com/librarian/get_book_details.php";
-
-            HttpURLConnection httpURLConnection = null;
-            BufferedReader bufferedReader = null;
-
-            try {
-
-                URL url = new URL(new ServerScriptsURL().GET_BOOK_DETAILS());
-                httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setDoOutput(true);
-                httpURLConnection.connect();
-
-                InputStreamReader inputStreamReader = new InputStreamReader(httpURLConnection.getInputStream());
-                bufferedReader = new BufferedReader(inputStreamReader);
-
-                String line;
-                StringBuilder response = new StringBuilder();
-
-                while((line = bufferedReader.readLine()) != null){
-
-                    response.append(line);
-
-                }
-
-                return response.toString();
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-                return null;
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            } finally {
-                if(httpURLConnection != null){
-                    httpURLConnection.disconnect();
-                }
-                if (bufferedReader != null) {
-                    try {
-                        bufferedReader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            generateIdProgressDialog.dismiss();
-            if(s != null){
-
-                try {
-
-                    JSONArray root = new JSONArray(s);
-                    JSONObject lastObject = root.getJSONObject(root.length() - 1);
-                    String lastBookId = lastObject.getString("book_id");
-                    String[] ids = lastBookId.split("-");
-                    String actualId = ids[1];
-                    int intActualId = Integer.parseInt(actualId);
-                    String newId = "SB-" + String.valueOf(intActualId + 1);
-                    mScannedBookNewId.setText(newId);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            } else {
-
-                Toast.makeText(ScannedBookDetails.this, "Something went wrong when generating new id", Toast.LENGTH_SHORT).show();
-
-            }
-        }
-    }
+//    public class GenerateIdProtocol extends AsyncTask<String, Void, String>{
+//
+//        @Override
+//        protected void onPreExecute() {
+//            generateIdProgressDialog = new ProgressDialog(ScannedBookDetails.this);
+//            generateIdProgressDialog.setMessage("Generating new ID");
+//            generateIdProgressDialog.show();
+//        }
+//
+//        @Override
+//        protected String doInBackground(String... strings) {
+//            final String GET_BOOKS_URL = "http://www.fardeenpanjwani.com/librarian/get_book_details.php";
+//
+//            HttpURLConnection httpURLConnection = null;
+//            BufferedReader bufferedReader = null;
+//
+//            try {
+//
+//                URL url = new URL(new ServerScriptsURL().GET_BOOK_DETAILS());
+//                httpURLConnection = (HttpURLConnection) url.openConnection();
+//                httpURLConnection.setDoOutput(true);
+//                httpURLConnection.connect();
+//
+//                InputStreamReader inputStreamReader = new InputStreamReader(httpURLConnection.getInputStream());
+//                bufferedReader = new BufferedReader(inputStreamReader);
+//
+//                String line;
+//                StringBuilder response = new StringBuilder();
+//
+//                while((line = bufferedReader.readLine()) != null){
+//
+//                    response.append(line);
+//
+//                }
+//
+//                return response.toString();
+//
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//                return null;
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                return null;
+//            } finally {
+//                if(httpURLConnection != null){
+//                    httpURLConnection.disconnect();
+//                }
+//                if (bufferedReader != null) {
+//                    try {
+//                        bufferedReader.close();
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String s) {
+//            generateIdProgressDialog.dismiss();
+//            if(s != null){
+//
+//                try {
+//
+//                    JSONArray root = new JSONArray(s);
+//                    JSONObject lastObject = root.getJSONObject(root.length() - 1);
+//                    String lastBookId = lastObject.getString("book_id");
+//                    String[] ids = lastBookId.split("-");
+//                    String actualId = ids[1];
+//                    int intActualId = Integer.parseInt(actualId);
+//                    String newId = "SB-" + String.valueOf(intActualId + 1);
+//                    mScannedBookNewId.setText(newId);
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            } else {
+//
+//                Toast.makeText(ScannedBookDetails.this, "Something went wrong when generating new id", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        }
+//    }
 
     public class AddScannedBookAsyncTask extends AsyncTask<String, Void, String> {
 

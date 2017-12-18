@@ -126,15 +126,6 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(receiver, filter);
         flag = true;
 
-        SharedPreferences sharedPreferences = getSharedPreferences("last_added_book_id", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        // sharedPreferences.edit().clear().commit();
-
-        editor.putString("book_id", "SB-654");
-        editor.putString("subscriber_id", "SB/Lib/48");
-        editor.commit();
-
         if(!(isNetworkConnected())){
             Toast.makeText(MainActivity.this, "No Internet connection!", Toast.LENGTH_LONG).show();
             finish();
