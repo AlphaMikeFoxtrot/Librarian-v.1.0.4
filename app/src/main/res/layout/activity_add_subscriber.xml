@@ -102,22 +102,33 @@
                     <!--android:layout_height="match_parent"-->
                     <!--android:layout_weight="1"-->
                     <!--android:id="@+id/add_subscriber_id"-->
-                    <!--android:hint="SB/Lib/94.."-->
                     <!--style="@style/Base.V12.Widget.AppCompat.EditText"-->
                     <!--android:layout_marginLeft="6dp"-->
                     <!--android:fontFamily="sans-serif-smallcaps"-->
                     <!--android:gravity="center_vertical|left" />-->
 
-                <TextView
+                <EditText
+                    android:background="@drawable/round_et"
+                    android:padding="8dp"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/add_subscriber_id"
-                    android:fontFamily="sans-serif-smallcaps"
-                    tools:text="SB/Lib/124"
+                    style="@style/Base.V12.Widget.AppCompat.EditText"
                     android:layout_marginLeft="6dp"
-                    android:gravity="center_vertical|left"
-                    android:textSize="20sp"/>
+                    android:fontFamily="sans-serif-smallcaps"
+                    android:gravity="center_vertical|left" />
+
+                <!--<TextView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:id="@+id/add_subscriber_id"-->
+                    <!--android:fontFamily="sans-serif-smallcaps"-->
+                    <!--tools:text="SB/Lib/124"-->
+                    <!--android:layout_marginLeft="6dp"-->
+                    <!--android:gravity="center_vertical|left"-->
+                    <!--android:textSize="20sp"/>-->
 
             </LinearLayout>
 
@@ -150,7 +161,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/add_subscriber_dob"
-                    android:hint="12-10-1998"
                     style="@style/Base.V12.Widget.AppCompat.EditText"
                     android:layout_marginLeft="6dp"
                     android:inputType="date"
@@ -188,7 +198,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/add_subscriber_gender"
-                    android:hint="male, female"
                     style="@style/Base.V12.Widget.AppCompat.EditText"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
@@ -374,7 +383,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/add_subscriber_enrolled_for"
-                    android:hint="RFC, ToyLib.."
                     style="@style/Base.V12.Widget.AppCompat.EditText"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
@@ -411,7 +419,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/add_subscriber_enrollment_type"
-                    android:hint="New, Old..."
                     style="@style/Base.V12.Widget.AppCompat.EditText"
                     android:layout_marginLeft="6dp"
                     android:fontFamily="sans-serif-smallcaps"
@@ -467,7 +474,6 @@
                     <!--android:layout_height="match_parent"-->
                     <!--android:layout_weight="1"-->
                     <!--android:id="@+id/add_subscriber_joint_account_with"-->
-                    <!--android:hint="Other Subscriber Name"-->
                     <!--style="@style/Base.V12.Widget.AppCompat.EditText"-->
                     <!--android:layout_marginLeft="6dp"-->
                     <!--android:fontFamily="sans-serif-smallcaps"-->

@@ -34,10 +34,10 @@ import java.util.Date;
 
 public class AddBook extends AppCompatActivity {
 
-    EditText mNewBookName, mNewBookAuthor;
+    EditText mNewBookName, mNewBookAuthor, mNewBookId;
     ProgressDialog progressDialog, generateIdProgressDialog;
     Button mSubmit, mReset, mCancel;
-    TextView mNewBookId;
+    String newId;
     NetworkChangeReceiver receiver;
     Boolean flag = false;
     IntentFilter filter;
@@ -100,9 +100,8 @@ public class AddBook extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mNewBookName.setText("");
-                mNewBookName.setHint("The Secret");
                 mNewBookAuthor.setText("");
-                mNewBookAuthor.setHint("*optional");
+                mNewBookId.setText("");
             }
         });
 
@@ -211,100 +210,4 @@ public class AddBook extends AppCompatActivity {
             }
         }
     }
-
-//    public class GenerateIdProtocol extends AsyncTask<String, Void, String>{
-//
-//        @Override
-//        protected void onPreExecute() {
-//            generateIdProgressDialog = new ProgressDialog(AddBook.this);
-//            generateIdProgressDialog.setMessage("Generating new ID");
-//            generateIdProgressDialog.show();
-//        }
-//
-//        @Override
-//        protected String doInBackground(String... strings) {
-//            final String GET_BOOKS_URL = "http://www.fardeenpanjwani.com/librarian/get_book_details.php";
-//
-//            HttpURLConnection httpURLConnection = null;
-//            BufferedReader bufferedReader = null;
-//
-//            try {
-//
-//                URL url = new URL(new ServerScriptsURL().GET_BOOK_DETAILS());
-//                httpURLConnection = (HttpURLConnection) url.openConnection();
-//                httpURLConnection.setDoOutput(true);
-//                httpURLConnection.connect();
-//
-//                InputStreamReader inputStreamReader = new InputStreamReader(httpURLConnection.getInputStream());
-//                bufferedReader = new BufferedReader(inputStreamReader);
-//
-//                String line;
-//                StringBuilder response = new StringBuilder();
-//
-//                while((line = bufferedReader.readLine()) != null){
-//
-//                    response.append(line);
-//
-//                }
-//
-//                return response.toString();
-//
-//            } catch (MalformedURLException e) {
-//                e.printStackTrace();
-//                return null;
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                return null;
-//            } finally {
-//                if(httpURLConnection != null){
-//                    httpURLConnection.disconnect();
-//                }
-//                if (bufferedReader != null) {
-//                    try {
-//                        bufferedReader.close();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String s) {
-//            generateIdProgressDialog.dismiss();
-//            if(s != null){
-//
-//                try {
-//
-//                    JSONArray root = new JSONArray(s);
-//                    JSONObject lastObject = root.getJSONObject(root.length() - 1);
-//                    // SharedPreferences.Editor editor = sharedPreferences.edit();
-//                    String lastBookId = sharedPreferences.getString("book_id", ""); // lastObject.getString("book_id");
-//                    Toast.makeText(AddBook.this, "" + lastBookId, Toast.LENGTH_SHORT).show();
-//                    oldId = lastBookId;
-//                    String[] ids = lastBookId.split("-");
-//                    String actualId = ids[1];
-//                    int intActualId = Integer.parseInt(actualId);
-//                    String newId = "SB-" + String.valueOf(intActualId + 1);
-//                    mNewBookId.setText(newId);
-//                    // SharedPreferences.Editor editor = sharedPreferences.edit();
-//                    editor.putString("book_id", newId);
-//                    editor.commit();
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    editor.putString("book_id", oldId);
-//                    editor.commit();
-//
-//                }
-//
-//            } else {
-//
-//                Toast.makeText(AddBook.this, "Something went wrong when generating new id", Toast.LENGTH_SHORT).show();
-//                editor.putString("book_id", oldId);
-//                editor.commit();
-//
-//            }
-//        }
-//    }
 }

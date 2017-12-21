@@ -63,7 +63,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="The Secret"
                 android:fontFamily="sans-serif-smallcaps"
                 android:gravity="center_vertical|start"/>
 
@@ -91,15 +90,26 @@
                 android:layout_weight="0.2"
                 android:background="@android:color/transparent"/>
 
-            <TextView
+            <EditText
+                android:background="@drawable/round_et"
+                android:padding="8dp"
                 android:id="@+id/add_book_new_book_id"
-                android:textSize="23sp"
-                tools:text="SB-923"
+                style="@style/Base.V12.Widget.AppCompat.EditText"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:fontFamily="sans-serif-smallcaps"
                 android:gravity="center_vertical|start"/>
+
+            <!--<TextView-->
+                <!--android:id="@+id/add_book_new_book_id"-->
+                <!--android:textSize="23sp"-->
+                <!--tools:text="SB-923"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:fontFamily="sans-serif-smallcaps"-->
+                <!--android:gravity="center_vertical|start"/>-->
 
         </LinearLayout>
 
@@ -144,7 +154,6 @@
                 <!--android:layout_width="wrap_content"-->
                 <!--android:layout_toRightOf="@id/view"-->
                 <!--android:layout_height="wrap_content"-->
-                <!--android:hint="New Book ID"-->
                 <!--android:visibility="invisible"-->
                 <!--android:fontFamily="sans-serif-smallcaps"-->
                 <!--android:gravity="center_vertical|start"/>-->
@@ -180,7 +189,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="*optional"
                 android:fontFamily="sans-serif-smallcaps"
                 android:gravity="center_vertical|start"/>
 

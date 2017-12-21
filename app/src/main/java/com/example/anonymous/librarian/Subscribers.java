@@ -10,7 +10,7 @@ public class Subscribers {
             mSubscriberREB, mSubscriberLEB, mSubscriberCenter,
             mSubscriberEnrollmentType, mSubscriberEnrolledFor, mSubscriberEnrolledOn,
             mSubscriberDOB, mSubscriberGender, mSubscriberPhone, mSubscriberBookActivity,
-            mSubscriberToyActivity;
+            mSubscriberToyActivity, mSubscriberJoinAccount;
 
     public String getmSubscriberName() {
         return mSubscriberName;
@@ -122,5 +122,13 @@ public class Subscribers {
 
     public void setmSubscriberToyActivity(String mSubscriberToyActivity) {
         this.mSubscriberToyActivity = mSubscriberToyActivity;
+    }
+
+    public String getmSubscriberJoinAccount() {
+        return mSubscriberJoinAccount;
+    }
+
+    public void setmSubscriberJoinAccount(String mSubscriberJoinAccount) {
+        this.mSubscriberJoinAccount = mSubscriberJoinAccount;
     }
 }

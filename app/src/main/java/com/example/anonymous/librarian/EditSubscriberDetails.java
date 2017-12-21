@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -37,13 +39,13 @@ public class EditSubscriberDetails extends AppCompatActivity {
     Toolbar mToolbar;
     EditText mNewSubscriberEnrolledOn, mNewSubscriberEnrolledFor, mNewSubscriberEnrollmentType, mNewSubscriberDOB, mNewSubscriberPhone;
     Button mSubmit, mCancel, mReset;
-    SharedPreferences sharedPreferences;
     public String oldId;
-    SharedPreferences.Editor editor;
     public ProgressDialog progressDialog, deleteProgressDialog;
     NetworkChangeReceiver receiver;
     Boolean flag = false;
     IntentFilter filter;
+    FloatingActionButton editJointAccount;
+    TextView currentJointAccount;
 
     @Override
     protected void onStop() {
@@ -62,13 +64,6 @@ public class EditSubscriberDetails extends AppCompatActivity {
             flag = false;
         }
     }
-
-//    @Override
-//    public void onBackPressed() {
-//        Intent toPreviousActivity = new Intent(this, SubscriberDetails.class);
-//        toPreviousActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        startActivity(toPreviousActivity);
-//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,11 +87,8 @@ public class EditSubscriberDetails extends AppCompatActivity {
         mNewSubscriberDOB = findViewById(R.id.edit_subscriber_detail_dob);
         mNewSubscriberPhone = findViewById(R.id.edit_subscriber_detail_phone);
 
-        sharedPreferences = getSharedPreferences("last_added_book_id", Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-
-        String subscriber_id = sharedPreferences.getString("subscriber_id", ""); // lastObject.getString("subscriber_id");
-        Toast.makeText(this, "" + subscriber_id, Toast.LENGTH_SHORT).show();
+        editJointAccount = findViewById(R.id.fab_edit_subscriber);
+        currentJointAccount = findViewById(R.id.edit_subscriber_detail_joint_account);
 
         mSubmit = findViewById(R.id.edit_subscriber_detail_submit);
         mCancel = findViewById(R.id.edit_subscriber_detail_cancel);
@@ -145,10 +137,10 @@ public class EditSubscriberDetails extends AppCompatActivity {
                 mNewSubscriberEnrollmentType.setText(getIntent().getStringExtra(("enrollmentType")));
                 mNewSubscriberDOB.setText(getIntent().getStringExtra("dob"));
                 mNewSubscriberPhone.setText(getIntent().getStringExtra("phone"));
+                currentJointAccount.setText(getIntent().getStringExtra("jointAccountEdited"));
 
             }
         });
-
 
     }
 
@@ -381,20 +373,12 @@ public class EditSubscriberDetails extends AppCompatActivity {
         protected void onPostExecute(String s) {
             if(s.contains("success")){
                 deleteProgressDialog.dismiss();
-                String subscriber_id = sharedPreferences.getString("subscriber_id", ""); // lastObject.getString("subscriber_id");
-                oldId = subscriber_id;
-                String[] ids = subscriber_id.split("/");
-                int incrementId = Integer.parseInt(ids[ids.length - 1]) - 1;
-                String generated_id = "SB/Lib/" + String.valueOf(incrementId);
-                editor.putString("subscriber_id", generated_id);
-                editor.commit();
+
                 Toast.makeText(EditSubscriberDetails.this, "Subscriber successfully deleted", Toast.LENGTH_SHORT).show();
                 Intent toMainActivity = new Intent(EditSubscriberDetails.this, MainActivity.class);
                 toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toMainActivity);
             } else {
-                editor.putString("subscriber_id", oldId);
-                editor.commit();
                 deleteProgressDialog.dismiss();
                 Toast.makeText(EditSubscriberDetails.this, "Sorry! Something went wrong.\n" + s, Toast.LENGTH_SHORT).show();
             }

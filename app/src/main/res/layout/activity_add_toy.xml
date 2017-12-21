@@ -63,7 +63,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Rubik\'s Cube"
                 android:fontFamily="sans-serif-smallcaps"
                 android:gravity="center_vertical|start"/>
 
@@ -91,15 +90,26 @@
                 android:layout_weight="0.2"
                 android:background="@android:color/transparent"/>
 
-            <TextView
+            <EditText
+                android:background="@drawable/round_et"
+                android:padding="8dp"
                 android:id="@+id/add_toy_new_toy_id"
-                android:textSize="23sp"
-                tools:text="SB-923"
+                style="@style/Base.V12.Widget.AppCompat.EditText"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:fontFamily="sans-serif-smallcaps"
                 android:gravity="center_vertical|start"/>
+
+            <!--<TextView-->
+                <!--android:id="@+id/add_toy_new_toy_id"-->
+                <!--android:textSize="23sp"-->
+                <!--tools:text="SB-923"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:fontFamily="sans-serif-smallcaps"-->
+                <!--android:gravity="center_vertical|start"/>-->
 
         </LinearLayout>
 

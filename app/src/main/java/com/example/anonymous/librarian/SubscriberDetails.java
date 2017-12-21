@@ -68,6 +68,7 @@ public class SubscriberDetails extends AppCompatActivity {
     Bitmap bitmap;
     BarChart barChart;
     Boolean isImageAvailable;
+    public String joint_account_raw;
     String mProfilePhotoEncodedString, mProfilePhotoName;
     ProgressDialog progressDialog, progressDialogGetAnalysis, uploadImage, checkImage, getBarGraph;
     TextView mSubscriberName,
@@ -85,7 +86,8 @@ public class SubscriberDetails extends AppCompatActivity {
             mSubscriberBooksActivity,
             mSubscriberToysActivity,
             mSubscriberDailyBookActivity,
-            mSubscriberDailyToysActivity;
+            mSubscriberDailyToysActivity,
+            mSubscriberJointAccount;
     ImageView mSubscriberPhoto;
     Button mEditButton;
     SubscriberAnalysisAdapter adapter;
@@ -99,6 +101,9 @@ public class SubscriberDetails extends AppCompatActivity {
     Boolean flag = false;
     public View view_two;
     IntentFilter filter;
+
+    final String JOINT_ACCOUNT = "JOINT ACCOUNT WITH ";
+    final String JOINT_ACCOUNT_NULL = "DOES\'NT HAVE A JOINT ACCOUNT";
 
     @Override
     protected void onStop() {
@@ -157,6 +162,7 @@ public class SubscriberDetails extends AppCompatActivity {
         mSubscriberDOB = findViewById(R.id.subscriber_detail_dob);
         mSubscriberDailyBookActivity = findViewById(R.id.subscriber_detail_daily_book_activity);
         mSubscriberDailyToysActivity = findViewById(R.id.subscriber_detail_daily_toys_activity);
+        mSubscriberJointAccount = findViewById(R.id.subscriber_detail_joint_account);
 
         mSubscriberPhoto = findViewById(R.id.subscriber_detail_image_view);
 
@@ -209,6 +215,9 @@ public class SubscriberDetails extends AppCompatActivity {
 
         new GetDailyAnalysisAsyncTask().execute();
 
+        // Toast.makeText(this, "" + mSubscriberJointAccount.getText().toString(), Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, ""  + joint_account_raw, Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -256,6 +265,8 @@ public class SubscriberDetails extends AppCompatActivity {
             toEdit.putExtra("enrollmentType", mSubscriberEnrollmentType.getText().toString());
             toEdit.putExtra("dob", mSubscriberDOB.getText().toString());
             toEdit.putExtra("phone", mSubscriberPhone.getText().toString());
+            toEdit.putExtra("jointAccountRaw", joint_account_raw);
+            toEdit.putExtra("jointAccountEdited", JOINT_ACCOUNT_NULL + joint_account_raw);
             toEdit.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(toEdit);
 
@@ -357,6 +368,7 @@ public class SubscriberDetails extends AppCompatActivity {
                     String subscriber_book_activity = root.getString("books_activity");
                     String subscriber_toys_activity = root.getString("toys_activity");
                     String subscriber_name = root.getString("subscriber_name");
+                    String joint_account = root.getString("subscriber_joint_account");
 
                     mSubscriberName.setText(subscriber_name);
                     mSubscriberId.setText(subscriberId);
@@ -371,6 +383,17 @@ public class SubscriberDetails extends AppCompatActivity {
                     mSubscriberDOB.setText(subscriber_date_of_birth);
                     mSubscriberDailyBookActivity.setText(subscriber_book_activity);
                     mSubscriberDailyToysActivity.setText(subscriber_toys_activity);
+
+                    if(joint_account.toLowerCase().contains("none")){
+
+                        mSubscriberJointAccount.setText("Does\'nt have a joint account.");
+
+                    } else {
+
+                        mSubscriberJointAccount.setText(JOINT_ACCOUNT + joint_account);
+                        joint_account_raw = joint_account;
+
+                    }
 
                     new CheckProfilePhotoAsyncTask().execute(subscriber_name.toLowerCase().replace(" ", "_") + ".jpg");
 
@@ -659,20 +682,14 @@ public class SubscriberDetails extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             checkImage.dismiss();
-            // Toast.makeText(SubscriberDetails.this, "" + imageName, Toast.LENGTH_SHORT).show();
             if(s.contains("true")){
 
                 String stringUrl = "http://www.fardeenpanjwani.com/librarian/subscriber_profile_photo/" + getIntent().getStringExtra("subscriberName").toLowerCase().replace(" ", "_") + ".jpg";
-                // Toast.makeText(SubscriberDetails.this, "" + stringUrl, Toast.LENGTH_SHORT).show();
-                // new SetProfileImage(SubscriberDetails.this, stringUrl);
                 new GetProfilePhoto().execute(stringUrl);
-                // Picasso.with(SubscriberDetails.this).load(stringUrl).into(mSubscriberPhoto);
 
             } else {
 
                 mSubscriberPhoto.setImageResource(R.drawable.no_image);
-                // String stringUrl = "http://fardeenpanjwani.com/librarian/subscriber_profile_photo/" + getIntent().getStringExtra("subscriberName").toLowerCase().replace(" ", "_") + ".jpg";
-                // Toast.makeText(SubscriberDetails.this, "" + stringUrl, Toast.LENGTH_SHORT).show();
 
             }
         }
@@ -689,66 +706,9 @@ public class SubscriberDetails extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-//            String subscriberId = getIntent().getStringExtra("subscriberId");
-//            String month = getIntent().getStringExtra("month");
-//
-//            final String GET_ANALYSIS_URL = "http://fardeenpanjwani.com/librarian/get_individual_analysis.php";
-//
-//            HttpURLConnection httpURLConnection = null;
-//            BufferedReader bufferedReader = null;
-//            BufferedWriter bufferedWriter = null;
-//
-//            try {
-//
-//                URL url = new URL(GET_ANALYSIS_URL);
-//                httpURLConnection = (HttpURLConnection) url.openConnection();
-//                httpURLConnection.setDoInput(true);
-//                httpURLConnection.setDoOutput(true);
-//                httpURLConnection.connect();
-//
-//                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(httpURLConnection.getOutputStream(), "UTF-8");
-//                bufferedWriter = new BufferedWriter(outputStreamWriter);
-//
-//                String dataToWrite = URLEncoder.encode("month", "UTF-8") +"="+ URLEncoder.encode(month, "UTF-8") +"&"+
-//                        URLEncoder.encode("subscriber_id", "UTF-8") +"="+ URLEncoder.encode(subscriberId, "UTF-8");
-//
-//                bufferedWriter.write(dataToWrite);
-//                bufferedWriter.flush();
-//                bufferedWriter.close();
-//
-//                InputStreamReader inputStreamReader = new InputStreamReader(httpURLConnection.getInputStream());
-//                bufferedReader = new BufferedReader(inputStreamReader);
-//
-//                String line;
-//                StringBuilder response = new StringBuilder();
-//
-//                while((line = bufferedReader.readLine()) != null){
-//
-//                    response.append(line);
-//
-//                }
-//
-//                return response.toString();
-//
-//            } catch (MalformedURLException e) {
-//                e.printStackTrace();
-//                return "";
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                return "";
-//            } finally {
-//                if(httpURLConnection != null){
-//                    httpURLConnection.disconnect();
-//                }
-//                if(bufferedReader != null){
-//                    try {
-//                        bufferedReader.close();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
+
             return "";
+
         }
 
         @Override
@@ -759,14 +719,6 @@ public class SubscriberDetails extends AppCompatActivity {
             entries.add(new BarEntry(1, Float.parseFloat(mSubscriberDailyToysActivity.getText().toString())));
 
             BarDataSet dataSet = new BarDataSet(entries, "");
-
-//            final ArrayList<String> labels = new ArrayList<String>();
-//            labels.add("Books");
-//            labels.add("Toys");
-
-            // String[] labels = {"Books", "Toys"};
-
-            // barChart.getXAxis().setValueFormatter(new LabelFormatter(labels));
 
             BarData data = new BarData(dataSet);
             Description description = new Description();
@@ -779,37 +731,6 @@ public class SubscriberDetails extends AppCompatActivity {
             barChart.setData(data);
             barChart.setDrawGridBackground(false);
             barChart.animateY(2000);
-//            if(s.length() > 0){
-//
-//                try {
-//
-//                    JSONArray root = new JSONArray(s);
-//                    JSONObject object = root.getJSONObject(0);
-//                    ArrayList<BarEntry> entries = new ArrayList<>();
-//                    entries.add(new BarEntry(0, Float.parseFloat(object.getString("book_activity"))));
-//                    entries.add(new BarEntry(1, Float.parseFloat(object.getString("toy_activity"))));
-//
-//                    BarDataSet dataSet = new BarDataSet(entries, "Books Toys");
-//
-//                    final ArrayList<String> labels = new ArrayList<String>();
-//                    labels.add("Books");
-//                    labels.add("Toys");
-//
-//                    BarData data = new BarData(dataSet);
-//                    dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-//                    barChart.setData(data);
-//                    barChart.animateY(1000);
-//
-//                    // monthlyBook.setText(MONTHLY_BOOK_ACTIVITY + object.getString("book_activity"));
-//                    // monthlyToy.setText(MONTHLY_TOY_ACTIVITY + object.getString("toy_activity"));
-//
-//                    // new TotalAnalysisAsyncTask().execute();
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
         }
     }
 
@@ -831,7 +752,6 @@ public class SubscriberDetails extends AppCompatActivity {
                 InputStream inputStream = httpURLConnection.getInputStream();
                 bitmap = BitmapFactory.decodeStream(inputStream);
 
-                // mSubscriberPhoto.setImageBitmap(bitmap);
                 return bitmap;
 
             } catch (IOException e) {
@@ -863,8 +783,6 @@ public class SubscriberDetails extends AppCompatActivity {
 
                 InputStream inputStream = httpURLConnection.getInputStream();
                 bitmap = BitmapFactory.decodeStream(inputStream);
-
-                // mSubscriberPhoto.setImageBitmap(bitmap);
                 return bitmap;
 
             } catch (IOException e) {
@@ -880,19 +798,4 @@ public class SubscriberDetails extends AppCompatActivity {
 
         }
     }
-
-//    try {
-//
-//        HttpURLConnection httpURLConnection = (HttpURLConnection) new URL(imageUrl).openConnection();
-//        httpURLConnection.setDoInput(true);
-//        httpURLConnection.connect();
-//
-//        InputStream inputStream = httpURLConnection.getInputStream();
-//        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-//
-//        mSubscriberPhoto.setImageBitmap(bitmap);
-//
-//    } catch (IOException e) {
-//        e.printStackTrace();
-//    }
 }

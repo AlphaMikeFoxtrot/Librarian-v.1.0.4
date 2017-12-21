@@ -136,7 +136,7 @@ public class IssuedBookDetail extends AppCompatActivity {
         });
 
     }
-
+    
     public class ReturnBookAsyncTask extends AsyncTask<String, Void, String> {
 
         @Override
@@ -171,7 +171,7 @@ public class IssuedBookDetail extends AppCompatActivity {
 
                 String dataToWrite = URLEncoder.encode("returnedBookId", "UTF-8") +"="+ URLEncoder.encode(bookId, "UTF-8") +"&"+
                         URLEncoder.encode("returned_on", "UTF-8") +"="+ URLEncoder.encode(returnedOn, "UTF-8") +"&"+
-                        URLEncoder.encode("returnedFrom", "UTF-8") +"="+ URLEncoder.encode(mIssuedBookToId.getText().toString(), "UTF-8");
+                        URLEncoder.encode("returnedById", "UTF-8") +"="+ URLEncoder.encode(mIssuedBookToId.getText().toString(), "UTF-8");
 
                 bufferedWriter.write(dataToWrite);
                 bufferedWriter.flush();

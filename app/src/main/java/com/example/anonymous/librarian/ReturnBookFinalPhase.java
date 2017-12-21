@@ -94,7 +94,9 @@ public class ReturnBookFinalPhase extends AppCompatActivity {
                 SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
                 String returnedOnDate = df.format(c.getTime());
                 ReturnBookAsyncTask returnBookAsyncTask = new ReturnBookAsyncTask();
-                returnBookAsyncTask.execute(mBookId.getText().toString(), returnedOnDate);
+                Toast.makeText(ReturnBookFinalPhase.this, "" + mBookId.getText().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ReturnBookFinalPhase.this, "" + returnedOnDate, Toast.LENGTH_SHORT).show();
+                // returnBookAsyncTask.execute(mBookId.getText().toString(), returnedOnDate);
             }
         });
 
@@ -230,7 +232,8 @@ public class ReturnBookFinalPhase extends AppCompatActivity {
                 bufferedWriter = new BufferedWriter(outputStreamWriter);
 
                 String dataToWrite = URLEncoder.encode("returnedBookId", "UTF-8") +"="+ URLEncoder.encode(bookId, "UTF-8") +"&"+
-                        URLEncoder.encode("returned_on", "UTF-8") +"="+ URLEncoder.encode(returnedOn, "UTF-8");
+                        URLEncoder.encode("returned_on", "UTF-8") +"="+ URLEncoder.encode(returnedOn, "UTF-8") +"&"+
+                        URLEncoder.encode("returnedById", "UTF-8") +"="+ URLEncoder.encode(mSubscriberId.getText().toString(), "UTF-8");
 
                 bufferedWriter.write(dataToWrite);
                 bufferedWriter.flush();

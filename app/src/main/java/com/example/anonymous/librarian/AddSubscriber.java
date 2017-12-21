@@ -51,8 +51,8 @@ import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 
 public class AddSubscriber extends AppCompatActivity {
 
-    public EditText newName, newDOB, newPhone, newGender, newEnrolledFor, newEnrollmentType;
-    TextView newId, newREB, newLEB, newCenter, textView;
+    public EditText newName, newDOB, newPhone, newGender, newEnrolledFor, newEnrollmentType, newId;
+    TextView newREB, newLEB, newCenter, textView;
     Button mSubmit, mCancel, mReset, mShow;
     // Spinner subscriberNamesForJAC;
     ProgressDialog progressDialog, generateIdProgressDialog;
@@ -136,6 +136,7 @@ public class AddSubscriber extends AppCompatActivity {
                 newName.setText("");
                 // newId.setText("");
                 newPhone.setText("");
+                newId.setText("");
                 newDOB.setText("");
                 newGender.setText("");
                 newEnrolledFor.setText("");
@@ -321,102 +322,6 @@ public class AddSubscriber extends AppCompatActivity {
             }
         }
     }
-
-//    public class GenerateSubscriberId extends AsyncTask<String, Void, String>{
-//
-//        @Override
-//        protected void onPreExecute() {
-//            generateIdProgressDialog = new ProgressDialog(AddSubscriber.this);
-//            generateIdProgressDialog.setMessage("Generating Id...");
-//            generateIdProgressDialog.show();
-//        }
-//
-//        @Override
-//        protected String doInBackground(String... strings) {
-//            final String GET_SUBSCRIBERS = "http://www.fardeenpanjwani.com/librarian/get_subscribers_details.php";
-//
-//            HttpURLConnection httpURLConnection = null;
-//            BufferedReader bufferedReader = null;
-//
-//            try {
-//
-//                URL url = new URL(new ServerScriptsURL().GET_SUBSCRIBERS_DETAILS());
-//                httpURLConnection = (HttpURLConnection) url.openConnection();
-//                httpURLConnection.setDoOutput(true);
-//                httpURLConnection.connect();
-//
-//                InputStreamReader inputStreamReader = new InputStreamReader(httpURLConnection.getInputStream());
-//                bufferedReader = new BufferedReader(inputStreamReader);
-//
-//                String line;
-//                StringBuilder response = new StringBuilder();
-//
-//                while((line = bufferedReader.readLine()) != null){
-//
-//                    response.append(line);
-//
-//                }
-//
-//                return response.toString();
-//
-//            } catch (MalformedURLException e) {
-//                e.printStackTrace();
-//                return null; // "MalformedURLException";
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                newId.setText(e.toString());
-//                return null; // "IOException\n" + e.toString();
-//            } finally {
-//                if(httpURLConnection != null){
-//                    httpURLConnection.disconnect();
-//                }
-//                if(bufferedReader != null){
-//                    try {
-//                        bufferedReader.close();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String s) {
-//            generateIdProgressDialog.dismiss();
-//
-//            // Toast.makeText(AddSubscriber.this, "" + s, Toast.LENGTH_SHORT).show();
-//
-//            if(s == null){
-//
-//                // Toast.makeText(AddSubscriber.this, "s == null", Toast.LENGTH_SHORT).show();
-//                // TODO :
-//                // Toast.makeText(AddSubscriber.this, "", Toast.LENGTH_SHORT).show();
-//
-//            } else {
-//
-//                try {
-//
-//                    JSONArray root = new JSONArray(s);
-//                    JSONObject lastObject = root.getJSONObject(root.length() - 1);
-//                    String subscriber_id = sharedPreferences.getString("subscriber_id", ""); // lastObject.getString("subscriber_id");
-//                    Toast.makeText(AddSubscriber.this, "" + subscriber_id, Toast.LENGTH_SHORT).show();
-//                    oldId = subscriber_id;
-//                    String[] ids = subscriber_id.split("/");
-//                    int incrementId = Integer.parseInt(ids[ids.length - 1]) + 1;
-//                    String generated_id = "SB/Lib/" + String.valueOf(incrementId);
-//                    newId.setText(generated_id);
-//                    editor.putString("subscriber_id", generated_id);
-//                    editor.commit();
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                    editor.putString("subscriber_id", oldId);
-//                    editor.commit();
-//                }
-//
-//            }
-//        }
-//    }
 
     public class GetSubscribersForJACAsyncTask extends AsyncTask<String, Void, String>{
 
