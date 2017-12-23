@@ -581,7 +581,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
                         subscribers.add(subscriber_name);
                     }
 
-                    spinnerDialog = new SpinnerDialog(EditSubscriberDetails.this, subscribers, "Select Subscriber", R.style.DialogAnimations_SmileWindow);
+                    spinnerDialog = new SpinnerDialog(EditSubscriberDetails.this, subscribers, "Select Subscriber");
                     spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
                         @Override
                         public void onClick(String s, int i) {
