@@ -40,6 +40,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
 import in.galaxyofandroid.spinerdialog.SpinnerDialog;
@@ -50,13 +51,14 @@ public class EditSubscriberDetails extends AppCompatActivity {
     EditText mNewSubscriberEnrolledOn, mNewSubscriberEnrolledFor, mNewSubscriberEnrollmentType, mNewSubscriberDOB, mNewSubscriberPhone;
     Button mSubmit, mCancel, mReset;
     public String oldId;
-    public ProgressDialog progressDialog, deleteProgressDialog, getProgressDialog;
+    public ProgressDialog progressDialog, deleteProgressDialog, getProgressDialog, pd;
+    LinearLayout linearLayout;
     NetworkChangeReceiver receiver;
     Boolean flag = false;
     ArrayList<String> subscribers;
     IntentFilter filter;
     FloatingActionButton editJointAccount;
-    TextView currentJointAccount;
+    TextView currentJointAccount, textView;
     SpinnerDialog spinnerDialog;
 
     @Override
@@ -99,12 +101,16 @@ public class EditSubscriberDetails extends AppCompatActivity {
         mNewSubscriberDOB = findViewById(R.id.edit_subscriber_detail_dob);
         mNewSubscriberPhone = findViewById(R.id.edit_subscriber_detail_phone);
 
+        textView = findViewById(R.id.add_subscriber_jac_selected);
+
         editJointAccount = findViewById(R.id.fab_edit_subscriber);
         currentJointAccount = findViewById(R.id.edit_subscriber_detail_joint_account);
 
         mSubmit = findViewById(R.id.edit_subscriber_detail_submit);
         mCancel = findViewById(R.id.edit_subscriber_detail_cancel);
         mReset = findViewById(R.id.edit_subscriber_detail_reset);
+
+        linearLayout = findViewById(R.id.joint_account_linear_layout);
 
         mNewSubscriberEnrolledOn.setText(getIntent().getStringExtra("enrolledOn"));
         mNewSubscriberEnrolledFor.setText(getIntent().getStringExtra("enrolledFor"));
@@ -113,7 +119,11 @@ public class EditSubscriberDetails extends AppCompatActivity {
         mNewSubscriberPhone.setText(getIntent().getStringExtra("phone"));
 
         progressDialog.dismiss();
+        getProgressDialog = new ProgressDialog(EditSubscriberDetails.this);
+        getProgressDialog.setMessage("");
+        getProgressDialog.show();
         new GetSubscribersForJACAsyncTask().execute();
+        getProgressDialog.dismiss();
         spinnerDialog = new SpinnerDialog(EditSubscriberDetails.this, subscribers, "Select Subscriber");
 
         new GetJointAccount().execute();
@@ -154,6 +164,8 @@ public class EditSubscriberDetails extends AppCompatActivity {
                 mNewSubscriberDOB.setText(getIntent().getStringExtra("dob"));
                 mNewSubscriberPhone.setText(getIntent().getStringExtra("phone"));
                 currentJointAccount.setText(getIntent().getStringExtra("jointAccountEdited"));
+
+                linearLayout.setVisibility(View.INVISIBLE);
 
             }
         });
@@ -264,7 +276,8 @@ public class EditSubscriberDetails extends AppCompatActivity {
                         URLEncoder.encode("enrollmentType", "UTF-8") +"="+ URLEncoder.encode(mNewSubscriberEnrollmentType.getText().toString()) +"&"+
                         URLEncoder.encode("phone", "UTF-8") +"="+ URLEncoder.encode(mNewSubscriberPhone.getText().toString()) +"&"+
                         URLEncoder.encode("dob", "UTF-8") +"="+ URLEncoder.encode(mNewSubscriberDOB.getText().toString()) +"&"+
-                        URLEncoder.encode("id", "UTF-8") +"="+ URLEncoder.encode(subscriberId);
+                        URLEncoder.encode("id", "UTF-8") +"="+ URLEncoder.encode(subscriberId) +"&"+
+                        URLEncoder.encode("jointAccount", "UTF-8") +"="+ URLEncoder.encode(textView.getText().toString(), "UTF-8");
 
                 bufferedWriter.write(dataToWrite);
                 bufferedWriter.flush();
@@ -585,9 +598,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
                     spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
                         @Override
                         public void onClick(String s, int i) {
-                            LinearLayout linearLayout = findViewById(R.id.joint_account_linear_layout);
                             linearLayout.setVisibility(View.VISIBLE);
-                            TextView textView = findViewById(R.id.add_subscriber_jac_selected);
                             textView.setText(s);
                         }
                     });
@@ -602,6 +613,46 @@ public class EditSubscriberDetails extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    public class UpdateJointAccount extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected void onPreExecute() {
+            pd = new ProgressDialog(EditSubscriberDetails.this);
+            pd.setMessage("Running protocol....");
+            pd.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String protocol = strings[0];
+
+            HttpURLConnection httpURLConnection = null;
+            BufferedWriter bufferedWriter = null;
+            BufferedReader bufferedReader = null;
+
+            try {
+
+                URL url = new URL(new ServerScriptsURL().UPDATE_JOINT_ACCOUNT());
+                httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.connect();
+
+                bufferedWriter = new BufferedWriter(new OutputStreamWriter(httpURLConnection.getOutputStream(), "UTF-8"));
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
         }
     }
 }
