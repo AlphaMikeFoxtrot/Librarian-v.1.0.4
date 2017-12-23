@@ -116,7 +116,7 @@ public class AddSubscriber extends AppCompatActivity {
         mReset = findViewById(R.id.add_subscriber_reset);
 
         new GetSubscribersForJACAsyncTask().execute();
-        spinnerDialog = new SpinnerDialog(AddSubscriber.this, subscribers, "Select Subscriber", R.style.DialogAnimations_SmileWindow);
+        spinnerDialog = new SpinnerDialog(AddSubscriber.this, subscribers, "Select Subscriber");
 
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -396,7 +396,6 @@ public class AddSubscriber extends AppCompatActivity {
                 try {
 
                     subscribers = new ArrayList<String>();
-                    subscribers.add("");
                     subscribers.add("NONE");
 
                     JSONArray root = new JSONArray(s);

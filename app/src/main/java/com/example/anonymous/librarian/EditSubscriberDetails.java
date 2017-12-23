@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,8 +20,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -33,6 +39,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+
+import in.galaxyofandroid.spinerdialog.OnSpinerItemClick;
+import in.galaxyofandroid.spinerdialog.SpinnerDialog;
 
 public class EditSubscriberDetails extends AppCompatActivity {
 
@@ -40,12 +50,14 @@ public class EditSubscriberDetails extends AppCompatActivity {
     EditText mNewSubscriberEnrolledOn, mNewSubscriberEnrolledFor, mNewSubscriberEnrollmentType, mNewSubscriberDOB, mNewSubscriberPhone;
     Button mSubmit, mCancel, mReset;
     public String oldId;
-    public ProgressDialog progressDialog, deleteProgressDialog;
+    public ProgressDialog progressDialog, deleteProgressDialog, getProgressDialog;
     NetworkChangeReceiver receiver;
     Boolean flag = false;
+    ArrayList<String> subscribers;
     IntentFilter filter;
     FloatingActionButton editJointAccount;
     TextView currentJointAccount;
+    SpinnerDialog spinnerDialog;
 
     @Override
     protected void onStop() {
@@ -101,6 +113,10 @@ public class EditSubscriberDetails extends AppCompatActivity {
         mNewSubscriberPhone.setText(getIntent().getStringExtra("phone"));
 
         progressDialog.dismiss();
+        new GetSubscribersForJACAsyncTask().execute();
+        spinnerDialog = new SpinnerDialog(EditSubscriberDetails.this, subscribers, "Select Subscriber");
+
+        new GetJointAccount().execute();
 
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,6 +155,20 @@ public class EditSubscriberDetails extends AppCompatActivity {
                 mNewSubscriberPhone.setText(getIntent().getStringExtra("phone"));
                 currentJointAccount.setText(getIntent().getStringExtra("jointAccountEdited"));
 
+            }
+        });
+
+        spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
+            @Override
+            public void onClick(String s, int i) {
+                Toast.makeText(EditSubscriberDetails.this, "" + s, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        editJointAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                spinnerDialog.showSpinerDialog();
             }
         });
 
@@ -381,6 +411,196 @@ public class EditSubscriberDetails extends AppCompatActivity {
             } else {
                 deleteProgressDialog.dismiss();
                 Toast.makeText(EditSubscriberDetails.this, "Sorry! Something went wrong.\n" + s, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public class GetJointAccount extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(EditSubscriberDetails.this);
+            progressDialog.setMessage("Getting Subscriber Joint Account Details...");
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            HttpURLConnection httpURLConnection = null;
+            BufferedReader bufferedReader = null;
+            BufferedWriter bufferedWriter = null;
+
+            try {
+
+                URL url = new URL(new ServerScriptsURL().GET_JOINT_ACCOUNT());
+                httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.connect();
+
+                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(httpURLConnection.getOutputStream(), "UTF-8");
+                bufferedWriter = new BufferedWriter(outputStreamWriter);
+
+                String data = URLEncoder.encode("subscriberId", "UTF-8") +"="+ URLEncoder.encode(getIntent().getStringExtra("subId"));
+
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+
+                InputStreamReader inputStreamReader = new InputStreamReader(httpURLConnection.getInputStream());
+                bufferedReader = new BufferedReader(inputStreamReader);
+
+                String line;
+                StringBuilder response = new StringBuilder();
+
+                while((line = bufferedReader.readLine()) != null){
+
+                    response.append(line);
+
+                }
+
+                return response.toString();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return "";
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "";
+            } finally {
+                if(httpURLConnection != null){
+                    httpURLConnection.disconnect();
+                }
+                if(bufferedReader != null){
+                    try {
+                        bufferedReader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            progressDialog.dismiss();
+            Toast.makeText(EditSubscriberDetails.this, "" + s, Toast.LENGTH_SHORT).show();
+            if(s.isEmpty()){
+
+                Toast.makeText(EditSubscriberDetails.this, "Joint Account Not Available\nEditing of Joint Account has been Disabled.", Toast.LENGTH_SHORT).show();
+                CoordinatorLayout linearLayout = findViewById(R.id.linear_layout);
+                CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) editJointAccount.getLayoutParams();
+                p.setAnchorId(View.NO_ID);
+                editJointAccount.setLayoutParams(p);
+                editJointAccount.setVisibility(View.GONE);
+                linearLayout.setVisibility(View.GONE);
+
+            } else {
+
+                currentJointAccount.setText(s);
+
+            }
+        }
+    }
+
+    public class GetSubscribersForJACAsyncTask extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected void onPreExecute() {
+            // getProgressDialog = new ProgressDialog(EditSubscriberDetails.this);
+            // getProgressDialog.setMessage("Loading subscribers..");
+            // getProgressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            // final String GET_SUBSCRIBERS_URL = "http://fardeenpanjwani.com/librarian/get_subscribers_details.php";
+
+            HttpURLConnection httpURLConnection = null;
+            BufferedReader bufferedReader = null;
+
+            try {
+
+                URL url = new URL(new ServerScriptsURL().GET_SUBSCRIBERS_DETAILS());
+                httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setRequestMethod("GET");
+                httpURLConnection.connect();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                bufferedReader = new BufferedReader(inputStreamReader);
+
+                String line;
+                StringBuilder response = new StringBuilder();
+
+                while((line = bufferedReader.readLine()) != null){
+                    response.append(line);
+                }
+
+                return response.toString();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return "";
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "";
+            } finally {
+                if(httpURLConnection != null){
+                    httpURLConnection.disconnect();
+                }
+                if(bufferedReader != null){
+                    try {
+                        bufferedReader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            // getProgressDialog.dismiss();
+
+            if(s.isEmpty()){
+                Toast.makeText(EditSubscriberDetails.this, "The list seems to be empty", Toast.LENGTH_SHORT).show();
+            } else {
+                try {
+
+                    subscribers = new ArrayList<String>();
+                    subscribers.add("NONE");
+
+                    JSONArray root = new JSONArray(s);
+                    for(int i = 0; i < root.length(); i++){
+                        JSONObject nthObject = root.getJSONObject(i);
+                        String subscriber_name = nthObject.getString("subscriber_name");
+                        subscribers.add(subscriber_name);
+                    }
+
+                    spinnerDialog = new SpinnerDialog(EditSubscriberDetails.this, subscribers, "Select Subscriber", R.style.DialogAnimations_SmileWindow);
+                    spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
+                        @Override
+                        public void onClick(String s, int i) {
+                            LinearLayout linearLayout = findViewById(R.id.joint_account_linear_layout);
+                            linearLayout.setVisibility(View.VISIBLE);
+                            TextView textView = findViewById(R.id.add_subscriber_jac_selected);
+                            textView.setText(s);
+                        }
+                    });
+                    findViewById(R.id.fab_edit_subscriber).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            spinnerDialog.showSpinerDialog();
+                        }
+                    });
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

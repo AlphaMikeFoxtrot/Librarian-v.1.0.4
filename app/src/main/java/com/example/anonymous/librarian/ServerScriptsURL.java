@@ -41,6 +41,7 @@ public class ServerScriptsURL {
     private final String GET_ISSUED_BOOK_TO_ID = "http://www.fardeenpanjwani.com/librarian/get_issued_book_to_id.php";
     private final String GET_LAST_UPDATED_IDS = "http://fardeenpanjwani.com/librarian/ids_handler/get_last_updated_ids.php";
     private final String UPDATE_EXISTING_IDS = "http://fardeenpanjwani.com/librarian/ids_handler/update_existing_ids.php";
+    private final String GET_JOINT_ACCOUNT = "http://www.fardeenpanjwani.com/librarian/get_joint_account.php";
 
 
 
@@ -187,5 +188,9 @@ public class ServerScriptsURL {
 
     public String UPDATE_EXISTING_IDS() {
         return UPDATE_EXISTING_IDS;
+    }
+
+    public String GET_JOINT_ACCOUNT() {
+        return GET_JOINT_ACCOUNT;
     }
 }

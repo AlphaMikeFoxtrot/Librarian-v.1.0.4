@@ -436,7 +436,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Joint Account with\n(leave blank if not)"
+                    android:text="Joint Account with\n(Select \'NONE\' if not)"
                     android:fontFamily="sans-serif-smallcaps"
                     android:textStyle="bold"
                     android:layout_marginRight="6dp"

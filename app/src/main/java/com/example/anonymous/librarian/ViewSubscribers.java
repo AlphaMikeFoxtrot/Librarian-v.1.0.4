@@ -21,6 +21,8 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.anonymous.librarian.ServerProtocols.SubscriberProtocol;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,6 +46,7 @@ public class ViewSubscribers extends AppCompatActivity {
     ArrayList<Subscribers> subscribers;
     NetworkChangeReceiver receiver;
     Boolean flag = false;
+    ArrayList<Subscribers> subscribersTwo;
     IntentFilter filter;
 
     @Override
@@ -89,6 +92,10 @@ public class ViewSubscribers extends AppCompatActivity {
 
         GetSubscribersAsyncTask getSubscribersAsyncTask = new GetSubscribersAsyncTask();
         getSubscribersAsyncTask.execute();
+
+        subscribersTwo = new ArrayList<>();
+//        adapter = new ViewSubscriberListViewAdapter(ViewSubscribers.this, new SubscriberProtocol(ViewSubscribers.this).getSubscribers());
+//        mListView.setAdapter(adapter);
 
         mListView.setTextFilterEnabled(true);
 
