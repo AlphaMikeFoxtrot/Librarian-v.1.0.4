@@ -58,7 +58,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
     ArrayList<String> subscribers;
     IntentFilter filter;
     FloatingActionButton editJointAccount;
-    TextView currentJointAccount, textView;
+    TextView currentJointAccount, textView, subscriberName, subscriberId;
     SpinnerDialog spinnerDialog;
 
     @Override
@@ -100,6 +100,8 @@ public class EditSubscriberDetails extends AppCompatActivity {
         mNewSubscriberEnrollmentType = findViewById(R.id.edit_subscriber_detail_enrollment_type);
         mNewSubscriberDOB = findViewById(R.id.edit_subscriber_detail_dob);
         mNewSubscriberPhone = findViewById(R.id.edit_subscriber_detail_phone);
+        subscriberId = findViewById(R.id.subscriber_detail_id);
+        subscriberName = findViewById(R.id.subscriber_detail_name);
 
         textView = findViewById(R.id.add_subscriber_jac_selected);
 
@@ -117,6 +119,9 @@ public class EditSubscriberDetails extends AppCompatActivity {
         mNewSubscriberEnrollmentType.setText(getIntent().getStringExtra(("enrollmentType")));
         mNewSubscriberDOB.setText(getIntent().getStringExtra("dob"));
         mNewSubscriberPhone.setText(getIntent().getStringExtra("phone"));
+
+        subscriberName.setText(getIntent().getStringExtra("subName"));
+        subscriberId.setText(getIntent().getStringExtra("subId"));
 
         progressDialog.dismiss();
         getProgressDialog = new ProgressDialog(EditSubscriberDetails.this);
@@ -187,6 +192,8 @@ public class EditSubscriberDetails extends AppCompatActivity {
     }
 
     private void submitClicked() {
+
+        new UpdateJointAccount().execute();
         UpdateSusbscriberAsyncTask updateSusbscriberAsyncTask = new UpdateSusbscriberAsyncTask();
         updateSusbscriberAsyncTask.execute();
     }
@@ -627,7 +634,6 @@ public class EditSubscriberDetails extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            String protocol = strings[0];
 
             HttpURLConnection httpURLConnection = null;
             BufferedWriter bufferedWriter = null;
@@ -643,16 +649,67 @@ public class EditSubscriberDetails extends AppCompatActivity {
 
                 bufferedWriter = new BufferedWriter(new OutputStreamWriter(httpURLConnection.getOutputStream(), "UTF-8"));
 
+                /*
+                  $protocol = $_POST["protocolType"]; // WHETHER TO ADD JOINT ACCOUNT OR REMOVE
+                  $subscriber_id = $_POST["subscriberOneId"];
+                  $subscriber_id_two = $_POST["subscriberTwoid"];
+                  $subscriber_name = $_POST["subscriberOneName"];
+                */
+
+                String subJAC = "";
+
+                if(linearLayout.getVisibility() == View.INVISIBLE){
+
+                    // this means that the joint account
+                    // details have not been changed
+                    if(currentJointAccount.getText().toString().toLowerCase().contains("none")){
+
+                        // the joint account was already none
+                        subJAC = "NONE";
+
+                    } else {
+
+                        subJAC = "ADD";
+
+                    }
+
+                } else if(linearLayout.getVisibility() == View.VISIBLE){
+
+                    if(textView.getText().toString().toLowerCase().contains("none")){
+
+                        subJAC = "NONE";
+
+                    } else {
+
+                        subJAC = "ADD";
+
+                    }
+
+                }
+
+                String dataToWrite = URLEncoder.encode("protocolType", "UTF-8") +"="+ URLEncoder.encode(subJAC, "UTF-8") +"&"+
+                        URLEncoder.encode("subscriberOneId", "UTF-8") +"="+ URLEncoder.encode(subscriberId.getText().toString(), "UTF-8") +"&"+
+                        URLEncoder.encode("subscriberTwoName", "UTF-8") +"="+ URLEncoder.encode(textView.getText().toString(), "UTF-8") +"&"+
+                        URLEncoder.encode("subscriberName", "UTF-8") +"="+ URLEncoder.encode(subscriberName.getText().toString(), "UTF-8");
+
+                bufferedWriter.write(dataToWrite);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+
+                return "";
+
             } catch (MalformedURLException e) {
                 e.printStackTrace();
+                return "";
             } catch (IOException e) {
                 e.printStackTrace();
+                return "";
             }
         }
 
         @Override
         protected void onPostExecute(String s) {
-            super.onPostExecute(s);
+            pd.dismiss();
         }
     }
 }
