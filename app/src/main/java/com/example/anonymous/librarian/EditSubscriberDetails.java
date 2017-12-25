@@ -58,7 +58,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
     ArrayList<String> subscribers;
     IntentFilter filter;
     // FloatingActionButton editJointAccount;
-    TextView currentJointAccount, textView, jac, subscriberName, subscriberId;
+    TextView currentJointAccount, textView, subscriberName, subscriberId;
     SpinnerDialog spinnerDialog;
 
     @Override
@@ -101,7 +101,6 @@ public class EditSubscriberDetails extends AppCompatActivity {
         mNewSubscriberDOB = findViewById(R.id.edit_subscriber_detail_dob);
         mNewSubscriberPhone = findViewById(R.id.edit_subscriber_detail_phone);
         subscriberId = findViewById(R.id.edit_subscriber_detail_id);
-        jac = findViewById(R.id.edit_subscriber_detail_joint_account);
         subscriberName = findViewById(R.id.edit_subscriber_detail_subscriber_name);
 
         textView = findViewById(R.id.add_subscriber_jac_selected);
@@ -120,8 +119,6 @@ public class EditSubscriberDetails extends AppCompatActivity {
         mNewSubscriberEnrollmentType.setText(getIntent().getStringExtra(("enrollmentType")));
         mNewSubscriberDOB.setText(getIntent().getStringExtra("dob"));
         mNewSubscriberPhone.setText(getIntent().getStringExtra("phone"));
-
-        jac.setText(getIntent().getStringExtra("jointAccountRaw"));
 
         subscriberName.setText(getIntent().getStringExtra("subName"));
         subscriberId.setText(getIntent().getStringExtra("subId"));
@@ -172,7 +169,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
                 mNewSubscriberDOB.setText(getIntent().getStringExtra("dob"));
                 mNewSubscriberPhone.setText(getIntent().getStringExtra("phone"));
 
-                // Toast.makeText(EditSubscriberDetails.this, "" + getIntent().getStringExtra("jointAccountRaw"), Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditSubscriberDetails.this, "" + getIntent().getStringExtra("jointAccountRaw"), Toast.LENGTH_SHORT).show();
 
                 linearLayout.setVisibility(View.INVISIBLE);
 

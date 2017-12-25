@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:gravity="center"
+    android:background="@drawable/final_background"
+    tools:context="com.example.anonymous.librarian.LoginActivity">
+
+    <ImageView
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_margin="6dp"
+        android:src="@drawable/logo"
+        android:scaleType="fitCenter" />
+
+    <EditText
+        android:background="@android:color/white"
+        android:id="@+id/username_et"
+        android:fontFamily="sans-serif-smallcaps"
+        android:hint="Username"
+        android:textSize="20sp"
+        android:padding="12dp"
+        style="@style/Base.V12.Widget.AppCompat.EditText"
+        android:layout_margin="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:background="@android:color/white"
+        android:id="@+id/password_et"
+        android:fontFamily="sans-serif-smallcaps"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textSize="20sp"
+        android:padding="12dp"
+        style="@style/Base.V12.Widget.AppCompat.EditText"
+        android:layout_margin="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:fontFamily="sans-serif-smallcaps"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:padding="12dp"
+        android:id="@+id/login_btn"
+        android:layout_margin="6dp"/>
+
+</LinearLayout>
