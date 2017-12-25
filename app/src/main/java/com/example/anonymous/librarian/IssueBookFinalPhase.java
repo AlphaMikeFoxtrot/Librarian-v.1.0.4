@@ -38,7 +38,7 @@ import java.util.Date;
 public class IssueBookFinalPhase extends AppCompatActivity {
 
     TextView bookName, bookId, subscriberName, subscriberId;
-    Button issueBookSubmit, issueBookCancel, issueBookReset;
+    Button issueBookSubmit, issueBookCancel;
     ProgressDialog progressDialog, issueBookProgressDialog, p;
     NetworkChangeReceiver receiver;
     Boolean flag = false;
@@ -90,7 +90,6 @@ public class IssueBookFinalPhase extends AppCompatActivity {
 
         issueBookSubmit = findViewById(R.id.issue_book_submit_button);
         issueBookCancel = findViewById(R.id.issue_book_cancel_button);
-        issueBookReset = findViewById(R.id.issue_book_reset_button);
 
         bookName.setText(getIntent().getStringExtra("bookName"));
         bookId.setText(getIntent().getStringExtra("bookId"));
@@ -119,17 +118,6 @@ public class IssueBookFinalPhase extends AppCompatActivity {
                 Intent toMainActivity = new Intent(IssueBookFinalPhase.this, MainActivity.class);
                 toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toMainActivity);
-            }
-        });
-
-        issueBookReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new IssueBookCancelProtocol().execute();
-
-                Intent toPhaseOne = new Intent(IssueBookFinalPhase.this, IssueBookPhaseOne.class);
-                toPhaseOne.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(toPhaseOne);
             }
         });
 

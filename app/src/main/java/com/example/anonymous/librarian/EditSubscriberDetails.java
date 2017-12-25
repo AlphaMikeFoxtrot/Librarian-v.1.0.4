@@ -57,8 +57,8 @@ public class EditSubscriberDetails extends AppCompatActivity {
     Boolean flag = false;
     ArrayList<String> subscribers;
     IntentFilter filter;
-    FloatingActionButton editJointAccount;
-    TextView currentJointAccount, textView, subscriberName, subscriberId;
+    // FloatingActionButton editJointAccount;
+    TextView currentJointAccount, textView, jac, subscriberName, subscriberId;
     SpinnerDialog spinnerDialog;
 
     @Override
@@ -100,12 +100,13 @@ public class EditSubscriberDetails extends AppCompatActivity {
         mNewSubscriberEnrollmentType = findViewById(R.id.edit_subscriber_detail_enrollment_type);
         mNewSubscriberDOB = findViewById(R.id.edit_subscriber_detail_dob);
         mNewSubscriberPhone = findViewById(R.id.edit_subscriber_detail_phone);
-        subscriberId = findViewById(R.id.subscriber_detail_id);
-        subscriberName = findViewById(R.id.subscriber_detail_name);
+        subscriberId = findViewById(R.id.edit_subscriber_detail_id);
+        jac = findViewById(R.id.edit_subscriber_detail_joint_account);
+        subscriberName = findViewById(R.id.edit_subscriber_detail_subscriber_name);
 
         textView = findViewById(R.id.add_subscriber_jac_selected);
 
-        editJointAccount = findViewById(R.id.fab_edit_subscriber);
+        // editJointAccount = findViewById(R.id.fab_edit_subscriber);
         currentJointAccount = findViewById(R.id.edit_subscriber_detail_joint_account);
 
         mSubmit = findViewById(R.id.edit_subscriber_detail_submit);
@@ -119,6 +120,8 @@ public class EditSubscriberDetails extends AppCompatActivity {
         mNewSubscriberEnrollmentType.setText(getIntent().getStringExtra(("enrollmentType")));
         mNewSubscriberDOB.setText(getIntent().getStringExtra("dob"));
         mNewSubscriberPhone.setText(getIntent().getStringExtra("phone"));
+
+        jac.setText(getIntent().getStringExtra("jointAccountRaw"));
 
         subscriberName.setText(getIntent().getStringExtra("subName"));
         subscriberId.setText(getIntent().getStringExtra("subId"));
@@ -168,7 +171,8 @@ public class EditSubscriberDetails extends AppCompatActivity {
                 mNewSubscriberEnrollmentType.setText(getIntent().getStringExtra(("enrollmentType")));
                 mNewSubscriberDOB.setText(getIntent().getStringExtra("dob"));
                 mNewSubscriberPhone.setText(getIntent().getStringExtra("phone"));
-                currentJointAccount.setText(getIntent().getStringExtra("jointAccountEdited"));
+
+                // Toast.makeText(EditSubscriberDetails.this, "" + getIntent().getStringExtra("jointAccountRaw"), Toast.LENGTH_SHORT).show();
 
                 linearLayout.setVisibility(View.INVISIBLE);
 
@@ -178,16 +182,16 @@ public class EditSubscriberDetails extends AppCompatActivity {
         spinnerDialog.bindOnSpinerListener(new OnSpinerItemClick() {
             @Override
             public void onClick(String s, int i) {
-                Toast.makeText(EditSubscriberDetails.this, "" + s, Toast.LENGTH_SHORT).show();
+                // Toast.makeText(EditSubscriberDetails.this, "" + s, Toast.LENGTH_SHORT).show();
             }
         });
 
-        editJointAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                spinnerDialog.showSpinerDialog();
-            }
-        });
+//        editJointAccount.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                spinnerDialog.showSpinerDialog();
+//            }
+//        });
 
     }
 
@@ -504,22 +508,6 @@ public class EditSubscriberDetails extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             progressDialog.dismiss();
-            Toast.makeText(EditSubscriberDetails.this, "" + s, Toast.LENGTH_SHORT).show();
-            if(s.isEmpty()){
-
-                Toast.makeText(EditSubscriberDetails.this, "Joint Account Not Available\nEditing of Joint Account has been Disabled.", Toast.LENGTH_SHORT).show();
-                CoordinatorLayout linearLayout = findViewById(R.id.linear_layout);
-                CoordinatorLayout.LayoutParams p = (CoordinatorLayout.LayoutParams) editJointAccount.getLayoutParams();
-                p.setAnchorId(View.NO_ID);
-                editJointAccount.setLayoutParams(p);
-                editJointAccount.setVisibility(View.GONE);
-                linearLayout.setVisibility(View.GONE);
-
-            } else {
-
-                currentJointAccount.setText(s);
-
-            }
         }
     }
 
@@ -609,12 +597,12 @@ public class EditSubscriberDetails extends AppCompatActivity {
                             textView.setText(s);
                         }
                     });
-                    findViewById(R.id.fab_edit_subscriber).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            spinnerDialog.showSpinerDialog();
-                        }
-                    });
+//                    findViewById(R.id.fab_edit_subscriber).setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View view) {
+//                            spinnerDialog.showSpinerDialog();
+//                        }
+//                    });
 
                 } catch (JSONException e) {
                     e.printStackTrace();

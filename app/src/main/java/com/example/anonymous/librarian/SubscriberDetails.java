@@ -47,6 +47,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -258,6 +259,10 @@ public class SubscriberDetails extends AppCompatActivity {
 
         if(itemId == R.id.action_edit){
 
+            TextView textView = findViewById(R.id.subscriber_detail_joint_account);
+
+            Toast.makeText(this, "" + textView.getText().toString(), Toast.LENGTH_SHORT).show();
+
             Intent toEdit = new Intent(SubscriberDetails.this, EditSubscriberDetails.class);
             toEdit.putExtra("subId", mSubscriberId.getText().toString());
             toEdit.putExtra("subName", mSubscriberName.getText().toString());
@@ -266,7 +271,7 @@ public class SubscriberDetails extends AppCompatActivity {
             toEdit.putExtra("enrollmentType", mSubscriberEnrollmentType.getText().toString());
             toEdit.putExtra("dob", mSubscriberDOB.getText().toString());
             toEdit.putExtra("phone", mSubscriberPhone.getText().toString());
-            toEdit.putExtra("jointAccountRaw", joint_account_raw);
+            toEdit.putExtra("jointAccountRaw", textView.getText().toString());
             toEdit.putExtra("jointAccountEdited", JOINT_ACCOUNT_NULL + joint_account_raw);
             toEdit.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(toEdit);
