@@ -124,7 +124,7 @@ public class ReportMainActivity extends AppCompatActivity {
         listItems.add(new MainActivityListViewItems("View subscribers Details", R.drawable.subscribers));
         listItems.add(new MainActivityListViewItems("View Report", R.drawable.logo));
 
-        MainActivityBaseAdapter adapter = new MainActivityBaseAdapter(getApplicationContext(), listItems);
+        ReportMainActivityBaseAdapter adapter = new ReportMainActivityBaseAdapter(getApplicationContext(), listItems);
         GridView gridView = findViewById(R.id.main_activity_grid_view);
         gridView.setAdapter(adapter);
     }

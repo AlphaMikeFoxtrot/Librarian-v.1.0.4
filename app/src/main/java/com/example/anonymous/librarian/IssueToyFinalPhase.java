@@ -34,7 +34,7 @@ import java.util.Calendar;
 public class IssueToyFinalPhase extends AppCompatActivity {
 
     TextView toyName, toyId, subscriberName, subscriberId;
-    Button submit, cancel, reset;
+    Button submit, cancel;
     ProgressDialog progressDialog, issueToyProgressDialog, cancelResetProgressDialog, p;
     NetworkChangeReceiver receiver;
     Boolean flag = false;
@@ -86,7 +86,6 @@ public class IssueToyFinalPhase extends AppCompatActivity {
 
         submit = findViewById(R.id.issue_toy_submit_button);
         cancel = findViewById(R.id.issue_toy_cancel_button);
-        reset = findViewById(R.id.issue_toy_reset_button);
 
         Intent intent = getIntent();
         subscriberName.setText(intent.getStringExtra("subscriberName"));
@@ -114,18 +113,6 @@ public class IssueToyFinalPhase extends AppCompatActivity {
                 Intent toMainActivity = new Intent(IssueToyFinalPhase.this, MainActivity.class);
                 toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toMainActivity);
-            }
-        });
-
-        reset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                IssueToyCancelProtocol issueBookCancelProtocol = new IssueToyCancelProtocol();
-                issueBookCancelProtocol.execute();
-
-                Intent toPhaseOne = new Intent(IssueToyFinalPhase.this, IssueToyPhaseOne.class);
-                toPhaseOne.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(toPhaseOne);
             }
         });
     }

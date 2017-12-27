@@ -9,19 +9,18 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.net.Inet4Address;
 import java.util.ArrayList;
 
 /**
- * Created by ANONYMOUS on 21-Nov-17.
+ * Created by ANONYMOUS on 27-Dec-17.
  */
 
-public class MainActivityBaseAdapter extends BaseAdapter {
+public class ReportMainActivityBaseAdapter extends BaseAdapter {
 
     Context context;
     ArrayList<MainActivityListViewItems> items;
 
-    public MainActivityBaseAdapter(Context context, ArrayList<MainActivityListViewItems> items) {
+    public ReportMainActivityBaseAdapter(Context context, ArrayList<MainActivityListViewItems> items) {
         this.context = context;
         this.items = items;
     }
@@ -77,7 +76,7 @@ public class MainActivityBaseAdapter extends BaseAdapter {
 
                     Intent toViewSubscribers = new Intent(context, ViewSubscribers.class);
                     toViewSubscribers.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    toViewSubscribers.putExtra("previousAct", "MainActivity");
+                    toViewSubscribers.putExtra("previousAct", "ReportActivity");
                     context.startActivity(toViewSubscribers);
 
                 } else if(itemClicked.toLowerCase().contains("view currently issued books")){
@@ -120,7 +119,7 @@ public class MainActivityBaseAdapter extends BaseAdapter {
 
                     Intent toReport = new Intent(context, FinalDetailsActivity.class);
                     toReport.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    toReport.putExtra("previousAct", "MainActivity");
+                    toReport.putExtra("previousAct", "ReportActivity");
                     context.startActivity(toReport);
 
                 }
@@ -130,4 +129,5 @@ public class MainActivityBaseAdapter extends BaseAdapter {
 
         return view;
     }
+
 }
