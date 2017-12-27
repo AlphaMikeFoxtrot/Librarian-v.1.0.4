@@ -11,8 +11,6 @@ import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -29,13 +27,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
+public class ReportMainActivity extends AppCompatActivity {
 
     private ListView mListView;
     public boolean isLastDay;
@@ -89,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(ReportMainActivity.this);
         builder.setMessage("Do you wish to exit the app?").setPositiveButton("Yes", dialogClickListener)
                 .setNegativeButton("No", dialogClickListener).show();
 
@@ -106,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         flag = true;
 
         if(!(isNetworkConnected())){
-            Toast.makeText(MainActivity.this, "No Internet connection!", Toast.LENGTH_LONG).show();
+            Toast.makeText(ReportMainActivity.this, "No Internet connection!", Toast.LENGTH_LONG).show();
             finish();
         }
 
@@ -124,13 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<MainActivityListViewItems> listItems = new ArrayList<>();
 
-        listItems.add(new MainActivityListViewItems("Issue a Book", R.drawable.issue_book));
-        listItems.add(new MainActivityListViewItems("Issue a Toy", R.drawable.toys));
-        listItems.add(new MainActivityListViewItems("View Currently Issued Toys", R.drawable.issued_toys));
-        listItems.add(new MainActivityListViewItems("View Currently Issued Books", R.drawable.issued_book_shelf));
         listItems.add(new MainActivityListViewItems("View subscribers Details", R.drawable.subscribers));
-        listItems.add(new MainActivityListViewItems("View Books", R.drawable.books));
-        listItems.add(new MainActivityListViewItems("View Toys", R.drawable.view_toys));
         listItems.add(new MainActivityListViewItems("View Report", R.drawable.logo));
 
         MainActivityBaseAdapter adapter = new MainActivityBaseAdapter(getApplicationContext(), listItems);
@@ -159,11 +150,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public class LastDayProtocolAsyncTask extends AsyncTask<String, Void, String>{
+    public class LastDayProtocolAsyncTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected void onPreExecute() {
-            lastDayProgressBar = new ProgressDialog(MainActivity.this);
+            lastDayProgressBar = new ProgressDialog(ReportMainActivity.this);
             lastDayProgressBar.setMessage("Initiating \"last day of the month\" protocol...");
             lastDayProgressBar.show();
         }
@@ -244,5 +235,4 @@ public class MainActivity extends AppCompatActivity {
 
         return cm.getActiveNetworkInfo() != null;
     }
-
 }

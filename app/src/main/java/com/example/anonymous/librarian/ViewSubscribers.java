@@ -69,9 +69,10 @@ public class ViewSubscribers extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent toMainActivity = new Intent(this, MainActivity.class);
-        toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(toMainActivity);
+        // Intent toMainActivity = new Intent(this, MainActivity.class);
+        // toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        // startActivity(toMainActivity);
+        finish();
     }
 
     @Override

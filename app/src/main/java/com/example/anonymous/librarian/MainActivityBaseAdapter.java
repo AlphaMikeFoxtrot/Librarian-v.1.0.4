@@ -115,6 +115,12 @@ public class MainActivityBaseAdapter extends BaseAdapter {
                     toToys.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(toToys);
 
+                } else if(itemClicked.toLowerCase().contains("report")){
+
+                    Intent toReport = new Intent(context, FinalDetailsActivity.class);
+                    toReport.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(toReport);
+
                 }
 
             }

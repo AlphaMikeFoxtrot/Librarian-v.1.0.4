@@ -19,5 +19,9 @@
     <string name="BOOK_ID">RECENTLY_UPDATED_BOOK_ID</string>
     <string name="TOY_ID">RECENTLY_UPDATED_TOY_ID</string>
     <string name="SUBSCRIBER_ID">RECENTLY_UPDATED_SUBSCRIBER_ID</string>
+    <string name="LOGIN_PREFERENCE">loginPreference</string>
+    <string name="LOGIN_BOOLEAN">loginBoolean</string>
+    <string name="LOGIN_USERNAME">loginUsername</string>
+    <string name="LOGIN_PASSWORD">loginPassword</string>
 </resources>
 

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:background="@android:color/background_light"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/main_activity_toolbar"
+        android:background="@color/colorPrimary"
+        android:theme="@style/Base.ThemeOverlay.AppCompat.Dark">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:scaleType="centerCrop"
+                android:layout_margin="3dp"
+                android:src="@drawable/logo"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Read For Children"
+                android:textColor="@android:color/white"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:fontFamily="sans-serif-smallcaps"
+                android:textStyle="bold"
+                android:gravity="center_vertical"
+                android:layout_margin="6dp"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <GridView
+        android:background="@android:color/white"
+        android:id="@+id/main_activity_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="2"
+        android:gravity="center"
+        android:layout_margin="8dp"
+        android:horizontalSpacing="8dp"
+        android:verticalSpacing="8dp" />
+
+</LinearLayout>
+
+    <!--<LinearLayout-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_gravity="center"-->
+    <!--tools:context="com.example.anonymous.librarian.MainActivity">-->
+
+    <!--<android.support.v7.widget.Toolbar-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="?attr/actionBarSize"-->
+    <!--android:id="@+id/main_activity_toolbar"-->
+    <!--android:background="@color/colorPrimary"-->
+    <!--android:theme="@style/Theme.AppCompat.Light.DarkActionBar">-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:gravity="center">-->
+
+    <!--<ImageView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:src="@drawable/library_icon"-->
+    <!--android:scaleType="fitCenter"-->
+    <!--android:layout_margin="12dp"/>-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:text="Librarian"-->
+    <!--android:textStyle="bold"-->
+    <!--android:textAppearance="@style/TextAppearance.AppCompat.Headline"-->
+    <!--android:fontFamily="sans-serif-smallcaps"-->
+    <!--android:textAllCaps="true"-->
+    <!--android:textColor="@android:color/white"-->
+    <!--android:layout_margin="12dp"/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--</android.support.v7.widget.Toolbar>-->
+
+    <!--<ListView-->
+    <!--android:id="@+id/main_activity_list_view"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:divider="@android:color/transparent"/>-->
+
+    <!--</LinearLayout>-->

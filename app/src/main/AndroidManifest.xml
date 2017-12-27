@@ -22,9 +22,7 @@
         tools:replace="android:label">
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".IssueBookPhaseOne"
             android:parentActivityName=".MainActivity"
@@ -109,6 +107,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".FinalDetailsActivity" />
+        <activity android:name=".ReportMainActivity"></activity>
     </application>
 
 </manifest>
