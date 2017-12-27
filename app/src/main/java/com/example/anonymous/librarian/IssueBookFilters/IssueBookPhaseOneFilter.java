@@ -31,7 +31,7 @@ public class IssueBookPhaseOneFilter extends Filter {
             charSequence = charSequence.toString().toUpperCase();
             ArrayList<Books> newList = new ArrayList<>();
             for(int i = 0; i < oldList.size(); i++){
-                if(oldList.get(i).getmBookName().toUpperCase().contains(charSequence)){
+                if(oldList.get(i).getmBookName().toUpperCase().contains(charSequence) || oldList.get(i).getmBookId().toUpperCase().contains(charSequence)){
                     newList.add(oldList.get(i));
                 }
             }
