@@ -121,6 +121,7 @@ public class ViewSubscribers extends AppCompatActivity {
                 String subscriberId = subscriberClicked.getmSubscriberId();
                 toSubscriberDetails.putExtra("subscriberName", subscriberClicked.getmSubscriberName());
                 toSubscriberDetails.putExtra("subscriberId", subscriberId);
+                toSubscriberDetails.putExtra("previousAct", getIntent().getStringExtra("previousAct"));
                 toSubscriberDetails.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toSubscriberDetails);
 

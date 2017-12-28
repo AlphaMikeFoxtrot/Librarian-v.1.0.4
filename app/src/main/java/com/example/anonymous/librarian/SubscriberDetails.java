@@ -128,6 +128,7 @@ public class SubscriberDetails extends AppCompatActivity {
     public void onBackPressed() {
         Intent toPreviousActivity = new Intent(this, ViewSubscribers.class);
         toPreviousActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        toPreviousActivity.putExtra("previousAct", getIntent().getStringExtra("previousAct"));
         startActivity(toPreviousActivity);
     }
 
