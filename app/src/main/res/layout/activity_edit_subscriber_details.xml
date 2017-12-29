@@ -299,44 +299,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/linear_layout_two"
-                android:layout_marginTop="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Current Joint Account Details"
-                    android:lines="2"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:textStyle="bold"
-                    android:layout_marginRight="6dp"
-                    android:gravity="center_vertical|end" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.1"
-                    android:background="@android:color/transparent"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:id="@+id/edit_subscriber_detail_joint_account"
-                    tools:text="Joint Account with Fardeen Panjwani"
-                    android:lines="2"
-                    android:textSize="18sp"
-                    android:layout_marginLeft="6dp"
-                    android:fontFamily="sans-serif-smallcaps"
-                    android:gravity="center_vertical|left" />
-
-            </LinearLayout>
-
         </LinearLayout>
 
         <LinearLayout

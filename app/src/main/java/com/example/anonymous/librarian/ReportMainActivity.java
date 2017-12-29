@@ -11,9 +11,12 @@ import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -102,6 +105,12 @@ public class ReportMainActivity extends AppCompatActivity {
         registerReceiver(receiver, filter);
         flag = true;
 
+        android.support.v7.widget.Toolbar mToolbar = findViewById(R.id.report_activity_toolbar);
+        setSupportActionBar(mToolbar);
+
+        sharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFERENCE), MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
         if(!(isNetworkConnected())){
             Toast.makeText(ReportMainActivity.this, "No Internet connection!", Toast.LENGTH_LONG).show();
             finish();
@@ -122,7 +131,8 @@ public class ReportMainActivity extends AppCompatActivity {
         ArrayList<MainActivityListViewItems> listItems = new ArrayList<>();
 
         listItems.add(new MainActivityListViewItems("View subscribers Details", R.drawable.subscribers));
-        listItems.add(new MainActivityListViewItems("View Report", R.drawable.logo));
+        listItems.add(new MainActivityListViewItems("View Report", R.drawable.report));
+        listItems.add(new MainActivityListViewItems("Logout", R.drawable.logout));
 
         ReportMainActivityBaseAdapter adapter = new ReportMainActivityBaseAdapter(getApplicationContext(), listItems);
         GridView gridView = findViewById(R.id.main_activity_grid_view);

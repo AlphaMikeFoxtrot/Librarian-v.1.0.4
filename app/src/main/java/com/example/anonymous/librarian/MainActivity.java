@@ -11,6 +11,9 @@ import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -38,13 +41,13 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     private ListView mListView;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    IntentFilter filter;
     public boolean isLastDay;
     ProgressDialog lastDayProgressBar;
     NetworkChangeReceiver receiver;
     Boolean flag = false;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
-    IntentFilter filter;
 
     @Override
     protected void onStop() {
@@ -105,6 +108,12 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(receiver, filter);
         flag = true;
 
+        sharedPreferences = getSharedPreferences(getString(R.string.LOGIN_PREFERENCE), Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
+        Toolbar mToolbar = findViewById(R.id.main_activity_toolbar);
+        setSupportActionBar(mToolbar);
+
         if(!(isNetworkConnected())){
             Toast.makeText(MainActivity.this, "No Internet connection!", Toast.LENGTH_LONG).show();
             finish();
@@ -131,7 +140,8 @@ public class MainActivity extends AppCompatActivity {
         listItems.add(new MainActivityListViewItems("View subscribers Details", R.drawable.subscribers));
         listItems.add(new MainActivityListViewItems("View Books", R.drawable.books));
         listItems.add(new MainActivityListViewItems("View Toys", R.drawable.view_toys));
-        listItems.add(new MainActivityListViewItems("View Report", R.drawable.logo));
+        listItems.add(new MainActivityListViewItems("View Report", R.drawable.report));
+        listItems.add(new MainActivityListViewItems("Logout", R.drawable.logout));
 
         MainActivityBaseAdapter adapter = new MainActivityBaseAdapter(getApplicationContext(), listItems);
         GridView gridView = findViewById(R.id.main_activity_grid_view);

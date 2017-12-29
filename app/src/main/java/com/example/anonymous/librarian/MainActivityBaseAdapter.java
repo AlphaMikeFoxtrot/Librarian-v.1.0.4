@@ -2,6 +2,7 @@ package com.example.anonymous.librarian;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,6 +123,16 @@ public class MainActivityBaseAdapter extends BaseAdapter {
                     toReport.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     toReport.putExtra("previousAct", "MainActivity");
                     context.startActivity(toReport);
+
+                } else if(itemClicked.toLowerCase().contains("logout")){
+
+                    SharedPreferences.Editor editor = context.getSharedPreferences(context.getString(R.string.LOGIN_PREFERENCE), context.MODE_PRIVATE).edit();
+                    editor.putBoolean(context.getString(R.string.LOGIN_BOOLEAN), false);
+                    editor.commit();
+                    Intent toLogin = new Intent(context, LoginActivity.class);
+                    toLogin.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(toLogin);
+
 
                 }
 

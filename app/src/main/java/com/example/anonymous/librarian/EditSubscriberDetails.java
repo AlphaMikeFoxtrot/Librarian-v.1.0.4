@@ -58,7 +58,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
     ArrayList<String> subscribers;
     IntentFilter filter;
     // FloatingActionButton editJointAccount;
-    TextView currentJointAccount, textView, subscriberName, subscriberId;
+    TextView textView, subscriberName, subscriberId;
     SpinnerDialog spinnerDialog;
 
     @Override
@@ -106,7 +106,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
         textView = findViewById(R.id.add_subscriber_jac_selected);
 
         // editJointAccount = findViewById(R.id.fab_edit_subscriber);
-        currentJointAccount = findViewById(R.id.edit_subscriber_detail_joint_account);
+        // currentJointAccount = findViewById(R.id.edit_subscriber_detail_joint_account);
 
         mSubmit = findViewById(R.id.edit_subscriber_detail_submit);
         mCancel = findViewById(R.id.edit_subscriber_detail_cancel);
@@ -131,13 +131,14 @@ public class EditSubscriberDetails extends AppCompatActivity {
         getProgressDialog.dismiss();
         spinnerDialog = new SpinnerDialog(EditSubscriberDetails.this, subscribers, "Select Subscriber");
 
-        new GetJointAccount().execute();
+        // new GetJointAccount().execute();
 
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                submitClicked();
+                // submitClicked();
+                new UpdateSusbscriberAsyncTask().execute();
 
             }
         });
@@ -148,6 +149,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
 
                 Intent back = new Intent(EditSubscriberDetails.this, ViewSubscribers.class);
                 back.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                back.putExtra("previousAct", getIntent().getStringExtra("previousAct"));
                 startActivity(back);
 
             }
@@ -169,7 +171,8 @@ public class EditSubscriberDetails extends AppCompatActivity {
                 mNewSubscriberDOB.setText(getIntent().getStringExtra("dob"));
                 mNewSubscriberPhone.setText(getIntent().getStringExtra("phone"));
 
-                Toast.makeText(EditSubscriberDetails.this, "" + getIntent().getStringExtra("jointAccountRaw"), Toast.LENGTH_SHORT).show();
+                // Toast.makeText(EditSubscriberDetails.this, "" + getIntent().getStringExtra("jointAccountRaw"), Toast.LENGTH_SHORT).show();
+                // currentJointAccount.setText(getIntent().getStringExtra("jointAccountRaw"));
 
                 linearLayout.setVisibility(View.INVISIBLE);
 
@@ -192,12 +195,12 @@ public class EditSubscriberDetails extends AppCompatActivity {
 
     }
 
-    private void submitClicked() {
-
-        new UpdateJointAccount().execute();
-        UpdateSusbscriberAsyncTask updateSusbscriberAsyncTask = new UpdateSusbscriberAsyncTask();
-        updateSusbscriberAsyncTask.execute();
-    }
+//    private void submitClicked() {
+//
+//        new UpdateJointAccount().execute();
+//        UpdateSusbscriberAsyncTask updateSusbscriberAsyncTask = new UpdateSusbscriberAsyncTask();
+//        updateSusbscriberAsyncTask.execute();
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -608,94 +611,94 @@ public class EditSubscriberDetails extends AppCompatActivity {
         }
     }
 
-    public class UpdateJointAccount extends AsyncTask<String, Void, String>{
-
-        @Override
-        protected void onPreExecute() {
-            pd = new ProgressDialog(EditSubscriberDetails.this);
-            pd.setMessage("Running protocol....");
-            pd.show();
-        }
-
-        @Override
-        protected String doInBackground(String... strings) {
-
-            HttpURLConnection httpURLConnection = null;
-            BufferedWriter bufferedWriter = null;
-            BufferedReader bufferedReader = null;
-
-            try {
-
-                URL url = new URL(new ServerScriptsURL().UPDATE_JOINT_ACCOUNT());
-                httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setDoInput(true);
-                httpURLConnection.setDoOutput(true);
-                httpURLConnection.connect();
-
-                bufferedWriter = new BufferedWriter(new OutputStreamWriter(httpURLConnection.getOutputStream(), "UTF-8"));
-
-                /*
-                  $protocol = $_POST["protocolType"]; // WHETHER TO ADD JOINT ACCOUNT OR REMOVE
-                  $subscriber_id = $_POST["subscriberOneId"];
-                  $subscriber_id_two = $_POST["subscriberTwoid"];
-                  $subscriber_name = $_POST["subscriberOneName"];
-                */
-
-                String subJAC = "";
-
-                if(linearLayout.getVisibility() == View.INVISIBLE){
-
-                    // this means that the joint account
-                    // details have not been changed
-                    if(currentJointAccount.getText().toString().toLowerCase().contains("none")){
-
-                        // the joint account was already none
-                        subJAC = "NONE";
-
-                    } else {
-
-                        subJAC = "ADD";
-
-                    }
-
-                } else if(linearLayout.getVisibility() == View.VISIBLE){
-
-                    if(textView.getText().toString().toLowerCase().contains("none")){
-
-                        subJAC = "NONE";
-
-                    } else {
-
-                        subJAC = "ADD";
-
-                    }
-
-                }
-
-                String dataToWrite = URLEncoder.encode("protocolType", "UTF-8") +"="+ URLEncoder.encode(subJAC, "UTF-8") +"&"+
-                        URLEncoder.encode("subscriberOneId", "UTF-8") +"="+ URLEncoder.encode(subscriberId.getText().toString(), "UTF-8") +"&"+
-                        URLEncoder.encode("subscriberTwoName", "UTF-8") +"="+ URLEncoder.encode(textView.getText().toString(), "UTF-8") +"&"+
-                        URLEncoder.encode("subscriberName", "UTF-8") +"="+ URLEncoder.encode(subscriberName.getText().toString(), "UTF-8");
-
-                bufferedWriter.write(dataToWrite);
-                bufferedWriter.flush();
-                bufferedWriter.close();
-
-                return "";
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-                return "";
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "";
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            pd.dismiss();
-        }
-    }
+//    public class UpdateJointAccount extends AsyncTask<String, Void, String> {
+//
+//        @Override
+//        protected void onPreExecute() {
+//            pd = new ProgressDialog(EditSubscriberDetails.this);
+//            pd.setMessage("Running protocol....");
+//            pd.show();
+//        }
+//
+//        @Override
+//        protected String doInBackground(String... strings) {
+//
+//            HttpURLConnection httpURLConnection = null;
+//            BufferedWriter bufferedWriter = null;
+//            BufferedReader bufferedReader = null;
+//
+//            try {
+//
+//                URL url = new URL(new ServerScriptsURL().UPDATE_JOINT_ACCOUNT());
+//                httpURLConnection = (HttpURLConnection) url.openConnection();
+//                httpURLConnection.setDoInput(true);
+//                httpURLConnection.setDoOutput(true);
+//                httpURLConnection.connect();
+//
+//                bufferedWriter = new BufferedWriter(new OutputStreamWriter(httpURLConnection.getOutputStream(), "UTF-8"));
+//
+//                /*
+//                  $protocol = $_POST["protocolType"]; // WHETHER TO ADD JOINT ACCOUNT OR REMOVE
+//                  $subscriber_id = $_POST["subscriberOneId"];
+//                  $subscriber_id_two = $_POST["subscriberTwoid"];
+//                  $subscriber_name = $_POST["subscriberOneName"];
+//                */
+//
+//                String subJAC = "";
+//
+//                if(linearLayout.getVisibility() == View.INVISIBLE){
+//
+//                    // this means that the joint account
+//                    // details have not been changed
+//                    if(currentJointAccount.getText().toString().toLowerCase().contains("none")){
+//
+//                        // the joint account was already none
+//                        subJAC = "NONE";
+//
+//                    } else {
+//
+//                        subJAC = "ADD";
+//
+//                    }
+//
+//                } else if(linearLayout.getVisibility() == View.VISIBLE){
+//
+//                    if(textView.getText().toString().toLowerCase().contains("none")){
+//
+//                        subJAC = "NONE";
+//
+//                    } else {
+//
+//                        subJAC = "ADD";
+//
+//                    }
+//
+//                }
+//
+//                String dataToWrite = URLEncoder.encode("protocolType", "UTF-8") +"="+ URLEncoder.encode(subJAC, "UTF-8") +"&"+
+//                        URLEncoder.encode("subscriberOneId", "UTF-8") +"="+ URLEncoder.encode(subscriberId.getText().toString(), "UTF-8") +"&"+
+//                        URLEncoder.encode("subscriberTwoName", "UTF-8") +"="+ URLEncoder.encode(textView.getText().toString(), "UTF-8") +"&"+
+//                        URLEncoder.encode("subscriberName", "UTF-8") +"="+ URLEncoder.encode(subscriberName.getText().toString(), "UTF-8");
+//
+//                bufferedWriter.write(dataToWrite);
+//                bufferedWriter.flush();
+//                bufferedWriter.close();
+//
+//                return "";
+//
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//                return "";
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                return "";
+//            }
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String s) {
+//            pd.dismiss();
+//        }
+//    }
 }
 
