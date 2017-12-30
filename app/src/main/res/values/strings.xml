@@ -23,5 +23,48 @@
     <string name="LOGIN_BOOLEAN">loginBoolean</string>
     <string name="LOGIN_USERNAME">loginUsername</string>
     <string name="LOGIN_PASSWORD">loginPassword</string>
+
+
+    <!-- __________________________________________________________________________________________________________ -->
+    <!--THE FOLLOWING STRING VALUES WILL BE USED TO REROUTE THE APP TO DIFFERENT SERVER BASED ON THE SIGNED IN USER -->
+    <!-- __________________________________________________________________________________________________________ -->
+
+    <string name="URL_PREFERENCE">urlPreference</string>
+    <string name = "ADD_BOOK">add_book</string>
+    <string name = "ADD_SUBSCRIBER">add_subscriber</string>
+    <string name = "ADD_TOY">add_toy</string>
+    <string name = "CHECK_PROFILE_PHOTO">check_profile_photo</string>
+    <string name = "DELETE_BOOK">delete_book</string>
+    <string name = "DELETE_SUBSCRIBER">delete_subscriber</string>
+    <string name = "DELETE_TOY">delete_toy</string>
+    <string name = "GET_BOOK_DETAILS">get_book_details</string>
+    <string name = "GET_INDIVIDUAL_ANALYSIS">get_individual_analysis</string>
+    <string name = "GET_INDIVIDUAL_SUBSCRIBER_DETAILS">get_individual_subscriber_details</string>
+    <string name = "GET_ISSUED_BOOKS">get_issued_books</string>
+    <string name = "GET_SINGLE_ISSUED_BOOK_DETAILS">get_single_issued_book_details</string>
+    <string name = "GET_SUBSCRIBERS_DETAILS">get_subscribers_details</string>
+    <string name = "GET_SUBSCRIBER_ANALYSIS">get_subscriber_analysis</string>
+    <string name = "GET_TEMP_BOOK_DETAILS">get_temp_book_details</string>
+    <string name = "GET_TEMP_TOY_DETAILS">get_temp_toy_details</string>
+    <string name = "GET_TOTAL_ANALYSIS">get_total_analysis</string>
+    <string name = "GET_TOY_DETAILS">get_toy_details</string>
+    <string name = "INSERT_TEMP_BOOK_DETAILS">insert_temp_book_details</string>
+    <string name = "INSERT_TEMP_TOY_DETAILS">insert_temp_toy_details</string>
+    <string name = "ISSUE_BOOK">issue_book</string>
+    <string name = "ISSUE_TOY">issue_toy</string>
+    <string name = "LAST_DAY_PROTOCOL">last_day_protocol</string>
+    <string name = "RETURN_BOOK">return_book</string>
+    <string name = "RETURN_TOY">return_toy</string>
+    <string name = "UPDATE_SUBSCRIBER_DETAILS">update_subscriber_details</string>
+    <string name = "UPLOAD_SUBSCRIBER_PROFILE_IMAGE_ENHANCED">upload_subscriber_profile_image_enhanced</string>
+    <string name = "UPLOAD_SUBSCRIBER_PROFILE_PHOTO">upload_subscriber_profile_photo</string>
+    <string name = "VIEW_CURRENTLY_ISSUED_TOYS">view_currently_issued_toys</string>
+    <string name = "CANCEL_ISSUE_BOOK_PROTOCOL">cancel_issue_book_protocol</string>
+    <string name = "CANCEL_ISSUE_TOY_PROTOCOL">cancel_issue_toy_protocol</string>
+    <string name = "GET_ISSUED_BOOK_TO_ID">get_issued_book_to_id</string>
+    <string name = "GET_LAST_UPDATED_IDS">get_last_updated_ids</string>
+    <string name = "UPDATE_EXISTING_IDS">update_existing_ids</string>
+    <string name = "GET_JOINT_ACCOUNT">get_joint_account</string>
+    <string name = "UPDATE_JOINT_ACCOUNT">update_joint_account</string>
 </resources>
 
