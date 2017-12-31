@@ -305,7 +305,7 @@ public class SubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().GET_INDIVIDUAL_SUBSCRIBER_DETAILS());
+                URL url = new URL(new ServerScriptsURL(SubscriberDetails.this).GET_INDIVIDUAL_SUBSCRIBER_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);
@@ -435,7 +435,7 @@ public class SubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().GET_SUBSCRIBER_ANALYSIS());
+                URL url = new URL(new ServerScriptsURL(SubscriberDetails.this).GET_SUBSCRIBER_ANALYSIS());
 
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
@@ -551,7 +551,7 @@ public class SubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().UPLOAD_SUBSCRIBER_PROFILE_IMAGE_ENHANCED());
+                URL url = new URL(new ServerScriptsURL(SubscriberDetails.this).UPLOAD_SUBSCRIBER_PROFILE_IMAGE_ENHANCED());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
@@ -638,7 +638,7 @@ public class SubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().CHECK_PROFILE_PHOTO());
+                URL url = new URL(new ServerScriptsURL(SubscriberDetails.this).CHECK_PROFILE_PHOTO());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);

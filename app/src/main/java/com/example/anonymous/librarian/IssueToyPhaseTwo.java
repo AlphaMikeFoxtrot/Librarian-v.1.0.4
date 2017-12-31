@@ -112,7 +112,7 @@ public class IssueToyPhaseTwo extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().GET_SUBSCRIBERS_DETAILS());
+                URL url = new URL(new ServerScriptsURL(IssueToyPhaseTwo.this).GET_SUBSCRIBERS_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setRequestMethod("GET");
@@ -213,7 +213,7 @@ public class IssueToyPhaseTwo extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().CANCEL_ISSUE_TOY_PROTOCOL());
+                URL url = new URL(new ServerScriptsURL(IssueToyPhaseTwo.this).CANCEL_ISSUE_TOY_PROTOCOL());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.connect();

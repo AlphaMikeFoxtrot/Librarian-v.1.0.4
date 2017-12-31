@@ -60,7 +60,7 @@ public class FinalDetailsActivity extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().GET_SUBSCRIBERS_DETAILS());
+                URL url = new URL(new ServerScriptsURL(FinalDetailsActivity.this).GET_SUBSCRIBERS_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setRequestMethod("GET");

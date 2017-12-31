@@ -126,7 +126,6 @@ public class AddBook extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            // final String ADD_BOOK_URL = "http://www.fardeenpanjwani.com/librarian/add_book.php";
 
             String newBookName = strings[0];
             String newBookId = strings[1];
@@ -141,7 +140,7 @@ public class AddBook extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().ADD_BOOK());
+                URL url = new URL(new ServerScriptsURL(AddBook.this).ADD_BOOK());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);

@@ -263,7 +263,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().UPDATE_SUBSCRIBER_DETAILS());
+                URL url = new URL(new ServerScriptsURL(EditSubscriberDetails.this).UPDATE_SUBSCRIBER_DETAILS());
 
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
@@ -373,7 +373,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().DELETE_SUBSCRIBER());
+                URL url = new URL(new ServerScriptsURL(EditSubscriberDetails.this).DELETE_SUBSCRIBER());
 
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
@@ -456,7 +456,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().GET_JOINT_ACCOUNT());
+                URL url = new URL(new ServerScriptsURL(EditSubscriberDetails.this).GET_JOINT_ACCOUNT());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
@@ -530,7 +530,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().GET_SUBSCRIBERS_DETAILS());
+                URL url = new URL(new ServerScriptsURL(EditSubscriberDetails.this).GET_SUBSCRIBERS_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setRequestMethod("GET");

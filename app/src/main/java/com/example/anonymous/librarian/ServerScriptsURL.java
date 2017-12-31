@@ -1,10 +1,24 @@
 package com.example.anonymous.librarian;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 /**
  * Created by ANONYMOUS on 15-Dec-17.
  */
 
 public class ServerScriptsURL {
+
+    public Context context;
+
+    public ServerScriptsURL(Context context) {
+        this.context = context;
+    }
+
+    public SharedPreferences sharedPreference = context.getSharedPreferences(context.getString(R.string.URL_PREFERENCE), context.MODE_PRIVATE);
+    public SharedPreferences.Editor editor = sharedPreference.edit();
+
+    String center = sharedPreference.getString(context.getString(R.string.CENTER), "");
 
     // private final String  = "http://www.fardeenpanjwani.com/librarian/.php";
     private final String ADD_BOOK = "http://www.fardeenpanjwani.com/librarian/add_book.php";
@@ -45,157 +59,435 @@ public class ServerScriptsURL {
     private final String UPDATE_JOINT_ACCOUNT = "http://www.fardeenpanjwani.com/librarian/update_joint_account.php";
 
 
-
-//    private String mUserCenter;
-//
-//    public ServerScriptsURL(String mUserCenter) {
-//        this.mUserCenter = mUserCenter;
-//    }
-//
-//    public ServerScriptsURL() {
-//    }
-
     public String ADD_BOOK() {
-        return ADD_BOOK;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.ADD_BOOK), "");
+
+        } else {
+
+            return ADD_BOOK;
+
+        }
     }
 
     public String ADD_SUBSCRIBER() {
-        return ADD_SUBSCRIBER;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.ADD_SUBSCRIBER), "");
+
+        } else {
+
+            return ADD_SUBSCRIBER;
+
+        }
     }
 
     public String ADD_TOY() {
-        return ADD_TOY;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.ADD_TOY), "");
+
+        } else {
+
+            return ADD_TOY;
+
+        }
     }
 
     public String CHECK_PROFILE_PHOTO() {
-        return CHECK_PROFILE_PHOTO;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.CHECK_PROFILE_PHOTO), "");
+
+        } else {
+
+            return CHECK_PROFILE_PHOTO;
+
+        }
     }
 
     public String DELETE_BOOK() {
-        return DELETE_BOOK;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.DELETE_BOOK), "");
+
+        } else {
+
+            return DELETE_BOOK;
+
+        }
     }
 
     public String DELETE_SUBSCRIBER() {
-        return DELETE_SUBSCRIBER;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.DELETE_SUBSCRIBER), "");
+
+        } else {
+
+            return DELETE_SUBSCRIBER;
+
+        }
     }
 
     public String DELETE_TOY() {
-        return DELETE_TOY;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.DELETE_TOY), "");
+
+        } else {
+
+            return DELETE_TOY;
+
+        }
     }
 
     public String GET_BOOK_DETAILS() {
-        return GET_BOOK_DETAILS;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.GET_BOOK_DETAILS), "");
+
+        } else {
+
+            return GET_BOOK_DETAILS;
+
+        }
     }
 
     public String GET_INDIVIDUAL_ANALYSIS() {
-        return GET_INDIVIDUAL_ANALYSIS;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.GET_INDIVIDUAL_ANALYSIS), "");
+
+        } else {
+
+            return GET_INDIVIDUAL_ANALYSIS;
+
+        }
     }
 
     public String GET_INDIVIDUAL_SUBSCRIBER_DETAILS() {
-        return GET_INDIVIDUAL_SUBSCRIBER_DETAILS;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.GET_INDIVIDUAL_SUBSCRIBER_DETAILS), "");
+
+        } else {
+
+            return GET_INDIVIDUAL_SUBSCRIBER_DETAILS;
+
+        }
     }
 
     public String GET_ISSUED_BOOKS() {
-        return GET_ISSUED_BOOKS;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.GET_ISSUED_BOOKS), "");
+
+        } else {
+
+            return GET_ISSUED_BOOKS;
+
+        }
     }
 
     public String GET_SINGLE_ISSUED_BOOK_DETAILS() {
-        return GET_SINGLE_ISSUED_BOOK_DETAILS;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.GET_SINGLE_ISSUED_BOOK_DETAILS), "");
+
+        } else {
+
+            return GET_SINGLE_ISSUED_BOOK_DETAILS;
+
+        }
     }
 
     public String GET_SUBSCRIBERS_DETAILS() {
-        return GET_SUBSCRIBERS_DETAILS;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.GET_SUBSCRIBERS_DETAILS), "");
+
+        } else {
+
+            return GET_SUBSCRIBERS_DETAILS;
+
+        }
     }
 
     public String GET_SUBSCRIBER_ANALYSIS() {
-        return GET_SUBSCRIBER_ANALYSIS;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.GET_SUBSCRIBER_ANALYSIS), "");
+
+        } else {
+
+            return GET_SUBSCRIBER_ANALYSIS;
+
+        }
     }
 
     public String GET_TEMP_BOOK_DETAILS() {
-        return GET_TEMP_BOOK_DETAILS;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.GET_TEMP_BOOK_DETAILS), "");
+
+        } else {
+
+            return GET_TEMP_BOOK_DETAILS;
+
+        }
     }
 
     public String GET_TEMP_TOY_DETAILS() {
-        return GET_TEMP_TOY_DETAILS;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.GET_TEMP_TOY_DETAILS), "");
+
+        } else {
+
+            return GET_TEMP_TOY_DETAILS;
+
+        }
     }
 
     public String GET_TOTAL_ANALYSIS() {
-        return GET_TOTAL_ANALYSIS;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.GET_TOTAL_ANALYSIS), "");
+
+        } else {
+
+            return GET_TOTAL_ANALYSIS;
+
+        }
     }
 
     public String GET_TOY_DETAILS() {
-        return GET_TOY_DETAILS;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.GET_TOY_DETAILS), "");
+
+        } else {
+
+            return GET_TOY_DETAILS;
+
+        }
     }
 
     public String INSERT_TEMP_BOOK_DETAILS() {
-        return INSERT_TEMP_BOOK_DETAILS;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.INSERT_TEMP_BOOK_DETAILS), "");
+
+        } else {
+
+            return INSERT_TEMP_BOOK_DETAILS;
+
+        }
     }
 
     public String INSERT_TEMP_TOY_DETAILS() {
-        return INSERT_TEMP_TOY_DETAILS;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.INSERT_TEMP_TOY_DETAILS), "");
+
+        } else {
+
+            return INSERT_TEMP_TOY_DETAILS;
+
+        }
     }
 
     public String ISSUE_BOOK() {
-        return ISSUE_BOOK;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.ISSUE_BOOK), "");
+
+        } else {
+
+            return ISSUE_BOOK;
+
+        }
     }
 
     public String ISSUE_TOY() {
-        return ISSUE_TOY;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.ISSUE_TOY), "");
+
+        } else {
+
+            return ISSUE_TOY;
+
+        }
     }
 
     public String LAST_DAY_PROTOCOL() {
-        return LAST_DAY_PROTOCOL;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.LAST_DAY_PROTOCOL), "");
+
+        } else {
+
+            return LAST_DAY_PROTOCOL;
+
+        }
     }
 
     public String RETURN_BOOK() {
-        return RETURN_BOOK;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.RETURN_BOOK), "");
+
+        } else {
+
+            return RETURN_BOOK;
+
+        }
     }
 
     public String RETURN_TOY() {
-        return RETURN_TOY;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.RETURN_TOY), "");
+
+        } else {
+
+            return RETURN_TOY;
+
+        }
     }
 
     public String UPDATE_SUBSCRIBER_DETAILS() {
-        return UPDATE_SUBSCRIBER_DETAILS;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.UPDATE_SUBSCRIBER_DETAILS), "");
+
+        } else {
+
+            return UPDATE_SUBSCRIBER_DETAILS;
+
+        }
     }
 
     public String UPLOAD_SUBSCRIBER_PROFILE_IMAGE_ENHANCED() {
-        return UPLOAD_SUBSCRIBER_PROFILE_IMAGE_ENHANCED;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.UPLOAD_SUBSCRIBER_PROFILE_IMAGE_ENHANCED), "");
+
+        } else {
+
+            return UPLOAD_SUBSCRIBER_PROFILE_IMAGE_ENHANCED;
+
+        }
     }
 
     public String UPLOAD_SUBSCRIBER_PROFILE_PHOTO() {
-        return UPLOAD_SUBSCRIBER_PROFILE_PHOTO;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.UPLOAD_SUBSCRIBER_PROFILE_PHOTO), "");
+
+        } else {
+
+            return UPLOAD_SUBSCRIBER_PROFILE_PHOTO;
+
+        }
     }
 
     public String VIEW_CURRENTLY_ISSUED_TOYS() {
-        return VIEW_CURRENTLY_ISSUED_TOYS;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.VIEW_CURRENTLY_ISSUED_TOYS), "");
+
+        } else {
+
+            return VIEW_CURRENTLY_ISSUED_TOYS;
+
+        }
     }
 
     public String CANCEL_ISSUE_BOOK_PROTOCOL() {
-        return CANCEL_ISSUE_BOOK_PROTOCOL;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.CANCEL_ISSUE_BOOK_PROTOCOL), "");
+
+        } else {
+
+            return CANCEL_ISSUE_BOOK_PROTOCOL;
+
+        }
     }
 
     public String CANCEL_ISSUE_TOY_PROTOCOL() {
-        return CANCEL_ISSUE_TOY_PROTOCOL;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.CANCEL_ISSUE_TOY_PROTOCOL), "");
+
+        } else {
+
+            return CANCEL_ISSUE_TOY_PROTOCOL;
+
+        }
     }
 
     public String GET_ISSUED_BOOK_TO_ID() {
-        return GET_ISSUED_BOOK_TO_ID;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.GET_ISSUED_BOOK_TO_ID), "");
+
+        } else {
+
+            return GET_ISSUED_BOOK_TO_ID;
+
+        }
     }
 
     public String GET_LAST_UPDATED_IDS() {
-        return GET_LAST_UPDATED_IDS;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.GET_LAST_UPDATED_IDS), "");
+
+        } else {
+
+            return GET_LAST_UPDATED_IDS;
+
+        }
     }
 
     public String UPDATE_EXISTING_IDS() {
-        return UPDATE_EXISTING_IDS;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.UPDATE_EXISTING_IDS), "");
+
+        } else {
+
+            return UPDATE_EXISTING_IDS;
+
+        }
     }
 
     public String GET_JOINT_ACCOUNT() {
-        return GET_JOINT_ACCOUNT;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.GET_JOINT_ACCOUNT), "");
+
+        } else {
+
+            return GET_JOINT_ACCOUNT;
+
+        }
     }
 
     public String UPDATE_JOINT_ACCOUNT() {
-        return UPDATE_JOINT_ACCOUNT;
+        if(center.toLowerCase().contains("kompally")){
+
+            return sharedPreference.getString(context.getString(R.string.UPDATE_JOINT_ACCOUNT), "");
+
+        } else {
+
+            return UPDATE_JOINT_ACCOUNT;
+
+        }
     }
 }

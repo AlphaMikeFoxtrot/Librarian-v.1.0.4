@@ -130,7 +130,7 @@ public class ReturnBook extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().GET_ISSUED_BOOKS());
+                URL url = new URL(new ServerScriptsURL(ReturnBook.this).GET_ISSUED_BOOKS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setRequestMethod("GET");

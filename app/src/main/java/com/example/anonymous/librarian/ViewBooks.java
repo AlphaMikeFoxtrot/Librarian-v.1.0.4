@@ -190,7 +190,7 @@ public class ViewBooks extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().GET_BOOK_DETAILS());
+                URL url = new URL(new ServerScriptsURL(ViewBooks.this).GET_BOOK_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.connect();

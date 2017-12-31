@@ -284,7 +284,7 @@ public class ScannedBookDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().ADD_BOOK());
+                URL url = new URL(new ServerScriptsURL(ScannedBookDetails.this).ADD_BOOK());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);

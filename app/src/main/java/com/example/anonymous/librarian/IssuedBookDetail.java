@@ -159,7 +159,7 @@ public class IssuedBookDetail extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().RETURN_BOOK());
+                URL url = new URL(new ServerScriptsURL(IssuedBookDetail.this).RETURN_BOOK());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
@@ -245,7 +245,7 @@ public class IssuedBookDetail extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().GET_ISSUED_BOOK_TO_ID());
+                URL url = new URL(new ServerScriptsURL(IssuedBookDetail.this).GET_ISSUED_BOOK_TO_ID());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);

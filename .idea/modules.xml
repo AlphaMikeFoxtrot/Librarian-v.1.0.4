@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LibrarianFour.iml" filepath="$PROJECT_DIR$/LibrarianFour.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Librarian-v.1.0.4.iml" filepath="$PROJECT_DIR$/Librarian-v.1.0.4.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

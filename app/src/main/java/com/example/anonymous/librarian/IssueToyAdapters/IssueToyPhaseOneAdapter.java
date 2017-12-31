@@ -113,7 +113,7 @@ public class IssueToyPhaseOneAdapter extends RecyclerView.Adapter<IssueToyPhaseO
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().INSERT_TEMP_TOY_DETAILS());
+                URL url = new URL(new ServerScriptsURL(context).INSERT_TEMP_TOY_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);

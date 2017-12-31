@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -124,11 +125,26 @@ public class MainActivity extends AppCompatActivity {
         String actualDate = dateFormat.format(date);
         String enhancedDate = actualDate.replace("/", " ");
         String[] splitDate = enhancedDate.split(" ");
+        Toast.makeText(this, "" + getSharedPreferences(getString(R.string.URL_PREFERENCE), MODE_PRIVATE).getString(getString(R.string.ADD_BOOK), ""), Toast.LENGTH_SHORT).show();
+
 
         isLastDay = checkLastDay(splitDate[2]);
 
         if (isLastDay) {
             lastDayProtocol();
+        }
+
+        TextView textView = findViewById(R.id.ma_header);
+
+        SharedPreferences preferences = getSharedPreferences(getString(R.string.URL_PREFERENCE), MODE_PRIVATE);
+        if(preferences.getString(getString(R.string.CENTER), "").toLowerCase().contains("kompally")){
+
+            textView.setText("RFC Kompally");
+
+        } else {
+
+            textView.setText("RFC Secunderabad");
+
         }
 
         ArrayList<MainActivityListViewItems> listItems = new ArrayList<>();
@@ -190,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().LAST_DAY_PROTOCOL());
+                URL url = new URL(new ServerScriptsURL(MainActivity.this).LAST_DAY_PROTOCOL());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);
