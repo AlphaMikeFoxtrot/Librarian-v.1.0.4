@@ -23,13 +23,16 @@
     <string name="LOGIN_BOOLEAN">loginBoolean</string>
     <string name="LOGIN_USERNAME">loginUsername</string>
     <string name="LOGIN_PASSWORD">loginPassword</string>
-
+    <string name="ADMIN_LOCAL">admin2</string>
+    <string name="ADMIN_REGIONAL">admin</string>
+    <string name="ADMIN_LOCAL_KOMPALLY">admin2_kompally</string>
+    <string name="ADMIN_REGIONAL_KOMPALLY">admin_kompally</string>
 
     <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
     <!--THE FOLLOWING STRING VALUES WILL BE USED TO REROUTE THE APP TO DIFFERENT SERVER BASED ON THE SIGNED IN USER -->
     <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
-    <string name="URL_PREFERENCE">urlPreference</string>
+    <string name = "URL_PREFERENCE">urlPreference</string>
     <string name = "ADD_BOOK">add_book</string>
     <string name = "ADD_SUBSCRIBER">add_subscriber</string>
     <string name = "ADD_TOY">add_toy</string>
@@ -66,5 +69,8 @@
     <string name = "UPDATE_EXISTING_IDS">update_existing_ids</string>
     <string name = "GET_JOINT_ACCOUNT">get_joint_account</string>
     <string name = "UPDATE_JOINT_ACCOUNT">update_joint_account</string>
+    <string name = "CENTER">center</string>
+    <string name="KOMPALLY_CENTER">kompally</string>
+
 </resources>
 

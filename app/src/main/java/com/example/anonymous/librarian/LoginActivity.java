@@ -18,8 +18,8 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText mUsername, mPassword;
     Button mLogin;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
+    SharedPreferences sharedPreferences, sharedPreferencesCenter;
+    SharedPreferences.Editor editor, editorCenter;
     Boolean isLoggedIn;
 
 
@@ -95,20 +95,24 @@ public class LoginActivity extends AppCompatActivity {
         sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.LOGIN_PREFERENCE), 0);
         editor = sharedPreferences.edit();
 
+        sharedPreferencesCenter = getApplicationContext().getSharedPreferences(getString(R.string.URL_PREFERENCE), MODE_PRIVATE);
+        editorCenter = sharedPreferencesCenter.edit();
+
         isLoggedIn = sharedPreferences.getBoolean(getString(R.string.LOGIN_BOOLEAN), true);
 
         if(isLoggedIn){
 
-//            mUsername.setText(sharedPreferences.getString(getString(R.string.LOGIN_USERNAME), ""));
-//            mPassword.setText(sharedPreferences.getString(getString(R.string.LOGIN_PASSWORD), ""));
-            if(sharedPreferences.getString(getString(R.string.LOGIN_USERNAME), "").equals("admin2")){
+            //*************//
+            // SECUNDERABAD//
+            //*************//
+            if(sharedPreferences.getString(getString(R.string.LOGIN_USERNAME), "").equals(getString(R.string.ADMIN_LOCAL))){
 
                 Intent toMain = new Intent(LoginActivity.this, MainActivity.class);
                 toMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toMain);
                 finish();
 
-            } else if(sharedPreferences.getString(getString(R.string.LOGIN_USERNAME), "").equals("admin")){
+            } else if(sharedPreferences.getString(getString(R.string.LOGIN_USERNAME), "").equals(getString(R.string.ADMIN_REGIONAL))) {
 
                 Intent toReport = new Intent(this, ReportMainActivity.class);
                 toReport.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -123,14 +127,17 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(mUsername.getText().toString().toLowerCase().equals("admin2")){
+                if(mUsername.getText().toString().toLowerCase().equals(getString(R.string.ADMIN_LOCAL))){
 
-                    if(mPassword.getText().toString().toLowerCase().equals("admin2")){
+                    if(mPassword.getText().toString().toLowerCase().equals(getString(R.string.ADMIN_LOCAL))){
 
                         editor.putBoolean(getString(R.string.LOGIN_BOOLEAN), true);
                         editor.putString(getString(R.string.LOGIN_USERNAME), mUsername.getText().toString());
                         editor.putString(getString(R.string.LOGIN_PASSWORD), mPassword.getText().toString());
                         editor.commit();
+
+                        editorCenter.clear();
+                        editorCenter.commit();
 
                         Intent toMain = new Intent(LoginActivity.this, MainActivity.class);
                         toMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -140,14 +147,17 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
                     }
 
-                } else if (mUsername.getText().toString().toLowerCase().equals("admin")) {
+                } else if (mUsername.getText().toString().toLowerCase().equals(getString(R.string.ADMIN_REGIONAL))) {
 
-                    if(mPassword.getText().toString().toLowerCase().equals("admin")){
+                    if(mPassword.getText().toString().toLowerCase().equals(getString(R.string.ADMIN_REGIONAL))){
 
                         editor.putBoolean(getString(R.string.LOGIN_BOOLEAN), true);
                         editor.putString(getString(R.string.LOGIN_USERNAME), mUsername.getText().toString());
                         editor.putString(getString(R.string.LOGIN_PASSWORD), mPassword.getText().toString());
                         editor.commit();
+
+                        editorCenter.clear();
+                        editorCenter.commit();
 
                         Intent toReport = new Intent(LoginActivity.this, ReportMainActivity.class);
                         toReport.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -160,8 +170,115 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
 
+                } else if(mUsername.getText().toString().toLowerCase().equals(getString(R.string.ADMIN_LOCAL_KOMPALLY))){
+
+                    if(mPassword.getText().toString().toLowerCase().equals(getString(R.string.ADMIN_LOCAL_KOMPALLY))){
+
+                        editorCenter.putString(getString(R.string.CENTER), getString(R.string.KOMPALLY_CENTER));
+                        editorCenter.putString(getString(R.string.ADD_BOOK), "http://www.fardeenpanjwani.com/kompally/add_book.php");
+                        editorCenter.putString(getString(R.string.ADD_SUBSCRIBER), "http://www.fardeenpanjwani.com/kompally/add_subscriber.php");
+                        editorCenter.putString(getString(R.string.ADD_TOY), "http://www.fardeenpanjwani.com/kompally/add_toy.php");
+                        editorCenter.putString(getString(R.string.CHECK_PROFILE_PHOTO), "http://www.fardeenpanjwani.com/kompally/check_profile_photo.php");
+                        editorCenter.putString(getString(R.string.DELETE_BOOK), "http://www.fardeenpanjwani.com/kompally/delete_book.php");
+                        editorCenter.putString(getString(R.string.DELETE_SUBSCRIBER), "http://www.fardeenpanjwani.com/kompally/delete_subscriber.php");
+                        editorCenter.putString(getString(R.string.DELETE_TOY), "http://www.fardeenpanjwani.com/kompally/delete_toy.php");
+                        editorCenter.putString(getString(R.string.GET_BOOK_DETAILS), "http://www.fardeenpanjwani.com/kompally/get_book_details.php");
+                        editorCenter.putString(getString(R.string.GET_INDIVIDUAL_ANALYSIS), "http://www.fardeenpanjwani.com/kompally/get_individual_analysis.php");
+                        editorCenter.putString(getString(R.string.GET_INDIVIDUAL_SUBSCRIBER_DETAILS), "http://www.fardeenpanjwani.com/kompally/get_individual_subscriber_details.php");
+                        editorCenter.putString(getString(R.string.GET_ISSUED_BOOKS), "http://www.fardeenpanjwani.com/kompally/get_issued_books.php");
+                        editorCenter.putString(getString(R.string.GET_SINGLE_ISSUED_BOOK_DETAILS), "http://www.fardeenpanjwani.com/kompally/get_single_issued_book_details.php");
+                        editorCenter.putString(getString(R.string.GET_SUBSCRIBERS_DETAILS), "http://www.fardeenpanjwani.com/kompally/get_subscribers_details.php");
+                        editorCenter.putString(getString(R.string.GET_SUBSCRIBER_ANALYSIS), "http://www.fardeenpanjwani.com/kompally/get_subscriber_analysis.php");
+                        editorCenter.putString(getString(R.string.GET_TEMP_BOOK_DETAILS), "http://www.fardeenpanjwani.com/kompally/get_temp_book_details.php");
+                        editorCenter.putString(getString(R.string.GET_TEMP_TOY_DETAILS), "http://www.fardeenpanjwani.com/kompally/get_temp_toy_details.php");
+                        editorCenter.putString(getString(R.string.GET_TOTAL_ANALYSIS), "http://www.fardeenpanjwani.com/kompally/get_total_analysis.php");
+                        editorCenter.putString(getString(R.string.GET_TOY_DETAILS), "http://www.fardeenpanjwani.com/kompally/get_toy_details.php");
+                        editorCenter.putString(getString(R.string.INSERT_TEMP_BOOK_DETAILS), "http://www.fardeenpanjwani.com/kompally/insert_temp_book_details.php");
+                        editorCenter.putString(getString(R.string.INSERT_TEMP_TOY_DETAILS), "http://www.fardeenpanjwani.com/kompally/insert_temp_toy_details.php");
+                        editorCenter.putString(getString(R.string.ISSUE_BOOK), "http://www.fardeenpanjwani.com/kompally/issue_book.php");
+                        editorCenter.putString(getString(R.string.ISSUE_TOY), "http://www.fardeenpanjwani.com/kompally/issue_toy.php");
+                        editorCenter.putString(getString(R.string.LAST_DAY_PROTOCOL), "http://www.fardeenpanjwani.com/kompally/last_day_protocol.php");
+                        editorCenter.putString(getString(R.string.RETURN_BOOK), "http://www.fardeenpanjwani.com/kompally/return_book.php");
+                        editorCenter.putString(getString(R.string.RETURN_TOY), "http://www.fardeenpanjwani.com/kompally/return_toy.php");
+                        editorCenter.putString(getString(R.string.UPDATE_SUBSCRIBER_DETAILS), "http://www.fardeenpanjwani.com/kompally/update_subscriber_details.php");
+                        editorCenter.putString(getString(R.string.UPLOAD_SUBSCRIBER_PROFILE_IMAGE_ENHANCED), "http://www.fardeenpanjwani.com/kompally/upload_subscriber_profile_image_enhanced.php");
+                        editorCenter.putString(getString(R.string.UPLOAD_SUBSCRIBER_PROFILE_PHOTO), "http://www.fardeenpanjwani.com/kompally/upload_subscriber_profile_photo.php");
+                        editorCenter.putString(getString(R.string.VIEW_CURRENTLY_ISSUED_TOYS), "http://www.fardeenpanjwani.com/kompally/view_currently_issued_toys.php");
+                        editorCenter.putString(getString(R.string.CANCEL_ISSUE_BOOK_PROTOCOL), "http://www.fardeenpanjwani.com/kompally/cancel_issue_book_protocol.php");
+                        editorCenter.putString(getString(R.string.CANCEL_ISSUE_TOY_PROTOCOL), "http://www.fardeenpanjwani.com/kompally/cancel_issue_toy_protocol.php");
+                        editorCenter.putString(getString(R.string.GET_ISSUED_BOOK_TO_ID), "http://www.fardeenpanjwani.com/kompally/get_issued_book_to_id.php");
+                        editorCenter.putString(getString(R.string.GET_LAST_UPDATED_IDS), "http://www.fardeenpanjwani.com/kompally/get_last_updated_ids.php");
+                        editorCenter.putString(getString(R.string.UPDATE_EXISTING_IDS), "http://www.fardeenpanjwani.com/kompally/update_existing_ids.php");
+                        editorCenter.putString(getString(R.string.GET_JOINT_ACCOUNT), "http://www.fardeenpanjwani.com/kompally/get_joint_account.php");
+                        editorCenter.putString(getString(R.string.UPDATE_JOINT_ACCOUNT), "http://www.fardeenpanjwani.com/kompally/update_joint_account.php");
+                        editorCenter.commit();
+
+                        Intent toMain = new Intent(LoginActivity.this, MainActivity.class);
+                        toMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(toMain);
+
+                    } else {
+
+                        Toast.makeText(LoginActivity.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                } else if(mUsername.getText().toString().toLowerCase().equals(getString(R.string.ADMIN_REGIONAL_KOMPALLY))){
+
+                    if(mPassword.getText().toString().toLowerCase().equals(getString(R.string.ADMIN_REGIONAL_KOMPALLY))) {
+                        editorCenter.putString(getString(R.string.CENTER), getString(R.string.KOMPALLY_CENTER));
+                        editorCenter.putString(getString(R.string.ADD_BOOK), "http://www.fardeenpanjwani.com/kompally/add_book.php");
+                        editorCenter.putString(getString(R.string.ADD_SUBSCRIBER), "http://www.fardeenpanjwani.com/kompally/add_subscriber.php");
+                        editorCenter.putString(getString(R.string.ADD_TOY), "http://www.fardeenpanjwani.com/kompally/add_toy.php");
+                        editorCenter.putString(getString(R.string.CHECK_PROFILE_PHOTO), "http://www.fardeenpanjwani.com/kompally/check_profile_photo.php");
+                        editorCenter.putString(getString(R.string.DELETE_BOOK), "http://www.fardeenpanjwani.com/kompally/delete_book.php");
+                        editorCenter.putString(getString(R.string.DELETE_SUBSCRIBER), "http://www.fardeenpanjwani.com/kompally/delete_subscriber.php");
+                        editorCenter.putString(getString(R.string.DELETE_TOY), "http://www.fardeenpanjwani.com/kompally/delete_toy.php");
+                        editorCenter.putString(getString(R.string.GET_BOOK_DETAILS), "http://www.fardeenpanjwani.com/kompally/get_book_details.php");
+                        editorCenter.putString(getString(R.string.GET_INDIVIDUAL_ANALYSIS), "http://www.fardeenpanjwani.com/kompally/get_individual_analysis.php");
+                        editorCenter.putString(getString(R.string.GET_INDIVIDUAL_SUBSCRIBER_DETAILS), "http://www.fardeenpanjwani.com/kompally/get_individual_subscriber_details.php");
+                        editorCenter.putString(getString(R.string.GET_ISSUED_BOOKS), "http://www.fardeenpanjwani.com/kompally/get_issued_books.php");
+                        editorCenter.putString(getString(R.string.GET_SINGLE_ISSUED_BOOK_DETAILS), "http://www.fardeenpanjwani.com/kompally/get_single_issued_book_details.php");
+                        editorCenter.putString(getString(R.string.GET_SUBSCRIBERS_DETAILS), "http://www.fardeenpanjwani.com/kompally/get_subscribers_details.php");
+                        editorCenter.putString(getString(R.string.GET_SUBSCRIBER_ANALYSIS), "http://www.fardeenpanjwani.com/kompally/get_subscriber_analysis.php");
+                        editorCenter.putString(getString(R.string.GET_TEMP_BOOK_DETAILS), "http://www.fardeenpanjwani.com/kompally/get_temp_book_details.php");
+                        editorCenter.putString(getString(R.string.GET_TEMP_TOY_DETAILS), "http://www.fardeenpanjwani.com/kompally/get_temp_toy_details.php");
+                        editorCenter.putString(getString(R.string.GET_TOTAL_ANALYSIS), "http://www.fardeenpanjwani.com/kompally/get_total_analysis.php");
+                        editorCenter.putString(getString(R.string.GET_TOY_DETAILS), "http://www.fardeenpanjwani.com/kompally/get_toy_details.php");
+                        editorCenter.putString(getString(R.string.INSERT_TEMP_BOOK_DETAILS), "http://www.fardeenpanjwani.com/kompally/insert_temp_book_details.php");
+                        editorCenter.putString(getString(R.string.INSERT_TEMP_TOY_DETAILS), "http://www.fardeenpanjwani.com/kompally/insert_temp_toy_details.php");
+                        editorCenter.putString(getString(R.string.ISSUE_BOOK), "http://www.fardeenpanjwani.com/kompally/issue_book.php");
+                        editorCenter.putString(getString(R.string.ISSUE_TOY), "http://www.fardeenpanjwani.com/kompally/issue_toy.php");
+                        editorCenter.putString(getString(R.string.LAST_DAY_PROTOCOL), "http://www.fardeenpanjwani.com/kompally/last_day_protocol.php");
+                        editorCenter.putString(getString(R.string.RETURN_BOOK), "http://www.fardeenpanjwani.com/kompally/return_book.php");
+                        editorCenter.putString(getString(R.string.RETURN_TOY), "http://www.fardeenpanjwani.com/kompally/return_toy.php");
+                        editorCenter.putString(getString(R.string.UPDATE_SUBSCRIBER_DETAILS), "http://www.fardeenpanjwani.com/kompally/update_subscriber_details.php");
+                        editorCenter.putString(getString(R.string.UPLOAD_SUBSCRIBER_PROFILE_IMAGE_ENHANCED), "http://www.fardeenpanjwani.com/kompally/upload_subscriber_profile_image_enhanced.php");
+                        editorCenter.putString(getString(R.string.UPLOAD_SUBSCRIBER_PROFILE_PHOTO), "http://www.fardeenpanjwani.com/kompally/upload_subscriber_profile_photo.php");
+                        editorCenter.putString(getString(R.string.VIEW_CURRENTLY_ISSUED_TOYS), "http://www.fardeenpanjwani.com/kompally/view_currently_issued_toys.php");
+                        editorCenter.putString(getString(R.string.CANCEL_ISSUE_BOOK_PROTOCOL), "http://www.fardeenpanjwani.com/kompally/cancel_issue_book_protocol.php");
+                        editorCenter.putString(getString(R.string.CANCEL_ISSUE_TOY_PROTOCOL), "http://www.fardeenpanjwani.com/kompally/cancel_issue_toy_protocol.php");
+                        editorCenter.putString(getString(R.string.GET_ISSUED_BOOK_TO_ID), "http://www.fardeenpanjwani.com/kompally/get_issued_book_to_id.php");
+                        editorCenter.putString(getString(R.string.GET_LAST_UPDATED_IDS), "http://www.fardeenpanjwani.com/kompally/get_last_updated_ids.php");
+                        editorCenter.putString(getString(R.string.UPDATE_EXISTING_IDS), "http://www.fardeenpanjwani.com/kompally/update_existing_ids.php");
+                        editorCenter.putString(getString(R.string.GET_JOINT_ACCOUNT), "http://www.fardeenpanjwani.com/kompally/get_joint_account.php");
+                        editorCenter.putString(getString(R.string.UPDATE_JOINT_ACCOUNT), "http://www.fardeenpanjwani.com/kompally/update_joint_account.php");
+                        editorCenter.commit();
+
+                        Intent toReport = new Intent(LoginActivity.this, ReportMainActivity.class);
+                        toReport.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(toReport);
+
+                    } else {
+
+                        Toast.makeText(LoginActivity.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
+
+                    }
+
                 } else {
+
                     Toast.makeText(LoginActivity.this, "Username and password do not match", Toast.LENGTH_SHORT).show();
+
                 }
 
             }
@@ -179,7 +296,7 @@ public class LoginActivity extends AppCompatActivity {
 
             // this means that the user has signed in earlier
             // and needs to be taken to the main activity
-            if(preferences.getString(getString(R.string.LOGIN_USERNAME), "") == "admin2" && preferences.getString(getString(R.string.LOGIN_PASSWORD), "") == "admin2") {
+            if(preferences.getString(getString(R.string.LOGIN_USERNAME), "") == getString(R.string.ADMIN_LOCAL) && preferences.getString(getString(R.string.LOGIN_PASSWORD), "") == getString(R.string.ADMIN_LOCAL)) {
 
                 // this account is to be
                 // used by the librarians
@@ -187,7 +304,7 @@ public class LoginActivity extends AppCompatActivity {
                 toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toMainActivity);
 
-            } else if(preferences.getString(getString(R.string.LOGIN_USERNAME), "") == "admin" && preferences.getString(getString(R.string.LOGIN_PASSWORD), "") == "admin"){
+            } else if(preferences.getString(getString(R.string.LOGIN_USERNAME), "") == getString(R.string.ADMIN_REGIONAL) && preferences.getString(getString(R.string.LOGIN_PASSWORD), "") == getString(R.string.ADMIN_REGIONAL)){
 
                 // this account is to be used
                 // by the regional council chaps
@@ -201,10 +318,10 @@ public class LoginActivity extends AppCompatActivity {
 
     public String checkCredentials(String username, String password){
 
-        if(username.trim() == "admin" && password.trim() == "admin"){
-            return "admin";
-        } else if(username.trim() == "admin2" && password.trim() == "admin2"){
-            return "admin2";
+        if(username.trim() == getString(R.string.ADMIN_REGIONAL) && password.trim() == getString(R.string.ADMIN_REGIONAL)){
+            return getString(R.string.ADMIN_REGIONAL);
+        } else if(username.trim() == getString(R.string.ADMIN_LOCAL) && password.trim() == getString(R.string.ADMIN_LOCAL)){
+            return getString(R.string.ADMIN_LOCAL);
         } else {
             return "false";
         }

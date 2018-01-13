@@ -181,7 +181,7 @@ public class ReportMainActivity extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().LAST_DAY_PROTOCOL());
+                URL url = new URL(new ServerScriptsURL(ReportMainActivity.this).LAST_DAY_PROTOCOL());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);

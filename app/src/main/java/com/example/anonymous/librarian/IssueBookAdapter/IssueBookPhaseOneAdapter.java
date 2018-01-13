@@ -120,7 +120,7 @@ public class IssueBookPhaseOneAdapter extends RecyclerView.Adapter<IssueBookPhas
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().INSERT_TEMP_BOOK_DETAILS());
+                URL url = new URL(new ServerScriptsURL(context).INSERT_TEMP_BOOK_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);

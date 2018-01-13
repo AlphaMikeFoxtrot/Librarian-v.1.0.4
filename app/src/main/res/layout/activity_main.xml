@@ -30,6 +30,7 @@
                 android:src="@drawable/logo"/>
 
             <TextView
+                android:id="@+id/ma_header"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Read For Children"
