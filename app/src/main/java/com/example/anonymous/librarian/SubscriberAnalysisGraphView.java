@@ -1,6 +1,7 @@
 package com.example.anonymous.librarian;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
@@ -60,6 +61,15 @@ public class SubscriberAnalysisGraphView extends AppCompatActivity {
             unregisterReceiver(receiver);
             flag = false;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent toDetails = new Intent(SubscriberAnalysisGraphView.this, SubscriberDetails.class);
+        toDetails.putExtra("previousAct", getIntent().getStringExtra("previousAct"));
+        toDetails.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(toDetails);
+
     }
 
     @Override
@@ -130,7 +140,7 @@ public class SubscriberAnalysisGraphView extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().GET_INDIVIDUAL_ANALYSIS());
+                URL url = new URL(new ServerScriptsURL(SubscriberAnalysisGraphView.this).GET_INDIVIDUAL_ANALYSIS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);
@@ -240,7 +250,7 @@ public class SubscriberAnalysisGraphView extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().GET_TOTAL_ANALYSIS());
+                URL url = new URL(new ServerScriptsURL(SubscriberAnalysisGraphView.this).GET_TOTAL_ANALYSIS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);

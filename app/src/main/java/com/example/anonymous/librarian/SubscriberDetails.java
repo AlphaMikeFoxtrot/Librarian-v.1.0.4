@@ -197,6 +197,7 @@ public class SubscriberDetails extends AppCompatActivity {
                 Intent toGraphView = new Intent(SubscriberDetails.this, SubscriberAnalysisGraphView.class);
                 toGraphView.putExtra("month", analysis.get(i).getmMonthOfAnalysis());
                 toGraphView.putExtra("subscriberId", mSubscriberId.getText().toString());
+                toGraphView.putExtra("previousAct", getIntent().getStringExtra("previousAct"));
                 toGraphView.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(toGraphView);
 
@@ -262,8 +263,6 @@ public class SubscriberDetails extends AppCompatActivity {
 
             TextView textView = findViewById(R.id.subscriber_detail_joint_account);
 
-            // Toast.makeText(this, "" + textView.getText().toString(), Toast.LENGTH_SHORT).show();
-
             Intent toEdit = new Intent(SubscriberDetails.this, EditSubscriberDetails.class);
             toEdit.putExtra("subId", mSubscriberId.getText().toString());
             toEdit.putExtra("subName", mSubscriberName.getText().toString());
@@ -272,7 +271,7 @@ public class SubscriberDetails extends AppCompatActivity {
             toEdit.putExtra("enrollmentType", mSubscriberEnrollmentType.getText().toString());
             toEdit.putExtra("dob", mSubscriberDOB.getText().toString());
             toEdit.putExtra("phone", mSubscriberPhone.getText().toString());
-            toEdit.putExtra("jointAccountRaw", textView.getText().toString());
+            toEdit.putExtra("jointAccountRaw", joint_account_raw);
             toEdit.putExtra("jointAccountEdited", JOINT_ACCOUNT_NULL + joint_account_raw);
             toEdit.putExtra("previousAct", getIntent().getStringExtra("previousAct"));
             toEdit.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -305,7 +304,7 @@ public class SubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().GET_INDIVIDUAL_SUBSCRIBER_DETAILS());
+                URL url = new URL(new ServerScriptsURL(SubscriberDetails.this).GET_INDIVIDUAL_SUBSCRIBER_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);
@@ -435,7 +434,7 @@ public class SubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().GET_SUBSCRIBER_ANALYSIS());
+                URL url = new URL(new ServerScriptsURL(SubscriberDetails.this).GET_SUBSCRIBER_ANALYSIS());
 
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
@@ -551,7 +550,7 @@ public class SubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().UPLOAD_SUBSCRIBER_PROFILE_IMAGE_ENHANCED());
+                URL url = new URL(new ServerScriptsURL(SubscriberDetails.this).UPLOAD_SUBSCRIBER_PROFILE_IMAGE_ENHANCED());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
@@ -638,7 +637,7 @@ public class SubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().CHECK_PROFILE_PHOTO());
+                URL url = new URL(new ServerScriptsURL(SubscriberDetails.this).CHECK_PROFILE_PHOTO());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);

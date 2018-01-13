@@ -1,6 +1,8 @@
 package com.example.anonymous.librarian;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -39,6 +41,7 @@ public class IssueToyFinalPhase extends AppCompatActivity {
     NetworkChangeReceiver receiver;
     Boolean flag = false;
     IntentFilter filter;
+    public String subEnrolledFor;
 
     @Override
     protected void onStop() {
@@ -84,6 +87,8 @@ public class IssueToyFinalPhase extends AppCompatActivity {
         subscriberName = findViewById(R.id.issue_toy_final_subscriber_name);
         subscriberId = findViewById(R.id.issue_toy_final_subscriber_id);
 
+        subEnrolledFor = "";
+
         submit = findViewById(R.id.issue_toy_submit_button);
         cancel = findViewById(R.id.issue_toy_cancel_button);
 
@@ -94,13 +99,52 @@ public class IssueToyFinalPhase extends AppCompatActivity {
         GetTempBookDetailsAsyncTask getTempBookDetailsAsyncTask = new GetTempBookDetailsAsyncTask();
         getTempBookDetailsAsyncTask.execute();
 
+        new GetSubscriberDetails().execute();
+        Toast.makeText(this, "" + subEnrolledFor, Toast.LENGTH_SHORT).show();
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = getIntent();
-                IssueToyAsyncTask issueToyAsyncTask = new IssueToyAsyncTask();
-                // Toast.makeText(IssueToyFinalPhase.this, "" + intent.getStringExtra("subscriberName") + "\n" + intent.getStringExtra("subscriberId"), Toast.LENGTH_SHORT).show();
-                issueToyAsyncTask.execute(toyName.getText().toString(), toyId.getText().toString(), intent.getStringExtra("subscriberName"), intent.getStringExtra("subscriberId"));
+
+                new GetSubscriberDetails().execute();
+
+                if(subEnrolledFor.toLowerCase().contains("etl") || subEnrolledFor.toLowerCase().contains("tl")){
+
+                    // The subscriber is eligible for issue of toy
+                    Intent intent = getIntent();
+                    IssueToyAsyncTask issueToyAsyncTask = new IssueToyAsyncTask();
+                    // Toast.makeText(IssueToyFinalPhase.this, "" + intent.getStringExtra("subscriberName") + "\n" + intent.getStringExtra("subscriberId"), Toast.LENGTH_SHORT).show();
+                    issueToyAsyncTask.execute(toyName.getText().toString(), toyId.getText().toString(), intent.getStringExtra("subscriberName"), intent.getStringExtra("subscriberId"));
+
+                } else if (!(subEnrolledFor.toLowerCase().contains("etl") || subEnrolledFor.toLowerCase().contains("tl"))){
+
+                    // the subscriber is not eligible for issue of toy
+                    // as the enrolledFor field is RFC only
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which){
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    //Yes button clicked
+                                    Intent toList = new Intent(IssueToyFinalPhase.this, IssueToyPhaseOne.class);
+                                    toList.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(toList);
+                                    finish();
+                                    break;
+
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    //No button clicked
+                                    break;
+                            }
+                        }
+                    };
+
+                    String message = "The user selected is not eligible for issue of Toy\nPlease check the subscriber\'s \'ENROLLED FOR\' detail\nclick continue to reset the issue phase";
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(IssueToyFinalPhase.this);
+                    builder.setMessage(message).setPositiveButton("Continue", dialogClickListener).show();
+
+                }
             }
         });
 
@@ -119,12 +163,12 @@ public class IssueToyFinalPhase extends AppCompatActivity {
 
     public class GetTempBookDetailsAsyncTask extends AsyncTask<String, Void, String> {
 
-        @Override
-        protected void onPreExecute() {
-            progressDialog = new ProgressDialog(IssueToyFinalPhase.this);
-            progressDialog.setMessage("Loading necessary Data");
-            progressDialog.show();
-        }
+//        @Override
+//        protected void onPreExecute() {
+//            progressDialog = new ProgressDialog(IssueToyFinalPhase.this);
+//            progressDialog.setMessage("Loading necessary Data");
+//            progressDialog.show();
+//        }
 
         @Override
         protected String doInBackground(String... strings) {
@@ -135,7 +179,7 @@ public class IssueToyFinalPhase extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().GET_TEMP_TOY_DETAILS());
+                URL url = new URL(new ServerScriptsURL(IssueToyFinalPhase.this).GET_TEMP_TOY_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setRequestMethod("GET");
@@ -176,12 +220,13 @@ public class IssueToyFinalPhase extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+            // progressDialog.dismiss();
             if(s.toString().length() <= 0){
-                progressDialog.dismiss();
+                // progressDialog.dismiss();
                 toyName.setText("un available");
                 toyId.setText("un available");
             } else {
-                progressDialog.dismiss();
+                // progressDialog.dismiss();
                 try {
 
                     JSONArray root = new JSONArray(s);
@@ -192,6 +237,113 @@ public class IssueToyFinalPhase extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+            }
+        }
+    }
+
+    public class GetSubscriberDetails extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(IssueToyFinalPhase.this);
+            progressDialog.setMessage("checking subscriber details...");
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String subId = subscriberId.getText().toString();
+
+            HttpURLConnection httpURLConnection = null;
+            BufferedReader bufferedReader = null;
+            BufferedWriter bufferedWriter = null;
+
+            try {
+
+                URL url = new URL(new ServerScriptsURL().GET_INDIVIDUAL_SUBSCRIBER_DETAILS());
+                httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.connect();
+
+                bufferedWriter = new BufferedWriter(new OutputStreamWriter(httpURLConnection.getOutputStream(), "UTF-8"));
+                String data = URLEncoder.encode("subscriberId", "UTF-8") +"="+ URLEncoder.encode(subId, "UTF-8");
+
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+
+                bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+
+                String line;
+                StringBuilder json = new StringBuilder();
+
+                while ((line = bufferedReader.readLine()) != null) {
+
+                    json.append(line);
+
+                }
+
+                return json.toString();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return  "";
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "";
+            } finally {
+                if(httpURLConnection != null){
+                    httpURLConnection.disconnect();
+                }
+                if(bufferedReader != null){
+                    try {
+                        bufferedReader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            progressDialog.dismiss();
+            if(s.isEmpty() || s.length() < 0){
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                //Yes button clicked
+                                Intent toList = new Intent(IssueToyFinalPhase.this, IssueToyPhaseOne.class);
+                                toList.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(toList);
+                                finish();
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+                };
+
+                String message = "Sorry! An error occurred when getting subscriber information\nIssuing of Toy with the information is not possible\nPlease try again after some time";
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(IssueToyFinalPhase.this);
+                builder.setMessage(message).setPositiveButton("Cancel issue of Toy", dialogClickListener).show();
+            } else {
+
+                try {
+
+                    JSONObject root = new JSONObject(s);
+                    subEnrolledFor = root.getString("subscriber_enrolled_for");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         }
     }
@@ -224,7 +376,7 @@ public class IssueToyFinalPhase extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().ISSUE_TOY());
+                URL url = new URL(new ServerScriptsURL(IssueToyFinalPhase.this).ISSUE_TOY());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
                 httpURLConnection.setDoOutput(true);
@@ -235,10 +387,10 @@ public class IssueToyFinalPhase extends AppCompatActivity {
                 bufferedWriter = new BufferedWriter(outputStreamWriter);
 
                 String dataToWrite = URLEncoder.encode("toy_name", "UTF-8") +"="+ URLEncoder.encode(toyName, "UTF-8") +"&"+
-                                URLEncoder.encode("toy_id", "UTF-8") +"="+ URLEncoder.encode(toyId, "UTF-8") +"&"+
-                                URLEncoder.encode("subscriber_name", "UTF-8") +"="+ URLEncoder.encode(subscriberName, "UTF-8") +"&"+
-                                URLEncoder.encode("subscriber_id", "UTF-8") +"="+ URLEncoder.encode(subscriberId, "UTF-8") +"&"+
-                                URLEncoder.encode("issued_on", "UTF-8") +"="+ URLEncoder.encode(issuedOnDate, "UTF-8");
+                        URLEncoder.encode("toy_id", "UTF-8") +"="+ URLEncoder.encode(toyId, "UTF-8") +"&"+
+                        URLEncoder.encode("subscriber_name", "UTF-8") +"="+ URLEncoder.encode(subscriberName, "UTF-8") +"&"+
+                        URLEncoder.encode("subscriber_id", "UTF-8") +"="+ URLEncoder.encode(subscriberId, "UTF-8") +"&"+
+                        URLEncoder.encode("issued_on", "UTF-8") +"="+ URLEncoder.encode(issuedOnDate, "UTF-8");
 
                 bufferedWriter.write(dataToWrite);
                 bufferedWriter.flush();
@@ -315,7 +467,7 @@ public class IssueToyFinalPhase extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().CANCEL_ISSUE_TOY_PROTOCOL());
+                URL url = new URL(new ServerScriptsURL(IssueToyFinalPhase.this).CANCEL_ISSUE_TOY_PROTOCOL());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.connect();

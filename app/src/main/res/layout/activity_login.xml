@@ -24,6 +24,7 @@
         android:fontFamily="sans-serif-smallcaps"
         android:hint="Username"
         android:textSize="20sp"
+        android:inputType="textWebEditText"
         android:padding="12dp"
         style="@style/Base.V12.Widget.AppCompat.EditText"
         android:layout_margin="6dp"

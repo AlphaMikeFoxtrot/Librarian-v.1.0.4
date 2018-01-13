@@ -86,6 +86,7 @@ public class AddSubscriber extends AppCompatActivity {
     public void onBackPressed() {
         Intent toPreviousActivity = new Intent(this, ViewSubscribers.class);
         toPreviousActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        toPreviousActivity.putExtra("previousAct", getIntent().getStringExtra("previousAct"));
         startActivity(toPreviousActivity);
     }
 
@@ -124,6 +125,7 @@ public class AddSubscriber extends AppCompatActivity {
 
                 Intent toSubscriberList = new Intent(AddSubscriber.this, ViewSubscribers.class);
                 toSubscriberList.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                toSubscriberList.putExtra("previousAct", getIntent().getStringExtra("previousAct"));
                 startActivity(toSubscriberList);
 
             }
@@ -155,7 +157,7 @@ public class AddSubscriber extends AppCompatActivity {
                     dob.setTime(sdf.parse(newDOB.getText().toString()));
                     if(getAge(dob) > 8 && (newEnrolledFor.getText().toString().toUpperCase().contains("TOYLIB") || newEnrolledFor.getText().toString().toUpperCase().contains("TL"))){
 
-                        // no eligible for Toy Library
+                        // not eligible for Toy Library
                         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -245,7 +247,7 @@ public class AddSubscriber extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().ADD_SUBSCRIBER());
+                URL url = new URL(new ServerScriptsURL(AddSubscriber.this).ADD_SUBSCRIBER());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
@@ -315,6 +317,7 @@ public class AddSubscriber extends AppCompatActivity {
                 Toast.makeText(AddSubscriber.this, "new Subscriber successfully added", Toast.LENGTH_SHORT).show();
                 Intent toSubscriberList = new Intent(AddSubscriber.this, ViewSubscribers.class);
                 toSubscriberList.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                toSubscriberList.putExtra("previousAct", getIntent().getStringExtra("previousAct"));
                 startActivity(toSubscriberList);
             } else {
                 progressDialog.dismiss();
@@ -342,7 +345,7 @@ public class AddSubscriber extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().GET_SUBSCRIBERS_DETAILS());
+                URL url = new URL(new ServerScriptsURL(AddSubscriber.this).GET_SUBSCRIBERS_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setRequestMethod("GET");

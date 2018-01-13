@@ -51,7 +51,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
     EditText mNewSubscriberEnrolledOn, mNewSubscriberEnrolledFor, mNewSubscriberEnrollmentType, mNewSubscriberDOB, mNewSubscriberPhone;
     Button mSubmit, mCancel, mReset;
     public String oldId;
-    public ProgressDialog progressDialog, deleteProgressDialog, getProgressDialog, pd;
+    public ProgressDialog progressDialog, deleteProgressDialog, getProgressDialog, updateProgressDialog;
     LinearLayout linearLayout;
     NetworkChangeReceiver receiver;
     Boolean flag = false;
@@ -80,9 +80,37 @@ public class EditSubscriberDetails extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        Intent toDetails = new Intent(EditSubscriberDetails.this, SubscriberDetails.class);
+        toDetails.putExtra("previousAct", getIntent().getStringExtra("previousAct"));
+        toDetails.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(toDetails);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_subscriber_details);
+
+//        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                switch (which){
+//                    case DialogInterface.BUTTON_POSITIVE:
+//                        //Yes button clicked
+//                        break;
+//
+//                    case DialogInterface.BUTTON_NEGATIVE:
+//                        //No button clicked
+//                        break;
+//                }
+//            }
+//        };
+//
+//        String message = getIntent().getStringExtra("jointAccountRaw");
+//
+//        AlertDialog.Builder builder = new AlertDialog.Builder(EditSubscriberDetails.this);
+//        builder.setMessage(message).setPositiveButton("Continue", dialogClickListener).show();
 
         mToolbar = findViewById(R.id.edit_subscriber_detail_toolbar);
         setSupportActionBar(mToolbar);
@@ -139,6 +167,10 @@ public class EditSubscriberDetails extends AppCompatActivity {
 
                 // submitClicked();
                 new UpdateSusbscriberAsyncTask().execute();
+                Intent toMainActivity = new Intent(EditSubscriberDetails.this, MainActivity.class);
+                toMainActivity.putExtra("previousAct", getIntent().getStringExtra("previousAct"));
+                toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(toMainActivity);
 
             }
         });
@@ -246,9 +278,9 @@ public class EditSubscriberDetails extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            progressDialog = new ProgressDialog(EditSubscriberDetails.this);
-            progressDialog.setMessage("Updating data");
-            progressDialog.show();
+//            updateProgressDialog = new ProgressDialog(getApplicationContext());
+//            updateProgressDialog.setMessage("Updating data");
+//            updateProgressDialog.show();
         }
 
         @Override
@@ -263,7 +295,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().UPDATE_SUBSCRIBER_DETAILS());
+                URL url = new URL(new ServerScriptsURL(EditSubscriberDetails.this).UPDATE_SUBSCRIBER_DETAILS());
 
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
@@ -287,8 +319,8 @@ public class EditSubscriberDetails extends AppCompatActivity {
                         URLEncoder.encode("enrollmentType", "UTF-8") +"="+ URLEncoder.encode(mNewSubscriberEnrollmentType.getText().toString()) +"&"+
                         URLEncoder.encode("phone", "UTF-8") +"="+ URLEncoder.encode(mNewSubscriberPhone.getText().toString()) +"&"+
                         URLEncoder.encode("dob", "UTF-8") +"="+ URLEncoder.encode(mNewSubscriberDOB.getText().toString()) +"&"+
-                        URLEncoder.encode("id", "UTF-8") +"="+ URLEncoder.encode(subscriberId) +"&"+
-                        URLEncoder.encode("jointAccount", "UTF-8") +"="+ URLEncoder.encode(textView.getText().toString(), "UTF-8");
+                        URLEncoder.encode("id", "UTF-8") +"="+ URLEncoder.encode(subscriberId);
+//                        URLEncoder.encode("jointAccount", "UTF-8") +"="+ URLEncoder.encode(getIntent().getStringExtra("jointAccountRaw"), "UTF-8");
 
                 bufferedWriter.write(dataToWrite);
                 bufferedWriter.flush();
@@ -333,21 +365,33 @@ public class EditSubscriberDetails extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+            // updateProgressDialog.dismiss();
             if(s.contains("success")){
 
-                progressDialog.dismiss();
                 Toast.makeText(EditSubscriberDetails.this, "Subscriber Detail successfully updated", Toast.LENGTH_SHORT).show();
-                Intent toMainActivity = new Intent(EditSubscriberDetails.this, MainActivity.class);
-                toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(toMainActivity);
 
             } else {
 
-                progressDialog.dismiss();
                 Toast.makeText(EditSubscriberDetails.this, "Sorry! There seems to be a problem with the server!\n" + s, Toast.LENGTH_SHORT).show();
-                Intent toMainActivity = new Intent(EditSubscriberDetails.this, MainActivity.class);
-                toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(toMainActivity);
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                //Yes button clicked
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+                };
+
+                String message = s;
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(EditSubscriberDetails.this);
+                builder.setMessage(message).setPositiveButton("Continue", dialogClickListener).show();
 
             }
         }
@@ -373,7 +417,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().DELETE_SUBSCRIBER());
+                URL url = new URL(new ServerScriptsURL(EditSubscriberDetails.this).DELETE_SUBSCRIBER());
 
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoInput(true);
@@ -429,12 +473,14 @@ public class EditSubscriberDetails extends AppCompatActivity {
                 deleteProgressDialog.dismiss();
 
                 Toast.makeText(EditSubscriberDetails.this, "Subscriber successfully deleted", Toast.LENGTH_SHORT).show();
-                Intent toMainActivity = new Intent(EditSubscriberDetails.this, MainActivity.class);
+                Intent toMainActivity = new Intent(EditSubscriberDetails.this, ViewSubscribers.class);
                 toMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                toMainActivity.putExtra("previousAct", getIntent().getStringExtra("previousAct"));
                 startActivity(toMainActivity);
             } else {
                 deleteProgressDialog.dismiss();
-                Toast.makeText(EditSubscriberDetails.this, "Sorry! Something went wrong.\n" + s, Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(EditSubscriberDetails.this, "Sorry! Something went wrong.\n" + s, Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -456,7 +502,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().GET_JOINT_ACCOUNT());
+                URL url = new URL(new ServerScriptsURL(EditSubscriberDetails.this).GET_JOINT_ACCOUNT());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
@@ -530,7 +576,7 @@ public class EditSubscriberDetails extends AppCompatActivity {
 
             try {
 
-                URL url = new URL(new ServerScriptsURL().GET_SUBSCRIBERS_DETAILS());
+                URL url = new URL(new ServerScriptsURL(EditSubscriberDetails.this).GET_SUBSCRIBERS_DETAILS());
                 httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setRequestMethod("GET");

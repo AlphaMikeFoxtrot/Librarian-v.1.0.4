@@ -32,7 +32,7 @@ public class IssueToyPhaseOneFilter extends Filter {
             ArrayList<Toys> newList = new ArrayList<>();
             for(int i = 0; i < oldList.size(); i++){
 
-                if(oldList.get(i).getmToyId().toUpperCase().contains(charSequence)){
+                if(oldList.get(i).getmToyId().toUpperCase().contains(charSequence) || oldList.get(i).getmToyName().toUpperCase().contains(charSequence)){
                     newList.add(oldList.get(i));
                 }
 
