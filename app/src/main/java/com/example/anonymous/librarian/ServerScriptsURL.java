@@ -1,11 +1,7 @@
 package com.example.anonymous.librarian;
 
 import android.content.Context;
-<<<<<<< HEAD
-=======
 import android.content.SharedPreferences;
->>>>>>> 75315769ca91dae1157515661a175d80777a4867
-
 /**
  * Created by ANONYMOUS on 15-Dec-17.
  */
