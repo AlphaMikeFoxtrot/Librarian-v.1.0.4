@@ -12,12 +12,6 @@ import android.content.SharedPreferences;
 
 public class ServerScriptsURL {
 
-    public Context context;
-
-    public ServerScriptsURL(Context context) {
-        this.context = context;
-    }
-
     public SharedPreferences sharedPreference = context.getSharedPreferences(context.getString(R.string.URL_PREFERENCE), context.MODE_PRIVATE);
     public SharedPreferences.Editor editor = sharedPreference.edit();
 
@@ -62,20 +56,16 @@ public class ServerScriptsURL {
     private final String UPDATE_JOINT_ACCOUNT = "http://www.fardeenpanjwani.com/librarian/update_joint_account.php";
 
     private Context context;
-
-<<<<<<< HEAD
     public ServerScriptsURL(Context context) {
         this.context = context;
     }
 
     public ServerScriptsURL() {
     }
-=======
     public String ADD_BOOK() {
         if(center.toLowerCase().contains("kompally")){
 
             return sharedPreference.getString(context.getString(R.string.ADD_BOOK), "");
->>>>>>> 75315769ca91dae1157515661a175d80777a4867
 
         } else {
 
